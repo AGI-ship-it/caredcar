@@ -449,9 +449,9 @@ export default function BlogDetail() {
         {/* Breadcrumb */}
         <div className="container-x pt-[124px]">
           <nav className="flex items-center gap-2 text-sm text-text-secondary">
-            <a href="/" className="hover:text-text-brand">Home</a>
+            <Link to="/" className="hover:text-text-brand">Home</Link>
             <span>/</span>
-            <a href="/blog" className="hover:text-text-brand">Blog</a>
+            <Link to="/blog" className="hover:text-text-brand">Blog</Link>
             <span>/</span>
             <span className="text-text-primary font-medium line-clamp-1">{post.title}</span>
           </nav>

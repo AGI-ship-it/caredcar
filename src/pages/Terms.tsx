@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -70,7 +71,7 @@ export default function Terms() {
           <section>
             <h2 className="text-text-brand font-extrabold text-xl mt-8 mb-3">6. Privacy Policy</h2>
             <p className="text-text-secondary leading-relaxed">
-              Your use of our website is also governed by our Privacy Policy, which is incorporated into these Terms by reference. Our Privacy Policy explains how we collect, use, and protect your personal information in compliance with the UAE Personal Data Protection Law (PDPL). Please review our Privacy Policy at <a href="/privacy" className="text-text-brand hover:underline">/privacy</a> to understand our practices. By using this website, you consent to the collection and use of your information as described in our Privacy Policy.
+              Your use of our website is also governed by our Privacy Policy, which is incorporated into these Terms by reference. Our Privacy Policy explains how we collect, use, and protect your personal information in compliance with the UAE Personal Data Protection Law (PDPL). Please review our Privacy Policy at <Link to="/privacy" className="text-text-brand hover:underline">/privacy</Link> to understand our practices. By using this website, you consent to the collection and use of your information as described in our Privacy Policy.
             </p>
           </section>
 
