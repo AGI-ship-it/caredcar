@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import DirhamSymbol from "../components/DirhamSymbol";
 import imgCompareHero from "@/imports/compare-hero.jpg";
 import { cars, type Car } from "../data/cars";
+import PageHero from "../components/PageHero";
 
 const MAX_SLOTS = 3;
 
@@ -213,29 +214,7 @@ export default function Compare() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bg-inverse page-hero">
-        <img
-          src={imgCompareHero}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-        {/* Light studio shot with the car behind the centred heading, so tint it and darken the text band */}
-        <div aria-hidden="true" className="absolute inset-0 bg-bg-inverse/55" />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 60% 55% at 50% 58%, color-mix(in srgb, var(--color-bg-inverse) 70%, transparent), transparent)" }}
-        />
-        <div className="container-x relative text-center">
-          <h1 className="text-white text-5xl font-bold font-display">
-            Compare Models
-          </h1>
-          <p className="text-white/85 mt-2 text-lg">
-            {`Pick up to ${MAX_SLOTS} cars and weigh their specs, pricing and features side by side.`}
-          </p>
-        </div>
-      </section>
+      <PageHero image={imgCompareHero} imagePosition="center 60%" title="Compare Models" subtitle={`Pick up to ${MAX_SLOTS} cars and weigh their specs, pricing and features side by side.`} />
 
       <main className="flex-1 bg-white">
         <div className="container-x py-10">

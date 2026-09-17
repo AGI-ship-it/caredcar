@@ -1,0 +1,56 @@
+import type { ReactNode } from "react";
+
+interface PageHeroProps {
+  title: ReactNode;
+  subtitle?: ReactNode;
+  image?: string;
+  // CSS object-position, tuned per photo so its subject stays in frame
+  imagePosition?: string;
+  // About: feature cards overlap the bottom edge
+  overlap?: boolean;
+  // Search results hold a user-typed query, so that title has to stay wrappable
+  wrapTitle?: boolean;
+}
+
+// Every inner page shares this banner so height, type sizes and text alignment stay identical.
+export default function PageHero({ title, subtitle, image, imagePosition = "center", overlap = false, wrapTitle = false }: PageHeroProps) {
+  return (
+    <section className={`page-hero ${overlap ? "page-hero--overlap" : ""} relative overflow-hidden bg-bg-inverse text-white`}>
+      {image && (
+        <>
+          <img
+            src={image}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: imagePosition }}
+          />
+          {/* Navy fades in from the text side so the heading reads on any photo */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/95 from-25% via-bg-inverse/80 via-65% to-bg-inverse/25 max-lg:via-bg-inverse/85 max-lg:to-bg-inverse/55"
+          />
+        </>
+      )}
+      <div className="container-x relative">
+        <div>
+          {/* Titles stay on one line from lg up; below that they wrap as normal */}
+          <h1
+            className={`text-4xl md:text-5xl font-bold leading-tight font-display ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
+            style={image ? { textShadow: "0 2px 16px rgba(8, 18, 45, 0.55)" } : undefined}
+          >
+            {title}
+          </h1>
+          {subtitle && (
+            <p
+              className="mt-4 max-w-[640px] text-xl md:text-2xl leading-relaxed text-white/90"
+              style={image ? { textShadow: "0 2px 14px rgba(8, 18, 45, 0.5)" } : undefined}
+            >
+              {subtitle}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}

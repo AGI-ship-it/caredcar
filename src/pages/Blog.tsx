@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import PageHero from "../components/PageHero";
 
 const blogPosts = [
   {
@@ -102,14 +103,7 @@ export default function Blog() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-bg-inverse page-hero text-white text-center">
-        <div className="container-x">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 font-display">Car Tips & Guides</h1>
-          <p className="text-white/70 text-lg max-w-xl mx-auto">
-            Expert advice, buying guides, and the latest insights from the UAE automotive world.
-          </p>
-        </div>
-      </section>
+      <PageHero title="Car Tips & Guides" subtitle="Expert advice, buying guides, and the latest insights from the UAE automotive world." />
 
       <main className="flex-1 bg-white">
         <div className="container-x py-16">
@@ -223,7 +217,7 @@ export default function Blog() {
             </p>
             <Link
               to="/buy"
-              className="inline-block bg-bg-accent text-text-on-accent font-bold px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+              className="inline-block bg-white text-text-brand font-bold px-8 py-3 rounded-full hover:bg-bg-brand-soft transition-colors"
             >
               Browse Cars
             </Link>

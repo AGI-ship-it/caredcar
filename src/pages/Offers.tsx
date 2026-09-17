@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import DirhamSymbol from "../components/DirhamSymbol";
 import imgOffersHero from "@/imports/offers-hero.jpg";
+import PageHero from "../components/PageHero";
 
 const OFFER_CARDS = [
   {
@@ -70,24 +71,7 @@ export default function Offers() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bg-inverse page-hero text-white">
-        <img
-          src={imgOffersHero}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-[70%_center]"
-        />
-        {/* The road on the text side is already dark; a light fade keeps the heading crisp */}
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/80 via-bg-inverse/55 to-bg-inverse/20 lg:via-bg-inverse/25 lg:to-transparent" />
-        <div className="container-x relative">
-          <div className="text-center lg:text-start lg:w-1/2">
-            <h1 className="text-5xl font-bold mb-2 font-display">Exclusive Offers</h1>
-            <p className="text-white/85 text-lg max-w-xl mx-auto lg:mx-0">
-              Limited-time deals on premium pre-owned vehicles — transparent pricing, zero hidden fees.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero image={imgOffersHero} imagePosition="70% center" title="Exclusive Offers" subtitle="Limited-time deals on premium pre-owned vehicles — transparent pricing, zero hidden fees." />
 
       {/* Featured Banner */}
       <section className="container-x py-12 w-full">

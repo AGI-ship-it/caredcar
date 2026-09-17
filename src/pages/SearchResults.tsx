@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import CarCard from "../components/CarCard";
 import { cars } from "../data/cars";
 import Select from "../components/Select";
+import PageHero from "../components/PageHero";
 
 export default function SearchResults() {
   const [searchParams] = useSearchParams();
@@ -37,23 +38,11 @@ export default function SearchResults() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-bg-inverse page-hero">
-        <div className="container-x text-center">
-          {q ? (
-            <h1 className="text-white text-4xl md:text-5xl font-bold font-display">
-              Results for{" "}
-              <span className="text-text-accent">&ldquo;{searchParams.get("q")}&rdquo;</span>
-            </h1>
-          ) : (
-            <h1 className="text-white text-4xl md:text-5xl font-bold font-display">
-              All Vehicles
-            </h1>
-          )}
-          <p className="text-text-secondary mt-4 text-lg">
-            {`${filtered.length} ${filtered.length === 1 ? "vehicle" : "vehicles"} found`}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        wrapTitle
+        title={q ? <>Results for <span className="text-text-accent">&ldquo;{searchParams.get("q")}&rdquo;</span></> : "All Vehicles"}
+        subtitle={`${filtered.length} ${filtered.length === 1 ? "vehicle" : "vehicles"} found`}
+      />
 
       <main className="flex-1 bg-white">
         <div className="container-x py-10">
@@ -114,7 +103,7 @@ export default function SearchResults() {
                 <div className="flex justify-center mt-10">
                   <button
                     onClick={() => setVisibleCount((v) => v + 9)}
-                    className="border border-border-focus text-text-brand px-8 py-3 rounded-full font-semibold text-sm hover:bg-bg-brand-soft transition-colors"
+                    className="bg-bg-brand text-white px-8 py-3 rounded-full font-semibold text-sm hover:bg-bg-brand-hover transition-colors"
                   >
                     Load More ({filtered.length - visibleCount} remaining)
                   </button>

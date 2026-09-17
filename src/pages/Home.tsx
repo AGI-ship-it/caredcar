@@ -296,7 +296,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       <div className="relative flex-1 flex flex-col items-center justify-between xl:justify-end gap-[32px] px-4 sm:px-5 pt-[40px] xl:pt-0 pb-[32px] xl:pb-[clamp(60px,11svh,112px)]">
       {/* Hero text: centred between the floating nav and the car roofs */}
       <div className="relative xl:absolute xl:inset-x-0 xl:top-[calc(60px+23%)] xl:-translate-y-1/2 px-5 flex justify-center pointer-events-none">
-      <div className="hero-parallax-fg hero-intro-text pointer-events-auto flex flex-col items-center gap-[36px] text-center">
+      <div className="hero-parallax-fg hero-intro-text pointer-events-auto flex flex-col items-center gap-[20px] text-center">
         <h1 data-no-translate className="relative isolate ty-display-xl text-text-brand">
           {/* Soft light halo so the brand blue stays legible on the sunset sky */}
           <span
@@ -325,9 +325,14 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
             <path d="M17 5.2c0-3 3.2-4.9 5.8-3.4l13 7.6c2.6 1.5 2.6 5.3 0 6.8l-13 7.6c-2.6 1.5-5.8-.4-5.8-3.4V5.2z" fill="var(--color-text-accent)" style={{ mixBlendMode: "multiply" }} />
           </svg>
         </h1>
-        <p className="inline-flex items-center gap-[8px] bg-bg-inverse-raised border border-(--color-bg-accent)/30 rounded-full px-[14px] py-[5px]">
-          <span aria-hidden="true" className="breathe-dot size-[7px] shrink-0 rounded-full bg-bg-accent" />
-          <span className="text-text-accent text-[13px] sm:text-sm font-semibold leading-normal">{"UAE's trusted pre-owned cars"}</span>
+        <p className="relative isolate text-text-primary text-xl sm:text-2xl md:text-3xl font-semibold leading-snug">
+          {/* Same light halo as the headline, so the line stays readable on the sunset sky */}
+          <span
+            aria-hidden="true"
+            className="absolute -inset-x-[12%] -inset-y-[55%] -z-10 pointer-events-none"
+            style={{ background: "radial-gradient(closest-side, rgba(255,255,255,0.7), rgba(255,255,255,0.3) 55%, transparent)" }}
+          />
+          {"UAE's trusted pre-owned cars"}
         </p>
       </div>
       </div>
@@ -548,15 +553,14 @@ function BestSellersSection({ onNavigate }: { onNavigate: (path: string) => void
           <div className="absolute left-0 top-0 h-[8px] bg-bg-accent rounded-[99px] transition-all duration-300" style={{ width: `${progress}%` }} />
         </div>
 
-        {/* Explore All – outlined */}
+        {/* Explore All */}
         <div className="flex justify-center mt-[48px]">
           <button
             onClick={() => onNavigate("/buy")}
-            className="group flex items-center gap-[12px] px-[24px] py-[12px] rounded-[999px] transition-all hover:bg-bg-brand"
-            style={{ border: "1px solid var(--color-border-focus)" }}
+            className="group flex items-center gap-[12px] px-[28px] py-[13px] rounded-[999px] bg-bg-brand text-white transition-colors hover:bg-bg-brand-hover"
           >
-            <span className="text-text-brand text-base font-semibold leading-[18px] whitespace-nowrap group-hover:text-white transition-colors">Explore All</span>
-            <svg className="block size-[24px] shrink-0 text-text-brand group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
+            <span className="text-base font-semibold leading-[18px] whitespace-nowrap">Explore All</span>
+            <svg className="block size-[24px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
           </button>
         </div>
       </div>
@@ -669,7 +673,7 @@ const CATALOG_DATA = [
   };
 });
 
-function CatalogCard({ id, name, make, img, price, monthly, isNew = false, onClick }: { id: string; name: string; make: string; img: string; price: string; monthly: string; isNew?: boolean; onClick: () => void }) {
+function CatalogCard({ id, name, make, img, price, monthly, onClick }: { id: string; name: string; make: string; img: string; price: string; monthly: string; onClick: () => void }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
@@ -690,12 +694,6 @@ function CatalogCard({ id, name, make, img, price, monthly, isNew = false, onCli
       {/* No gradient overlay */}
       {/* Car name */}
       <div className="absolute flex flex-col gap-[4px] items-start left-[16px] top-[16px]">
-        {isNew && (
-          <span className="mb-[6px] inline-flex items-center gap-[7px] rounded-full bg-bg-inverse-raised/90 backdrop-blur-sm border border-(--color-bg-accent)/30 ps-[10px] pe-[12px] py-[4px] text-[12px] font-semibold text-text-accent">
-            <span aria-hidden="true" className="breathe-dot size-[7px] rounded-full bg-bg-accent" />
-            New arrival
-          </span>
-        )}
         <span className="font-bold text-text-primary text-lg tracking-[-0.01em] leading-snug">{name}</span>
         <span className="font-normal text-text-secondary text-sm leading-normal">{make}</span>
       </div>
@@ -772,7 +770,7 @@ function FeaturedCarsSection({ onNavigate }: { onNavigate: (path: string) => voi
         {/* Filtered grid */}
         <div className="featured-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[16px] sm:gap-[24px]">
           {visibleCars.map((car) => (
-            <CatalogCard key={`${activeFilter}-${car.id}`} id={car.id} name={car.name} make={car.make} img={car.img} price={car.price} monthly={car.monthly} isNew={car.isNew} onClick={() => onNavigate(`/car/${car.id}`)} />
+            <CatalogCard key={`${activeFilter}-${car.id}`} id={car.id} name={car.name} make={car.make} img={car.img} price={car.price} monthly={car.monthly} onClick={() => onNavigate(`/car/${car.id}`)} />
           ))}
         </div>
 
@@ -780,11 +778,10 @@ function FeaturedCarsSection({ onNavigate }: { onNavigate: (path: string) => voi
         <div className="flex justify-center mt-[48px]">
           <button
             onClick={() => onNavigate("/buy")}
-            className="group flex items-center gap-[12px] px-[24px] py-[12px] rounded-[999px] transition-all hover:bg-bg-brand"
-            style={{ border: "1px solid var(--color-border-focus)" }}
+            className="group flex items-center gap-[12px] px-[28px] py-[13px] rounded-[999px] bg-bg-brand text-white transition-colors hover:bg-bg-brand-hover"
           >
-            <span className="text-text-brand text-base font-semibold leading-[18px] whitespace-nowrap group-hover:text-white transition-colors">Explore All</span>
-            <svg className="block size-[24px] shrink-0 text-text-brand group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
+            <span className="text-base font-semibold leading-[18px] whitespace-nowrap">Explore All</span>
+            <svg className="block size-[24px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
           </button>
         </div>
       </div>
@@ -1070,7 +1067,7 @@ function CarTipsSection({ onNavigate }: { onNavigate: (path: string) => void }) 
             </div>
             <button
               onClick={() => onNavigate("/blog")}
-              className="group flex items-center gap-[10px] h-[48px] px-[24px] rounded-[999px] border border-border-focus text-text-brand transition-colors duration-150 hover:bg-bg-brand hover:text-white"
+              className="group flex items-center gap-[10px] h-[48px] px-[28px] rounded-[999px] bg-bg-brand text-white transition-colors duration-150 hover:bg-bg-brand-hover"
             >
               <span className="text-base font-semibold leading-none">View All</span>
               <svg className="block size-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>

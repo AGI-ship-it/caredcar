@@ -4,6 +4,9 @@ import Footer from "../components/Footer";
 import { FIELD_CLASS, LABEL_CLASS } from "../lib/fieldStyles";
 import Select from "../components/Select";
 import imgContactHero from "@/imports/contact-hero.jpg";
+import PageHero from "../components/PageHero";
+
+const MAP_QUERY = "Dubai Motor City, Dubai, UAE";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -101,24 +104,7 @@ export default function Contact() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bg-inverse page-hero text-white">
-        <img
-          src={imgContactHero}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-[30%_center] lg:object-left"
-        />
-        {/* Keeps the heading readable where it overlaps the lighter part of the photo on small screens */}
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-bg-inverse/10 via-bg-inverse/55 to-bg-inverse/85 lg:from-transparent lg:via-transparent lg:to-bg-inverse/35" />
-        <div className="container-x relative">
-          <div className="text-center lg:text-start lg:ms-auto lg:w-1/2 lg:ps-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-2 font-display">Contact Us</h1>
-            <p className="text-white/85 text-lg max-w-xl mx-auto lg:mx-0">
-              Our team is ready to help you find the perfect car or answer any questions you may have.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero image={imgContactHero} imagePosition="left center" title="Contact Us" subtitle="Our team is ready to help you find the perfect car or answer any questions you may have." />
 
       {/* Main Content */}
       <main className="flex-1 bg-white">
@@ -146,16 +132,26 @@ export default function Contact() {
                 ))}
               </div>
 
-              {/* Map Placeholder */}
-              <div className="bg-bg-brand-soft rounded-[12px] h-48 flex items-center justify-center border border-(--color-bg-brand-soft)">
-                <div className="text-center text-text-secondary">
-                  <svg className="w-8 h-8 mx-auto mb-2 text-text-brand" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              {/* Showroom map — embed needs no API key, and loads only when scrolled into view */}
+              <div className="rounded-[12px] overflow-hidden border border-border-default">
+                <iframe
+                  title="Map showing the Cared showroom in Dubai Motor City"
+                  src={`https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&hl=en&z=14&output=embed`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="block w-full h-64 border-0"
+                />
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_QUERY)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-3 bg-bg-surface px-4 py-3 text-sm font-semibold text-text-brand hover:bg-bg-brand-soft transition-colors"
+                >
+                  Get directions
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className="size-[18px]" aria-hidden="true">
+                    <path d="M6 18L18 6M8.25 6H18v9.75" />
                   </svg>
-                  <p className="text-sm font-medium">Map</p>
-                  <p className="text-xs">Dubai Motor City, Dubai, UAE</p>
-                </div>
+                </a>
               </div>
             </div>
 

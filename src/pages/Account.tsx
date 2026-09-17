@@ -6,6 +6,7 @@ import CarCard from "../components/CarCard";
 import { FIELD_CLASS, LABEL_CLASS } from "../lib/fieldStyles";
 import { useAuth } from "../lib/auth";
 import { cars } from "../data/cars";
+import PageHero from "../components/PageHero";
 
 const TABS = [
   { id: "profile", label: "Profile Settings" },
@@ -74,12 +75,7 @@ export default function Account() {
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       <main className="flex-1 bg-bg-surface">
-        <div className="bg-bg-inverse page-hero">
-          <div className="container-x">
-            <h1 className="text-white text-3xl font-bold" style={{ fontFamily: "var(--font-display)" }}>Hi, {user.name}</h1>
-            <p className="text-text-on-inverse-secondary text-sm mt-2">{user.email}</p>
-          </div>
-        </div>
+        <PageHero title={`Hi, ${user.name}`} subtitle={user.email} />
 
         <div className="container-x py-10 flex flex-col md:flex-row gap-8">
           {/* Sidebar tabs */}

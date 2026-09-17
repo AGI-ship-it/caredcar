@@ -2,6 +2,12 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import imgAboutHero from "@/imports/about-hero.jpg";
+import imgAboutPursuit from "@/imports/about-pursuit.jpg";
+import imgAboutCared from "@/imports/about-cared.jpg";
+import logoAlGhurairColor from "@/imports/brand/al-ghurair-color.svg";
+import logoAlGhurairWhite from "@/imports/brand/al-ghurair-white.svg";
+import logoCaredWhite from "@/imports/brand/cared-white.svg";
+import PageHero from "../components/PageHero";
 
 // Headings and body copy match caredcars.com/about-us verbatim.
 const FEATURES = [
@@ -64,22 +70,7 @@ export default function About() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-bg-inverse page-hero page-hero--overlap relative overflow-hidden text-white">
-        <img
-          src={imgAboutHero}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-[65%_45%]"
-        />
-        {/* The sky behind the heading is pale, so fade navy in from the text side */}
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/90 via-bg-inverse/60 to-bg-inverse/10 lg:via-bg-inverse/35 lg:to-transparent" />
-        <div className="container-x relative">
-          <div className="text-center lg:text-start lg:w-1/2">
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-2 font-display">Just Good Cars</h1>
-            <p className="text-white/85 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">Dubai&apos;s trusted pre-owned cars</p>
-          </div>
-        </div>
-      </section>
+      <PageHero overlap image={imgAboutHero} imagePosition="65% 45%" title="Just Good Cars" subtitle="Dubai's trusted pre-owned cars" />
 
       {/* Key Features */}
       <section className="container-x py-20 w-full -mt-24 relative z-10">
@@ -97,18 +88,19 @@ export default function About() {
       </section>
 
       {/* In Pursuit of Better — Al Ghurair */}
-      <section className="container-x pb-20 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div>
-            <img
-              src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
-              alt="Al Ghurair business"
-              className="rounded-[16px] w-full h-96 object-cover shadow-lg"
-            />
-          </div>
-          <div>
-            <h2 className="text-4xl font-extrabold text-text-brand mb-4 font-display">In pursuit of better</h2>
-            <p className="text-text-secondary leading-relaxed">
+      <section className="relative overflow-hidden bg-bg-partner">
+        <img
+          src={imgAboutPursuit}
+          alt="A happy customer giving a thumbs up from the driver's seat of his new car"
+          className="absolute inset-y-0 end-0 h-full w-full md:w-[65%] object-cover object-[62%_center]"
+        />
+        {/* Al Ghurair purple washes over the photo so the copy stays readable while the customer shows through */}
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-partner from-30% via-bg-partner/85 to-bg-partner/50 max-md:via-bg-partner/80 max-md:to-bg-partner/75" />
+        <div className="container-x relative py-20 md:py-28">
+          <div className="max-w-[560px] text-white">
+            <img src={logoAlGhurairColor} alt="Al Ghurair" className="h-16 md:h-20 w-auto mb-10" />
+            <h2 className="text-4xl md:text-5xl font-bold mb-5 font-display">In pursuit of better</h2>
+            <p className="text-white/90 text-lg leading-relaxed">
               At Al Ghurair, we have always been driven by our pursuit of better. As one of the largest diversified family businesses in the Middle East, we drive transformation across industries: food, mobility, infrastructure, and real estate. Headquartered in Dubai, we operate in 20+ countries and employ over 28,000 people worldwide.
             </p>
           </div>
@@ -124,12 +116,21 @@ export default function About() {
               Cared has inherited the tradition and values built by the Al Ghurair family, so, we believe in enhancing the life of our employees, customers, and the community. We have the expertise to buy, prepare and sell the right quality vehicles that will meet the needs of our customers to buy with confidence. What you can expect from us? Vehicles that will meet the needs of customers to buy with confidence.
             </p>
           </div>
-          <div className="order-1 md:order-2">
+          <div className="order-1 md:order-2 relative h-96 rounded-[24px] overflow-hidden shadow-lg">
             <img
-              src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800"
-              alt="AG Cars showroom"
-              className="rounded-[16px] w-full h-96 object-cover shadow-lg"
+              src={imgAboutCared}
+              alt="Cars on display in the Cared showroom"
+              className="absolute inset-0 w-full h-full object-cover"
             />
+            {/* Navy fade behind the logos so the white marks read against the bright showroom ceiling */}
+            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-3/5 bg-gradient-to-b from-bg-inverse/90 via-bg-inverse/45 to-transparent" />
+            <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-4 p-6 sm:p-8">
+              <img src={logoCaredWhite} alt="Cared — Just Good Cars" className="h-9 sm:h-11 w-auto" />
+              <span className="flex items-center gap-2 text-white text-lg sm:text-xl font-medium">
+                by
+                <img src={logoAlGhurairWhite} alt="Al Ghurair" className="h-9 sm:h-11 w-auto" />
+              </span>
+            </div>
           </div>
         </div>
       </section>

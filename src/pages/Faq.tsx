@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import PageHero from "../components/PageHero";
 
 const FAQS = [
   {
@@ -32,14 +33,7 @@ export default function Faq() {
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
 
-      <section className="bg-bg-inverse page-hero text-center">
-        <div className="container-x">
-          <h1 className="text-5xl font-bold text-white mb-2 font-display">Frequently Asked Questions</h1>
-          <p className="text-text-on-inverse-secondary text-lg max-w-xl mx-auto">
-            Everything you need to know about buying, selling, and financing with Cared.
-          </p>
-        </div>
-      </section>
+      <PageHero title="Frequently Asked Questions" subtitle="Everything you need to know about buying, selling, and financing with Cared." />
 
       <main className="flex-1 bg-white py-16">
         <div className="max-w-2xl mx-auto px-4 space-y-3">

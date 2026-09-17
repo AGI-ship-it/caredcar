@@ -534,7 +534,7 @@ export default function BlogDetail() {
             </p>
             <Link
               to="/buy"
-              className="inline-block bg-bg-accent text-text-on-accent font-bold px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
+              className="inline-block bg-white text-text-brand font-bold px-8 py-3 rounded-full hover:bg-bg-brand-soft transition-colors"
             >
               Browse Cars
             </Link>

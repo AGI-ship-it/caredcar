@@ -56,7 +56,6 @@ export default function CompareTray({ cars, onRemove, onClear }: CompareTrayProp
           </button>
           <Button
             size="sm"
-            variant="secondary"
             disabled={cars.length < 2}
             onClick={() => navigate(`/compare?ids=${cars.map((c) => c.id).join(",")}`)}
           >

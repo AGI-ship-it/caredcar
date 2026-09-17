@@ -5,6 +5,7 @@ import { FIELD_CLASS_DARK } from "../lib/fieldStyles";
 import imgFinanceHero from "@/imports/finance-hero.jpg";
 import DirhamSymbol from "../components/DirhamSymbol";
 import EligibilityModal from "../components/EligibilityModal";
+import PageHero from "../components/PageHero";
 
 // Content sourced from caredcars.com/finance, restyled to match this design system.
 const STEPS = [
@@ -153,24 +154,7 @@ export default function Finance() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-bg-inverse page-hero text-white">
-        <img
-          src={imgFinanceHero}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-[75%_58%]"
-        />
-        {/* The sky behind the heading is pale, so fade navy in from the text side */}
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/90 via-bg-inverse/60 to-bg-inverse/10 lg:via-bg-inverse/35 lg:to-transparent" />
-        <div className="container-x relative">
-          <div className="text-center lg:text-start lg:w-1/2">
-            <h1 className="text-5xl font-bold mb-2 font-display">Finance your car the smart way.</h1>
-            <p className="text-white/85 text-lg max-w-xl mx-auto lg:mx-0">
-              Check eligibility, compare plans and drive away with clear monthly payments.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero image={imgFinanceHero} imagePosition="75% 58%" title="Finance your car the smart way." subtitle="Check eligibility, compare plans and drive away with clear monthly payments." />
 
       {/* Benefits */}
       <section className="container-x py-16 w-full">
