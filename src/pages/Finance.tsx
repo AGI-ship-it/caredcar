@@ -88,7 +88,7 @@ function AnimatedNumber({ value }: { value: number }) {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [value]);
-  return <>{shown.toLocaleString("en-AE")}</>;
+  return <>{shown.toLocaleString("en-US")}</>;
 }
 
 function CalcSlider({
@@ -121,22 +121,26 @@ function CalcSlider({
 }
 
 export default function Finance() {
-  const [price, setPrice] = useState(150000);
-  const [downPayment, setDownPayment] = useState(30000);
-  const [duration, setDuration] = useState(60);
-  const [annualRate, setAnnualRate] = useState(4.5);
+  const [price, setPrice] = useState(120000);
+  const [downPaymentInput, setDownPaymentInput] = useState(0);
+  const [years, setYears] = useState(5);
+  const [annualRate, setAnnualRate] = useState(4);
   const [appForm, setAppForm] = useState({ name: "", email: "", phone: "" });
   const [submitted, setSubmitted] = useState(false);
   const [eligibilityOpen, setEligibilityOpen] = useState(false);
 
-  const principal = price - downPayment;
-  const monthlyRate = annualRate / 100 / 12;
-  const n = duration;
+  // Same maths as caredcars.com: down payment is capped at 80% of price (in the handlers), and totals cover the financed amount only
+  const downPayment = downPaymentInput;
+  const principal = Math.max(price - downPayment, 0);
+  const monthlyRate = annualRate / 1200;
+  const n = years * 12;
   const monthlyPayment =
-    monthlyRate === 0
-      ? principal / n
-      : (principal * (monthlyRate * Math.pow(1 + monthlyRate, n))) / (Math.pow(1 + monthlyRate, n) - 1);
-  const totalAmount = monthlyPayment * n + downPayment;
+    monthlyRate > 0
+      ? (principal * monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1)
+      : principal / n;
+  const totalPayment = monthlyPayment * n;
+  const totalInterest = Math.max(totalPayment - principal, 0);
+  const principalPct = totalPayment ? Math.round((principal / totalPayment) * 100) : 100;
 
   function handleAppSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -201,146 +205,95 @@ export default function Finance() {
       </section>
 
       {/* Calculator */}
-      <section id="emi-calculator" className="bg-bg-inverse min-h-[100svh] flex flex-col justify-center py-8 xl:pt-[84px] xl:pb-6 scroll-mt-0">
+      <section id="emi-calculator" className="bg-bg-inverse py-16 sm:py-20 scroll-mt-[96px]">
         <div className="container-x">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-white font-display inline-flex items-center gap-3">
-              <span aria-hidden="true" className="text-[1.1em] leading-none">🧮</span>
-              EMI Calculator
-            </h2>
-            <p className="text-text-on-inverse-secondary text-[15px] mt-3">Adjust your inputs to see a full breakdown of your monthly payment</p>
-          </div>
+          <h2 className="text-center text-3xl font-bold text-white font-display mb-10">EMI Calculator</h2>
 
           <div className="calc-card max-w-[1040px] mx-auto rounded-[24px] grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
-            {/* LEFT — inputs */}
-            <div className="p-5 sm:p-7 flex flex-col gap-4">
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-[13px] font-semibold uppercase tracking-[0.18em] text-text-on-inverse-secondary">Build your plan</span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-bg-accent/10 border border-(--color-bg-accent)/25 px-3 py-1 text-xs font-semibold text-text-accent">
-                  <span aria-hidden="true" className="breathe-dot size-[6px] rounded-full bg-bg-accent" />
-                  Live estimate
-                </span>
-              </div>
-
+            {/* Inputs */}
+            <div className="p-6 sm:p-10 flex flex-col gap-7">
               <CalcSlider
-                label="Car price"
+                label="Price"
                 value={price}
-                min={30000} max={500000} step={5000}
-                display={`AED ${price.toLocaleString("en-AE")}`}
-                minLabel="AED 30k" maxLabel="AED 500k"
+                min={50000} max={400000} step={5000}
+                display={`AED ${price.toLocaleString("en-US")}`}
+                minLabel="AED 50,000" maxLabel="AED 400,000"
                 onChange={(p) => {
                   setPrice(p);
-                  setDownPayment(Math.min(downPayment, Math.round(p * 0.8)));
+                  setDownPaymentInput((d) => Math.min(d, p * 0.8));
                 }}
               />
               <CalcSlider
-                label="Down payment"
+                label="Down Payment"
                 value={downPayment}
-                min={0} max={Math.round(price * 0.8)} step={1000}
-                display={`AED ${downPayment.toLocaleString("en-AE")}`}
-                minLabel="0" maxLabel={`${Math.round((downPayment / price) * 100)}% of price`}
-                onChange={setDownPayment}
+                min={0} max={150000} step={1000}
+                display={`AED ${Math.round(downPayment).toLocaleString("en-US")}`}
+                minLabel="AED 0" maxLabel="AED 150,000"
+                onChange={(d) => setDownPaymentInput(Math.min(d, price * 0.8))}
               />
-
-              {/* Tenure */}
-              <div>
-                <span className="text-[15px] text-text-on-inverse-secondary block mb-2">Tenure</span>
-                <div role="radiogroup" aria-label="Tenure" className="relative grid grid-cols-5 p-1 rounded-full bg-white/[0.04] border border-white/10">
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-1 bottom-1 start-1 rounded-full bg-white transition-transform duration-300 ease-out"
-                    style={{ width: "calc((100% - 8px) / 5)", transform: `translateX(${[12, 24, 36, 48, 60].indexOf(duration) * 100}%)` }}
-                  />
-                  {[12, 24, 36, 48, 60].map((m) => {
-                    const active = duration === m;
-                    return (
-                      <button
-                        key={m}
-                        type="button"
-                        role="radio"
-                        aria-checked={active}
-                        onClick={() => setDuration(m)}
-                        className={`relative z-10 h-9 rounded-full text-[13px] font-semibold transition-colors ${active ? "text-text-primary" : "text-white/70 hover:text-white"}`}
-                      >
-                        {m / 12} {m / 12 === 1 ? "yr" : "yrs"}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
               <CalcSlider
-                label="Interest rate"
+                label="Years"
+                value={years}
+                min={1} max={5} step={1}
+                display={`${years} ${years === 1 ? "Year" : "Years"}`}
+                minLabel="1 Year" maxLabel="5 Years"
+                onChange={setYears}
+              />
+              <CalcSlider
+                label="Rate"
                 value={annualRate}
-                min={2} max={15} step={0.1}
-                display={`${annualRate.toFixed(1)}%`}
-                minLabel="2%" maxLabel="15%"
+                min={1} max={8} step={0.05}
+                display={`${annualRate.toFixed(2)}%`}
+                minLabel="1.00%" maxLabel="8.00%"
                 onChange={setAnnualRate}
               />
             </div>
 
-            {/* RIGHT — result */}
-            {(() => {
-              const totalInterest = Math.max(monthlyPayment * n - principal, 0);
-              const totalRepayment = principal + totalInterest;
-              const principalPct = totalRepayment ? Math.round((principal / totalRepayment) * 100) : 100;
-              return (
-                <div className="p-5 sm:p-7 flex flex-col border-t lg:border-t-0 lg:border-s border-white/10">
-                  <span className="text-[15px] text-text-on-inverse-secondary">Estimated monthly payment</span>
-                  <p className="mt-1 flex items-baseline gap-2 text-white">
-                    <span className="text-base font-semibold text-text-on-inverse-secondary">AED</span>
-                    <span className="text-[48px] sm:text-[56px] font-bold leading-none tracking-[-0.03em] tabular-nums">
-                      <AnimatedNumber value={Math.round(monthlyPayment)} />
-                    </span>
-                    <span className="text-lg text-text-on-inverse-secondary">/mo</span>
-                  </p>
-                  <p className="mt-2 text-sm text-text-on-inverse-secondary">
-                    {`${duration} months at ${annualRate.toFixed(1)}% · AED ${principal.toLocaleString("en-AE")} financed`}
-                  </p>
+            {/* Result */}
+            <div className="p-6 sm:p-10 flex flex-col border-t lg:border-t-0 lg:border-s border-white/10">
+              <span className="text-[15px] font-semibold text-white">Estimated Payment</span>
+              <p className="mt-3 flex items-baseline gap-2 text-white">
+                <span className="text-[48px] sm:text-[56px] font-bold leading-none tracking-[-0.03em] tabular-nums">
+                  <AnimatedNumber value={Math.round(monthlyPayment)} />
+                </span>
+                <span className="text-lg text-text-on-inverse-secondary">/ month</span>
+              </p>
 
-                  {/* Principal vs interest share */}
-                  <div className="mt-5 flex h-[8px] gap-[3px] rounded-full overflow-hidden" role="img" aria-label={`Principal ${principalPct}%, interest ${100 - principalPct}%`}>
-                    <span className="h-full rounded-s-full bg-bg-brand transition-[width] duration-500 ease-out" style={{ width: `${principalPct}%` }} />
-                    <span className="h-full flex-1 rounded-e-full bg-bg-accent" />
+              {/* Principal vs interest share of the total payment */}
+              <div className="mt-6 flex h-[8px] gap-[3px] rounded-full overflow-hidden" role="img" aria-label={`Principal ${principalPct}%, interest ${100 - principalPct}%`}>
+                <span className="h-full rounded-s-full bg-bg-brand transition-[width] duration-500 ease-out" style={{ width: `${principalPct}%` }} />
+                <span className="h-full flex-1 rounded-e-full bg-bg-accent" />
+              </div>
+
+              <dl className="mt-4 divide-y divide-white/10">
+                {[
+                  { label: "Total Payment", dot: "var(--color-text-brand)", value: totalPayment },
+                  { label: "Total Interest", dot: "var(--color-text-accent)", value: totalInterest },
+                  { label: "Total", value: monthlyPayment },
+                ].map((row) => (
+                  <div key={row.label} className="flex items-center gap-3 py-3">
+                    <dt className="flex items-center gap-2.5 text-[15px] text-text-on-inverse-secondary">
+                      {row.dot && <span aria-hidden="true" className="size-2 rounded-full" style={{ background: row.dot }} />}
+                      {row.label}
+                    </dt>
+                    <dd className="ms-auto text-[15px] font-semibold text-white tabular-nums">
+                      <AnimatedNumber value={Math.round(row.value)} /> AED
+                    </dd>
                   </div>
+                ))}
+              </dl>
 
-                  <dl className="mt-3 divide-y divide-white/10">
-                    {[
-                      { label: "Principal", dot: "var(--color-text-brand)", value: principal, pct: principalPct },
-                      { label: "Total interest", dot: "var(--color-text-accent)", value: totalInterest, pct: 100 - principalPct },
-                      { label: "Total repayment", value: totalRepayment },
-                    ].map((row) => (
-                      <div key={row.label} className="flex items-center gap-3 py-2.5">
-                        <dt className="flex items-center gap-2.5 text-[15px] text-text-on-inverse-secondary">
-                          {row.dot && <span aria-hidden="true" className="size-2 rounded-full" style={{ background: row.dot }} />}
-                          {row.label}
-                        </dt>
-                        <dd className="ms-auto flex items-baseline gap-2.5 tabular-nums">
-                          <span className="text-[15px] font-semibold text-white">
-                            AED <AnimatedNumber value={Math.round(row.value)} />
-                          </span>
-                          {row.pct !== undefined && <span className="w-9 text-end text-sm text-text-on-inverse-secondary">{row.pct}%</span>}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-
-                  <button
-                    type="button"
-                    onClick={() => setEligibilityOpen(true)}
-                    className="group mt-5 lg:mt-auto inline-flex items-center justify-center gap-2 bg-bg-brand text-white font-semibold h-[48px] rounded-full hover:bg-bg-brand-hover transition-colors"
-                  >
-                    Apply with this plan
-                    <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 transition-transform group-hover:translate-x-1 rtl:-scale-x-100" aria-hidden="true">
-                      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </button>
-                  <p className="mt-2.5 text-xs leading-relaxed text-text-on-inverse-secondary">
-                    Indicative only. Final rate and approval are subject to bank assessment.
-                  </p>
-                </div>
-              );
-            })()}
+              <button
+                type="button"
+                onClick={() => setEligibilityOpen(true)}
+                className="group mt-8 lg:mt-auto inline-flex items-center justify-center gap-2 bg-bg-brand text-white font-semibold h-[48px] rounded-full hover:bg-bg-brand-hover transition-colors"
+              >
+                Apply with this plan
+                <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 transition-transform group-hover:translate-x-1 rtl:-scale-x-100" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>

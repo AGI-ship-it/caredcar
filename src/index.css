@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Almarai:wght@300;400;700;800&display=swap');
 @import 'tailwindcss';
 
 /* ── Cared theme (cared-design-system.md) ──────────────────────────────────
@@ -120,6 +120,13 @@
   --shadow-lg: 0 12px 32px rgba(18, 42, 94, 0.16);
 }
 
+/* Arabic: Almarai for headings and body (its Latin glyphs keep numbers and AED consistent) */
+:root[lang="ar"] {
+  --font-display: "Almarai", "Geeza Pro", "Segoe UI", sans-serif;
+  --font-body: "Almarai", "Geeza Pro", "Segoe UI", sans-serif;
+  --font-sans: "Almarai", "Geeza Pro", "Segoe UI", sans-serif;
+}
+
 [data-theme="dark"] {
   --color-bg-page: var(--navy-900);
   --color-bg-surface: var(--navy-800);
@@ -196,7 +203,7 @@
   font-family: var(--font-body);
 }
 .font-arabic {
-  font-family: "IBM Plex Sans Arabic", "Geeza Pro", "Segoe UI", sans-serif;
+  font-family: "Almarai", "Geeza Pro", "Segoe UI", sans-serif;
 }
 
 /* Type styles from the design system */
@@ -442,12 +449,13 @@
 }
 
 /* Frosted glass for the top bar: tinted enough that white text stays readable over white pages */
+/* Navy tint stays at 65% so white nav text keeps ~4.5:1 contrast over white pages */
 .glass-bar {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 60%),
-    rgba(0, 0, 51, 0.8);
-  backdrop-filter: blur(22px) saturate(180%);
-  -webkit-backdrop-filter: blur(22px) saturate(180%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.02) 70%),
+    rgba(18, 42, 94, 0.65);
+  backdrop-filter: blur(30px) saturate(170%);
+  -webkit-backdrop-filter: blur(30px) saturate(170%);
 }
 
 .site-header,

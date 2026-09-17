@@ -481,9 +481,8 @@ function BestSellerCard({ car, onClick }: { car: typeof ALL_BEST_SELLER_CARS[0];
             </div>
           </div>
           <span className="card-arrow" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M8 16L16 8" />
-              <path d="M9.5 8H16v6.5" />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 18L18 6M8.25 6H18v9.75" />
             </svg>
           </span>
         </div>
@@ -554,11 +553,7 @@ function BestSellersSection({ onNavigate }: { onNavigate: (path: string) => void
             style={{ border: "1px solid var(--color-border-focus)" }}
           >
             <span className="text-text-brand text-base font-semibold leading-[18px] whitespace-nowrap group-hover:text-white transition-colors">Explore All</span>
-            <div className="shrink-0 size-[24px]">
-              <svg className="block size-full" fill="none" height="24" viewBox="0 0 24 24" width="24">
-                <path d={svgPaths.p4a58600} fill="currentColor" className="text-text-brand group-hover:text-white" />
-              </svg>
-            </div>
+            <svg className="block size-[24px] shrink-0 text-text-brand group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
           </button>
         </div>
       </div>
@@ -722,9 +717,8 @@ function CatalogCard({ id, name, make, img, price, monthly, isNew = false, onCli
           </div>
         </div>
         <span className="card-arrow" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M8 16L16 8" />
-              <path d="M9.5 8H16v6.5" />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 18L18 6M8.25 6H18v9.75" />
             </svg>
           </span>
       </div>
@@ -787,11 +781,7 @@ function FeaturedCarsSection({ onNavigate }: { onNavigate: (path: string) => voi
             style={{ border: "1px solid var(--color-border-focus)" }}
           >
             <span className="text-text-brand text-base font-semibold leading-[18px] whitespace-nowrap group-hover:text-white transition-colors">Explore All</span>
-            <div className="shrink-0 size-[24px]">
-              <svg className="block size-full" fill="none" height="24" viewBox="0 0 24 24" width="24">
-                <path d={svgPaths.p4a58600} fill="var(--color-text-brand)" className="group-hover:fill-white" />
-              </svg>
-            </div>
+            <svg className="block size-[24px] shrink-0 text-text-brand group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
           </button>
         </div>
       </div>
@@ -935,9 +925,7 @@ function CustomerReviewsSection() {
                 <path d={svgPaths.p35fbea00} fill="#1976D2" />
               </svg>
               <span className="text-text-brand text-sm font-semibold leading-[18px] whitespace-nowrap">Read Our Reviews</span>
-              <svg className="block size-[24px] shrink-0" fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
-                <path d={svgPaths.p4a58600} fill="var(--color-text-brand)" />
-              </svg>
+              <svg className="block size-[24px] shrink-0 text-text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
             </a>
           </div>
 
@@ -1082,9 +1070,7 @@ function CarTipsSection({ onNavigate }: { onNavigate: (path: string) => void }) 
               className="group flex items-center gap-[10px] h-[48px] px-[24px] rounded-[999px] border border-border-focus text-text-brand transition-colors duration-150 hover:bg-bg-brand hover:text-white"
             >
               <span className="text-base font-semibold leading-none">View All</span>
-              <svg className="block size-[22px]" fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
-                <path d={svgPaths.p4a58600} fill="currentColor" />
-              </svg>
+              <svg className="block size-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
             </button>
           </div>
 

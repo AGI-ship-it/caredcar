@@ -135,9 +135,8 @@ export default function Offers() {
                     {offer.validity}
                   </span>
                   <span className="card-arrow" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M8 16L16 8" />
-                      <path d="M9.5 8H16v6.5" />
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 18L18 6M8.25 6H18v9.75" />
                     </svg>
                   </span>
                 </div>
