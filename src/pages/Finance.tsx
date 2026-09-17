@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FIELD_CLASS_DARK } from "../lib/fieldStyles";
+import imgFinanceHero from "@/imports/finance-hero.jpg";
 import DirhamSymbol from "../components/DirhamSymbol";
 import EligibilityModal from "../components/EligibilityModal";
 
@@ -152,12 +153,22 @@ export default function Finance() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-bg-inverse page-hero text-center">
-        <div className="container-x">
-          <h1 className="text-5xl font-bold text-white mb-2 font-display">Finance your car the smart way.</h1>
-          <p className="text-text-on-inverse-secondary text-lg max-w-xl mx-auto">
-            Check eligibility, compare plans and drive away with clear monthly payments.
-          </p>
+      <section className="relative overflow-hidden bg-bg-inverse page-hero text-white">
+        <img
+          src={imgFinanceHero}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-[75%_58%]"
+        />
+        {/* The sky behind the heading is pale, so fade navy in from the text side */}
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/90 via-bg-inverse/60 to-bg-inverse/10 lg:via-bg-inverse/35 lg:to-transparent" />
+        <div className="container-x relative">
+          <div className="text-center lg:text-start lg:w-1/2">
+            <h1 className="text-5xl font-bold mb-2 font-display">Finance your car the smart way.</h1>
+            <p className="text-white/85 text-lg max-w-xl mx-auto lg:mx-0">
+              Check eligibility, compare plans and drive away with clear monthly payments.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -186,11 +197,11 @@ export default function Finance() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
             {STEPS.map((step, i) => (
-              <div key={step.n} className="relative">
+              <div key={step.n} className="relative h-full">
                 {i < STEPS.length - 1 && (
-                  <div className="hidden md:block absolute top-6 left-1/2 w-full h-0.5 bg-bg-brand/20 z-0" />
+                  <div className="hidden md:block absolute top-[47px] left-1/2 w-full h-0.5 bg-bg-brand/20 z-0" />
                 )}
-                <div className="relative z-10 text-center bg-white rounded-[12px] p-6 shadow">
+                <div className="relative z-10 h-full text-center bg-white rounded-[12px] p-6 shadow">
                   <div className="w-12 h-12 bg-bg-brand rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg">
                     {step.n}
                   </div>
@@ -343,13 +354,13 @@ export default function Finance() {
       </section>
 
       {/* Application CTA */}
-      <section className="bg-bg-inverse py-20">
+      <section className="bg-bg-brand py-20">
         <div className="max-w-[640px] mx-auto px-5 text-center">
           <h2 className="text-4xl font-bold text-white mb-2 font-display">Ready to Apply?</h2>
-          <p className="text-text-on-inverse-secondary mb-8">Leave your details and our finance team will call you back within 2 hours.</p>
+          <p className="text-white/85 mb-8">Leave your details and our finance team will call you back within 2 hours.</p>
 
           {submitted ? (
-            <div role="status" className="relative bg-bg-accent/10 border border-(--color-bg-accent)/30 rounded-[12px] p-8">
+            <div role="status" className="relative bg-white/10 border border-white/25 rounded-[12px] p-8">
               <button
                 type="button"
                 onClick={() => {
@@ -357,7 +368,7 @@ export default function Finance() {
                   setAppForm({ name: "", email: "", phone: "" });
                 }}
                 aria-label="Close"
-                className="absolute top-3 end-3 size-9 flex items-center justify-center rounded-full text-text-on-inverse-secondary hover:text-white hover:bg-white/10 transition-colors"
+                className="absolute top-3 end-3 size-9 flex items-center justify-center rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
               >
                 <svg fill="none" height="16" viewBox="0 0 24 24" width="16" aria-hidden="true"><path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
               </button>
@@ -366,8 +377,8 @@ export default function Finance() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <p className="text-text-accent font-bold text-lg">Application Received!</p>
-              <p className="text-text-on-inverse-secondary text-sm mt-2">Our finance team will contact you within 2 hours.</p>
+              <p className="text-white font-bold text-lg">Application Received!</p>
+              <p className="text-white/85 text-sm mt-2">Our finance team will contact you within 2 hours.</p>
               <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
                 <button
                   type="button"
@@ -385,7 +396,7 @@ export default function Finance() {
             <form onSubmit={handleAppSubmit} className="space-y-4">
               <input
                 required
-                className={FIELD_CLASS_DARK}
+                className={`${FIELD_CLASS_DARK} border-white/30 placeholder-white/75 focus:border-white focus:ring-white/30`}
                 placeholder="Full Name"
                 value={appForm.name}
                 onChange={(e) => setAppForm((f) => ({ ...f, name: e.target.value }))}
@@ -393,21 +404,21 @@ export default function Finance() {
               <input
                 required
                 type="email"
-                className={FIELD_CLASS_DARK}
+                className={`${FIELD_CLASS_DARK} border-white/30 placeholder-white/75 focus:border-white focus:ring-white/30`}
                 placeholder="Email Address"
                 value={appForm.email}
                 onChange={(e) => setAppForm((f) => ({ ...f, email: e.target.value }))}
               />
               <input
                 required
-                className={FIELD_CLASS_DARK}
+                className={`${FIELD_CLASS_DARK} border-white/30 placeholder-white/75 focus:border-white focus:ring-white/30`}
                 placeholder="Phone Number (+971...)"
                 value={appForm.phone}
                 onChange={(e) => setAppForm((f) => ({ ...f, phone: e.target.value }))}
               />
               <button
                 type="submit"
-                className="w-full bg-bg-brand text-white font-bold py-4 rounded-full hover:bg-bg-brand-hover transition"
+                className="w-full bg-white text-text-brand font-bold py-4 rounded-full hover:bg-bg-brand-soft transition"
               >
                 Submit Application
               </button>

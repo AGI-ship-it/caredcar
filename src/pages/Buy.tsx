@@ -8,6 +8,7 @@ import SortMenu from "../components/SortMenu";
 import BroomIcon from "../components/BroomIcon";
 import Button from "../components/Button";
 import CompareTray from "../components/CompareTray";
+import imgBuyHero from "@/imports/buy-hero.jpg";
 
 const toOpts = (arr: string[]) => arr.map((v) => ({ value: v, label: v }));
 
@@ -388,12 +389,25 @@ export default function Buy() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-bg-inverse page-hero">
-        <div className="container-x text-center">
+      <section className="relative overflow-hidden bg-bg-inverse page-hero">
+        <img
+          src={imgBuyHero}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-bottom"
+        />
+        {/* The cars sit right behind the centred heading, so tint the photo and darken the text band */}
+        <div aria-hidden="true" className="absolute inset-0 bg-bg-inverse/45" />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 60% 55% at 50% 58%, color-mix(in srgb, var(--color-bg-inverse) 70%, transparent), transparent)" }}
+        />
+        <div className="container-x relative text-center">
           <h1 className="text-white text-5xl font-bold font-display">
             Browse Our Cars
           </h1>
-          <p className="text-text-secondary mt-2 text-lg">
+          <p className="text-white/85 mt-2 text-lg">
             Find your perfect pre-owned vehicle from our curated UAE collection
           </p>
         </div>

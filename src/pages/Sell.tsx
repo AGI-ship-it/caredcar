@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SellYourCarForm from "../components/SellYourCarForm";
+import imgSellHero from "@/imports/sell-hero.jpg";
 
 const WHY_SELL = [
   { title: "Free Valuation", desc: "Get an accurate, market-based estimate for your car in minutes — no obligation." },
@@ -29,14 +30,24 @@ export default function Sell() {
       <Header />
 
       {/* Hero */}
-      <div className="bg-bg-inverse page-hero text-center">
-        <div className="container-x">
-          <h1 className="text-4xl font-bold text-white mb-2 font-display">Get the Best Price for Your Car</h1>
-          <p className="text-text-on-inverse-secondary text-lg max-w-xl mx-auto">
-            Fill in your details and book a free inspection — we handle the rest.
-          </p>
+      <section className="relative overflow-hidden bg-bg-inverse page-hero text-white">
+        <img
+          src={imgSellHero}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-[75%_center]"
+        />
+        {/* The sky behind the heading is near-white, so fade navy in from the text side */}
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/90 via-bg-inverse/60 to-bg-inverse/10 lg:via-bg-inverse/35 lg:to-transparent" />
+        <div className="container-x relative">
+          <div className="text-center lg:text-start lg:w-1/2">
+            <h1 className="text-4xl md:text-5xl font-bold mb-2 font-display">Get the Best Price for Your Car</h1>
+            <p className="text-white/85 text-lg max-w-xl mx-auto lg:mx-0">
+              Fill in your details and book a free inspection — we handle the rest.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Why sell with us */}
       <section className="py-16 bg-white">

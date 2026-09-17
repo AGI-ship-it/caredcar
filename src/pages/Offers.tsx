@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import DirhamSymbol from "../components/DirhamSymbol";
+import imgOffersHero from "@/imports/offers-hero.jpg";
 
 const OFFER_CARDS = [
   {
@@ -69,15 +70,21 @@ export default function Offers() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-bg-inverse page-hero text-center">
-        <div className="container-x">
-          <h1 className="text-5xl font-bold text-white mb-2 font-display">Exclusive Offers</h1>
-          <p className="text-text-on-inverse-secondary text-lg max-w-xl mx-auto mb-6">
-            Limited-time deals on premium pre-owned vehicles — transparent pricing, zero hidden fees.
-          </p>
-          <div className="inline-flex items-center gap-2 bg-bg-accent/10 border border-(--color-bg-accent)/30 rounded-full px-5 py-2">
-            <span className="w-2 h-2 rounded-full bg-bg-accent animate-pulse" />
-            <span className="text-text-accent text-sm font-semibold">New offers added this week</span>
+      <section className="relative overflow-hidden bg-bg-inverse page-hero text-white">
+        <img
+          src={imgOffersHero}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-[70%_center]"
+        />
+        {/* The road on the text side is already dark; a light fade keeps the heading crisp */}
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/80 via-bg-inverse/55 to-bg-inverse/20 lg:via-bg-inverse/25 lg:to-transparent" />
+        <div className="container-x relative">
+          <div className="text-center lg:text-start lg:w-1/2">
+            <h1 className="text-5xl font-bold mb-2 font-display">Exclusive Offers</h1>
+            <p className="text-white/85 text-lg max-w-xl mx-auto lg:mx-0">
+              Limited-time deals on premium pre-owned vehicles — transparent pricing, zero hidden fees.
+            </p>
           </div>
         </div>
       </section>

@@ -5,7 +5,8 @@ import Footer from "../components/Footer";
 import Select from "../components/Select";
 import Button from "../components/Button";
 import DirhamSymbol from "../components/DirhamSymbol";
-import { cars, Car } from "../data/cars";
+import imgCompareHero from "@/imports/compare-hero.jpg";
+import { cars, type Car } from "../data/cars";
 
 const MAX_SLOTS = 3;
 
@@ -14,6 +15,8 @@ type Cell = { value: React.ReactNode; raw: string };
 interface SpecRow {
   label: string;
   cell: (c: Car) => Cell;
+  // Rows with a clear "better" direction get a Best badge on the winning car(s)
+  best?: { pick: "min" | "max"; get: (c: Car) => number };
 }
 
 interface SpecGroup {
@@ -23,16 +26,32 @@ interface SpecGroup {
 
 const text = (raw: string): Cell => ({ value: raw, raw });
 
+const yesNo = (yes: boolean): Cell => ({
+  raw: yes ? "yes" : "no",
+  value: yes ? (
+    <span className="inline-flex items-center gap-1.5 text-text-success font-medium">
+      <svg viewBox="0 0 20 20" fill="none" className="size-4" aria-hidden="true"><path d="M4.5 10.5l3.5 3.5 7.5-8" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      Yes
+    </span>
+  ) : (
+    <span className="inline-flex items-center gap-1.5 text-text-disabled">
+      <svg viewBox="0 0 20 20" fill="none" className="size-4" aria-hidden="true"><path d="M6 6l8 8M14 6l-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
+      No
+    </span>
+  ),
+});
+
 const specGroups: SpecGroup[] = [
   {
     title: "Pricing",
     rows: [
       {
         label: "Price",
+        best: { pick: "min", get: (c) => c.price },
         cell: (c) => ({
           raw: String(c.price),
           value: (
-            <span className="inline-flex items-center gap-1.5 font-bold text-text-primary">
+            <span className="inline-flex items-center gap-1.5 font-bold text-text-primary tabular-nums">
               <DirhamSymbol size={16} />
               {c.price.toLocaleString("en-AE")}
             </span>
@@ -41,12 +60,14 @@ const specGroups: SpecGroup[] = [
       },
       {
         label: "Monthly (est.)",
+        best: { pick: "min", get: (c) => c.monthlyPayment },
         cell: (c) => ({
           raw: String(c.monthlyPayment),
           value: (
-            <span className="inline-flex items-center gap-1 text-text-secondary">
+            <span className="inline-flex items-center gap-1 text-text-primary tabular-nums">
               <DirhamSymbol size={12} color="var(--color-text-secondary)" />
-              {c.monthlyPayment.toLocaleString("en-AE")}/mo
+              {c.monthlyPayment.toLocaleString("en-AE")}
+              <span className="text-text-secondary">/mo</span>
             </span>
           ),
         }),
@@ -65,7 +86,7 @@ const specGroups: SpecGroup[] = [
     title: "Body & Design",
     rows: [
       { label: "Body Type", cell: (c) => text(c.bodyType) },
-      { label: "Model Year", cell: (c) => text(String(c.year)) },
+      { label: "Model Year", best: { pick: "max", get: (c) => c.year }, cell: (c) => text(String(c.year)) },
       { label: "Exterior Colour", cell: (c) => text(c.color) },
     ],
   },
@@ -74,32 +95,26 @@ const specGroups: SpecGroup[] = [
     rows: [
       {
         label: "Mileage",
-        cell: (c) =>
-          text(
-            c.mileage >= 1000
-              ? `${(c.mileage / 1000).toFixed(0)}k km`
-              : `${c.mileage} km`
-          ),
+        best: { pick: "min", get: (c) => c.mileage },
+        cell: (c) => ({ raw: String(c.mileage), value: <span className="tabular-nums">{c.mileage.toLocaleString("en-US")} km</span> }),
       },
     ],
   },
   {
     title: "Highlights",
     rows: [
-      { label: "Certified New", cell: (c) => text(c.isNew ? "Yes" : "No") },
-      { label: "Featured Pick", cell: (c) => text(c.isFeatured ? "Yes" : "No") },
-      {
-        label: "Automatic",
-        cell: (c) => text(c.transmission === "Automatic" ? "Yes" : "No"),
-      },
-      {
-        label: "Eco Friendly",
-        cell: (c) =>
-          text(c.fuelType === "Electric" || c.fuelType === "Hybrid" ? "Yes" : "No"),
-      },
+      { label: "Certified New", cell: (c) => yesNo(Boolean(c.isNew)) },
+      { label: "Featured Pick", cell: (c) => yesNo(Boolean(c.isFeatured)) },
+      { label: "Automatic", cell: (c) => yesNo(c.transmission === "Automatic") },
+      { label: "Eco Friendly", cell: (c) => yesNo(c.fuelType === "Electric" || c.fuelType === "Hybrid") },
     ],
   },
 ];
+
+// Starter pairs for the empty state: the two cheapest cars of each popular body type
+const SUGGESTIONS = (["SUV", "Sedan", "Pickup"] as const)
+  .map((type) => cars.filter((c) => c.bodyType === type).sort((x, y) => x.price - y.price).slice(0, 2))
+  .filter((pair) => pair.length === 2);
 
 const carLabel = (c: Car) => `${c.year} ${c.make} ${c.model}`;
 
@@ -107,6 +122,8 @@ export default function Compare() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [highlight, setHighlight] = useState(true);
+  const [onlyDiffs, setOnlyDiffs] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const selectedIds = useMemo(() => {
     const raw = (searchParams.get("ids") || "")
@@ -166,7 +183,6 @@ export default function Compare() {
 
   // Slots to render: filled cars + one empty "add" slot if room remains.
   const slotCount = Math.min(selectedCars.length + 1, MAX_SLOTS);
-  const columnBasis = `${100 / MAX_SLOTS}%`;
 
   const rowDiffers = (row: SpecRow) => {
     if (selectedCars.length < 2) return false;
@@ -174,17 +190,48 @@ export default function Compare() {
     return selectedCars.some((c) => row.cell(c).raw !== first);
   };
 
+  // A car wins a row only when the values actually differ, so ties don't all get badges
+  const isBest = (row: SpecRow, car: Car) => {
+    if (!row.best || !rowDiffers(row)) return false;
+    const values = selectedCars.map(row.best.get);
+    const target = row.best.pick === "min" ? Math.min(...values) : Math.max(...values);
+    return row.best.get(car) === target;
+  };
+
+  const allRows = specGroups.flatMap((g) => g.rows);
+  const diffCount = allRows.filter(rowDiffers).length;
+
+  function copyLink() {
+    navigator.clipboard?.writeText(window.location.href).then(() => {
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
 
       {/* Hero */}
-      <section className="bg-bg-inverse page-hero">
-        <div className="container-x text-center">
+      <section className="relative overflow-hidden bg-bg-inverse page-hero">
+        <img
+          src={imgCompareHero}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        {/* Light studio shot with the car behind the centred heading, so tint it and darken the text band */}
+        <div aria-hidden="true" className="absolute inset-0 bg-bg-inverse/55" />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 60% 55% at 50% 58%, color-mix(in srgb, var(--color-bg-inverse) 70%, transparent), transparent)" }}
+        />
+        <div className="container-x relative text-center">
           <h1 className="text-white text-5xl font-bold font-display">
             Compare Models
           </h1>
-          <p className="text-text-secondary mt-2 text-lg">
+          <p className="text-white/85 mt-2 text-lg">
             Pick up to {MAX_SLOTS} cars and weigh their specs, pricing and features side by side.
           </p>
         </div>
@@ -195,29 +242,39 @@ export default function Compare() {
           {/* Controls */}
           <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
             <p className="text-text-secondary text-sm">
-              {selectedCars.length === 0
-                ? "No cars selected yet."
-                : `Comparing ${selectedCars.length} of ${MAX_SLOTS} cars.`}
+              {selectedCars.length === 0 ? (
+                "No cars selected yet."
+              ) : (
+                <>
+                  Comparing <span className="font-semibold text-text-primary">{selectedCars.length}</span> of {MAX_SLOTS} cars
+                  {selectedCars.length > 1 && (
+                    <>
+                      {" · "}
+                      <span className="font-semibold text-text-primary">{diffCount}</span> {diffCount === 1 ? "difference" : "differences"}
+                    </>
+                  )}
+                </>
+              )}
             </p>
-            <div className="flex items-center gap-4">
-              <label className="flex items-center gap-2 cursor-pointer select-none text-sm text-text-primary">
-                <input
-                  type="checkbox"
-                  checked={highlight}
-                  onChange={(e) => setHighlight(e.target.checked)}
-                  className="h-4 w-4 accent-bg-brand"
-                />
-                Highlight differences
-              </label>
-              {selectedCars.length > 0 && (
-                <button
-                  onClick={() => commitIds([])}
-                  className="text-sm font-medium text-text-brand hover:underline"
-                >
+            {selectedCars.length > 0 && (
+              <div className="flex items-center gap-x-5 gap-y-2 flex-wrap">
+                <label className="flex items-center gap-2 cursor-pointer select-none text-sm text-text-primary">
+                  <input type="checkbox" checked={highlight} onChange={(e) => setHighlight(e.target.checked)} className="size-4 accent-bg-brand" />
+                  Highlight differences
+                </label>
+                <label className={`flex items-center gap-2 select-none text-sm ${selectedCars.length > 1 ? "cursor-pointer text-text-primary" : "text-text-disabled"}`}>
+                  <input type="checkbox" checked={onlyDiffs} disabled={selectedCars.length < 2} onChange={(e) => setOnlyDiffs(e.target.checked)} className="size-4 accent-bg-brand" />
+                  Only differences
+                </label>
+                <button type="button" onClick={copyLink} className="inline-flex items-center gap-1.5 text-sm font-medium text-text-brand hover:underline" aria-live="polite">
+                  <svg viewBox="0 0 20 20" fill="none" className="size-4" aria-hidden="true"><path d="M8.5 11.5a3.5 3.5 0 005 0l2.5-2.5a3.5 3.5 0 00-5-5l-1 1M11.5 8.5a3.5 3.5 0 00-5 0L4 11a3.5 3.5 0 005 5l1-1" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" /></svg>
+                  {copied ? "Link copied" : "Copy link"}
+                </button>
+                <button onClick={() => commitIds([])} className="text-sm font-medium text-text-brand hover:underline">
                   Clear all
                 </button>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           {/* Selection slots */}
@@ -286,69 +343,118 @@ export default function Compare() {
 
           {/* Comparison table */}
           {selectedCars.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 text-center border-t border-border-default">
+            <div className="flex flex-col items-center justify-center py-16 text-center border-t border-border-default">
               <p className="text-text-primary font-bold text-xl mb-2">Nothing to compare yet</p>
               <p className="text-text-secondary text-sm mb-6">
-                Add at least two cars above, or browse the inventory to get started.
+                Add at least two cars above, or start with a popular comparison.
               </p>
-              <Button onClick={() => navigate("/buy")}>Browse Cars</Button>
+              {SUGGESTIONS.length > 0 && (
+                <div className="flex flex-wrap justify-center gap-3 mb-8">
+                  {SUGGESTIONS.map((pair) => (
+                    <button
+                      key={pair.map((c) => c.id).join("-")}
+                      type="button"
+                      onClick={() => commitIds(pair.map((c) => c.id))}
+                      className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-border-default bg-white text-sm font-medium text-text-primary hover:border-border-focus hover:text-text-brand transition-colors"
+                    >
+                      {pair[0].make} {pair[0].model}
+                      <span className="text-text-secondary text-xs font-semibold">vs</span>
+                      {pair[1].make} {pair[1].model}
+                    </button>
+                  ))}
+                </div>
+              )}
+              <Button variant="outline" onClick={() => navigate("/buy")}>Browse Cars</Button>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
+            <div className="overflow-x-auto rounded-[16px] border border-border-default">
+              <table className="w-full min-w-[640px] border-collapse">
                 <colgroup>
-                  <col style={{ width: "220px" }} />
+                  <col className="w-[180px] sm:w-[220px]" />
                   {selectedCars.map((c) => (
-                    <col key={c.id} style={{ width: columnBasis }} />
+                    <col key={c.id} />
                   ))}
                 </colgroup>
+                <thead>
+                  <tr className="bg-bg-surface">
+                    <th className="text-start align-bottom px-4 py-4 text-xs font-semibold uppercase tracking-widest text-text-secondary">Specs</th>
+                    {selectedCars.map((c) => (
+                      <th key={c.id} scope="col" className="text-start align-bottom px-4 py-4">
+                        <div className="flex items-center gap-3">
+                          <img src={c.image} alt="" className="size-14 shrink-0 rounded-[10px] object-cover" />
+                          <div className="min-w-0">
+                            <p className="text-xs font-medium text-text-secondary">{c.year} {c.make}</p>
+                            <p className="text-sm font-bold text-text-primary truncate">{c.model}</p>
+                          </div>
+                        </div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
                 <tbody>
-                  {specGroups.map((group) => (
-                    <Fragment key={group.title}>
-                      <tr>
-                        <td
-                          colSpan={selectedCars.length + 1}
-                          className="bg-bg-inverse text-white text-xs font-semibold uppercase tracking-widest px-4 py-2.5 rounded-[6px]"
-                        >
-                          {group.title}
-                        </td>
-                      </tr>
-                      {group.rows.map((row) => {
-                        const differs = highlight && rowDiffers(row);
-                        return (
-                          <tr key={row.label} className="border-b border-border-default">
-                            <th className="text-left align-middle px-4 py-3 text-sm font-medium text-text-secondary">
-                              {row.label}
-                            </th>
-                            {selectedCars.map((c) => (
-                              <td
-                                key={c.id}
-                                className={`px-4 py-3 text-sm text-text-primary align-middle ${
-                                  differs ? "bg-[#fff7e6]" : ""
-                                }`}
+                  {specGroups.map((group) => {
+                    const rows = onlyDiffs ? group.rows.filter(rowDiffers) : group.rows;
+                    if (rows.length === 0) return null;
+                    return (
+                      <Fragment key={group.title}>
+                        <tr>
+                          <th
+                            colSpan={selectedCars.length + 1}
+                            scope="colgroup"
+                            className="bg-bg-inverse text-white text-start text-xs font-semibold uppercase tracking-widest px-4 py-2.5"
+                          >
+                            {group.title}
+                          </th>
+                        </tr>
+                        {rows.map((row) => {
+                          const differs = highlight && rowDiffers(row);
+                          return (
+                            <tr key={row.label} className="border-b border-border-default last:border-b-0">
+                              <th
+                                scope="row"
+                                className={`text-start align-middle px-4 py-3 text-sm font-medium text-text-secondary ${differs ? "shadow-[inset_3px_0_0_var(--color-bg-brand)]" : ""}`}
                               >
-                                {row.cell(c).value}
-                              </td>
-                            ))}
-                          </tr>
-                        );
-                      })}
-                    </Fragment>
-                  ))}
+                                {row.label}
+                              </th>
+                              {selectedCars.map((c) => (
+                                <td key={c.id} className={`px-4 py-3 text-sm text-text-primary align-middle ${differs ? "bg-bg-brand-soft/60" : ""}`}>
+                                  <span className="inline-flex flex-wrap items-center gap-2">
+                                    {row.cell(c).value}
+                                    {isBest(row, c) && (
+                                      <span className="inline-flex items-center rounded-full bg-bg-accent-soft px-2 py-0.5 text-[11px] font-semibold text-text-success">
+                                        Best
+                                      </span>
+                                    )}
+                                  </span>
+                                </td>
+                              ))}
+                            </tr>
+                          );
+                        })}
+                      </Fragment>
+                    );
+                  })}
+                  {onlyDiffs && diffCount === 0 && (
+                    <tr>
+                      <td colSpan={selectedCars.length + 1} className="px-4 py-10 text-center text-sm text-text-secondary">
+                        These cars match on every spec.
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
+                <tfoot>
+                  <tr className="bg-bg-surface border-t border-border-default">
+                    <td className="px-4 py-4" />
+                    {selectedCars.map((c) => (
+                      <td key={c.id} className="px-4 py-4">
+                        <Button variant="outline" size="sm" onClick={() => navigate(`/car/${c.id}`)}>
+                          View details
+                        </Button>
+                      </td>
+                    ))}
+                  </tr>
+                </tfoot>
               </table>
-
-              <div className="flex flex-wrap gap-3 mt-8">
-                {selectedCars.map((c) => (
-                  <Button
-                    key={c.id}
-                    variant="outline"
-                    onClick={() => navigate(`/car/${c.id}`)}
-                  >
-                    View {c.model}
-                  </Button>
-                ))}
-              </div>
             </div>
           )}
         </div>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import imgAboutHero from "@/imports/about-hero.jpg";
 
 // Headings and body copy match caredcars.com/about-us verbatim.
 const FEATURES = [
@@ -63,10 +64,20 @@ export default function About() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-bg-inverse page-hero page-hero--overlap relative overflow-hidden">
-        <div className="container-x text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-2 font-display">Just Good Cars</h1>
-          <p className="text-text-on-inverse-secondary text-lg leading-relaxed max-w-xl mx-auto">Dubai&apos;s trusted pre-owned cars</p>
+      <section className="bg-bg-inverse page-hero page-hero--overlap relative overflow-hidden text-white">
+        <img
+          src={imgAboutHero}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-[65%_45%]"
+        />
+        {/* The sky behind the heading is pale, so fade navy in from the text side */}
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/90 via-bg-inverse/60 to-bg-inverse/10 lg:via-bg-inverse/35 lg:to-transparent" />
+        <div className="container-x relative">
+          <div className="text-center lg:text-start lg:w-1/2">
+            <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-2 font-display">Just Good Cars</h1>
+            <p className="text-white/85 text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">Dubai&apos;s trusted pre-owned cars</p>
+          </div>
         </div>
       </section>
 
