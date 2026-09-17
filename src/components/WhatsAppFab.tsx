@@ -9,10 +9,10 @@ export default function WhatsAppFab() {
     <a
       href={`tel:${PHONE_TEL}`}
       aria-label="Call us"
-      className="call-fab xl:hidden fixed end-6 z-[60] size-[52px] rounded-full flex items-center justify-center text-white"
-      style={{ bottom: "calc(24px + 60px + 14px + env(safe-area-inset-bottom, 0px))", marginInlineEnd: "4px" }}
+      className="call-fab xl:hidden fixed end-4 sm:end-6 z-[60] size-[54px] sm:size-[60px] rounded-full flex items-center justify-center text-white"
+      style={{ bottom: "calc(20px + 54px + 12px + env(safe-area-inset-bottom, 0px))" }}
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2" />
       </svg>
     </a>
@@ -22,8 +22,8 @@ export default function WhatsAppFab() {
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
       title="Chat with us on WhatsApp"
-      className="wa-fab fixed end-6 z-[60] size-[60px] rounded-full flex items-center justify-center text-white"
-      style={{ bottom: "calc(24px + env(safe-area-inset-bottom, 0px))" }}
+      className="wa-fab fixed end-4 sm:end-6 z-[60] size-[54px] sm:size-[60px] rounded-full flex items-center justify-center text-white"
+      style={{ bottom: "calc(20px + env(safe-area-inset-bottom, 0px))" }}
     >
       <span aria-hidden="true" className="wa-fab-wave" />
       <span aria-hidden="true" className="wa-fab-wave wa-fab-wave--late" />

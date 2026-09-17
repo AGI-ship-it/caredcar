@@ -123,7 +123,7 @@ function HeroDropdownField({
 
   return (
     <div className="flex-1 min-w-0 flex flex-col items-start relative" ref={ref}>
-      <label htmlFor={id} className="text-white text-[14px] font-semibold leading-normal mb-[8px]">{label}</label>
+      <label htmlFor={id} className="text-white text-[13px] sm:text-[14px] font-semibold leading-normal mb-[5px] sm:mb-[8px]">{label}</label>
       <button
         id={id}
         type="button"
@@ -293,7 +293,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,20,0.5) 100%)" }} />
       </div>
 
-      <div className="relative flex-1 flex flex-col items-center justify-between xl:justify-end gap-[32px] px-4 sm:px-5 pt-[40px] xl:pt-0 pb-[32px] xl:pb-[clamp(60px,11svh,112px)]">
+      <div className="relative flex-1 flex flex-col items-center justify-between xl:justify-end gap-[24px] sm:gap-[32px] px-4 sm:px-5 pt-[32px] sm:pt-[40px] xl:pt-0 pb-[96px] sm:pb-[32px] xl:pb-[clamp(60px,11svh,112px)]">
       {/* Hero text: centred between the floating nav and the car roofs */}
       <div className="relative xl:absolute xl:inset-x-0 xl:top-[calc(60px+23%)] xl:-translate-y-1/2 px-5 flex justify-center pointer-events-none">
       <div className="hero-parallax-fg hero-intro-text pointer-events-auto flex flex-col items-center gap-[20px] text-center">
@@ -338,10 +338,10 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       </div>
 
       {/* Search card */}
-      <div className="w-full max-w-[1040px] mt-[30px]">
-        <form onSubmit={submit} className="hero-search relative w-full rounded-[20px] px-[16px] pb-[16px] pt-[46px] sm:px-[24px] sm:pb-[24px] sm:pt-[50px] flex flex-col gap-[16px]">
+      <div className="w-full max-w-[1040px] mt-0 sm:mt-[30px]">
+        <form onSubmit={submit} className="hero-search relative w-full rounded-[20px] p-[14px] sm:px-[24px] sm:pb-[24px] sm:pt-[50px] flex flex-col gap-[14px] sm:gap-[16px]">
             {/* Type toggle straddles the top edge of the card */}
-            <div role="tablist" aria-label="Search type" className="hero-tabs absolute z-30 top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 grid grid-cols-2 p-[4px] rounded-full w-[calc(100%-32px)] sm:w-[360px] h-[60px]">
+            <div role="tablist" aria-label="Search type" className="hero-tabs relative sm:absolute z-30 sm:top-0 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 grid grid-cols-2 p-[4px] rounded-full w-full sm:w-[360px] h-[52px] sm:h-[60px]">
               <span
                 aria-hidden="true"
                 className="hero-tab-indicator absolute top-[4px] bottom-[4px] start-[4px] w-[calc(50%-4px)] rounded-full"
@@ -357,7 +357,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
                   tabSwitched.current = true;
                   setActiveTab(tab);
                 }}
-                  className={`relative z-10 h-[52px] flex items-center justify-center rounded-full text-[18px] font-bold transition-colors duration-200 ${
+                  className={`relative z-10 h-[44px] sm:h-[52px] flex items-center justify-center rounded-full text-[16px] sm:text-[18px] font-bold transition-colors duration-200 ${
                     activeTab === tab ? "text-white" : "text-white/70 hover:text-white"
                   }`}
                 >
@@ -379,8 +379,8 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
             )}
 
           {/* Row 2: fields + action */}
-          <div className="flex flex-col lg:flex-row lg:items-end gap-[12px]">
-            <div key={`fields-${activeTab}`} className="hero-fields relative z-20 flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-2 lg:flex gap-[12px]">
+          <div className="flex flex-col lg:flex-row lg:items-end gap-[10px] sm:gap-[12px]">
+            <div key={`fields-${activeTab}`} className="hero-fields relative z-20 flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-2 lg:flex gap-[10px] sm:gap-[12px]">
               {activeTab === "buy" ? (
                 <>
                   <HeroDropdownField id="hero-make" label="Make" value={buy.make} options={makeOptions} anyLabel="Any make" placeholder="Select make" onChange={(v) => setBuyField("make", v)} />
@@ -391,7 +391,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
               ) : (
                 <>
                   <div className="flex-1 min-w-0 flex flex-col items-start">
-                    <label htmlFor="hero-plate" className="text-white text-[14px] font-semibold leading-normal mb-[8px]">Plate / VIN</label>
+                    <label htmlFor="hero-plate" className="text-white text-[13px] sm:text-[14px] font-semibold leading-normal mb-[5px] sm:mb-[8px]">Plate / VIN</label>
                     <input
                       id="hero-plate"
                       ref={plateRef}
