@@ -8,17 +8,36 @@ const DICT = dictionary as Record<string, string>;
 const ATTRS = ["placeholder", "aria-label", "title", "alt"] as const;
 const SKIP_TAGS = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA", "CODE", "PRE"]);
 
-function arCars(n: number) {
-  if (n === 1) return "سيارة واحدة";
-  if (n === 2) return "سيارتان";
-  if (n >= 3 && n <= 10) return `${n} سيارات`;
-  return `${n} سيارة`;
+// Arabic counted nouns change form for 1, 2, 3–10 and 11+
+function arCount(n: number, one: string, two: string, few: string, many: string) {
+  if (n === 1) return one;
+  if (n === 2) return two;
+  if (n >= 3 && n <= 10) return `${n} ${few}`;
+  return `${n} ${many}`;
 }
+const arCars = (n: number) => arCount(n, "سيارة واحدة", "سيارتان", "سيارات", "سيارة");
+const arVehicles = (n: number) => arCount(n, "مركبة واحدة", "مركبتان", "مركبات", "مركبة");
+const arYears = (n: number) => arCount(n, "سنة واحدة", "سنتان", "سنوات", "سنة");
+const arDiffs = (n: number) => arCount(n, "فرق واحد", "فرقان", "فروقات", "فرقًا");
+const arTime = (t: string, ampm: string) => `${t} ${ampm === "AM" ? "ص" : "م"}`;
 
-const PATTERNS: [RegExp, (...m: string[]) => string][] = [
+const PATTERNS: [RegExp, (...m: string[]) => string | null][] = [
   [/^Show (\d+) cars?$/, (_, n) => `عرض ${arCars(Number(n))}`],
   [/^Search all (\d+) cars$/, (_, n) => `البحث في ${arCars(Number(n))}`],
   [/^Comparing (\d+) of (\d+) cars\.$/, (_, a, b) => `مقارنة ${a} من ${b} سيارات.`],
+  [/^Comparing (\d+) of (\d+) cars$/, (_, a, b) => `مقارنة ${a} من ${b} سيارات`],
+  [/^Comparing (\d+) of (\d+) cars · (\d+) differences?$/, (_, a, b, d) => `مقارنة ${a} من ${b} سيارات · ${arDiffs(Number(d))}`],
+  [/^Pick up to (\d+) cars and weigh their specs, pricing and features side by side\.$/, (_, n) => `اختر حتى ${n} سيارات وقارن بين مواصفاتها وأسعارها ومزاياها جنبًا إلى جنب.`],
+  [/^Showing (\d+) vehicles?$/, (_, n) => `عرض ${arVehicles(Number(n))}`],
+  [/^(\d+) vehicles? found$/, (_, n) => `تم العثور على ${arVehicles(Number(n))}`],
+  [/^Show all (\d+) makes$/, (_, n) => `عرض كل الماركات (${n})`],
+  [/^(\d+) seats$/, (_, n) => (n === "2" ? "مقعدان" : `${n} مقاعد`)],
+  [/^(\d+) Years?$/, (_, n) => arYears(Number(n))],
+  [/^Principal (\d+)%, interest (\d+)%$/, (_, a, b) => `أصل المبلغ ${a}%، والفائدة ${b}%`],
+  [/^Open now · until (\d+:\d+) (AM|PM)$/, (_, t, p) => `مفتوح الآن · حتى ${arTime(t, p)}`],
+  [/^Closed · opens (today|tomorrow) at (\d+:\d+) (AM|PM)$/, (_, d, t, p) => `مغلق · يفتح ${d === "today" ? "اليوم" : "غدًا"} الساعة ${arTime(t, p)}`],
+  [/^Shop (.+)$/, (_, x) => `تسوّق ${x}`],
+  [/^(.+) view (\d+)$/, (_, x, n) => `${x} - الصورة ${n}`],
   [/^Up to ([\d,]+) km$/, (_, n) => `حتى ${n} كم`],
   [/^([\d,]+) km$/, (_, n) => `${n} كم`],
   [/^([\d.]+)k km$/, (_, n) => `${n} ألف كم`],
@@ -38,6 +57,13 @@ const PATTERNS: [RegExp, (...m: string[]) => string][] = [
   [/^(\d+) months at ([\d.]+)%$/, (_, m, r) => `${m} شهرًا بفائدة ${r}%`],
   [/^(\d+) months at ([\d.]+)% · AED ([\d,]+) financed$/, (_, m, r, v) => `${m} شهرًا بفائدة ${r}% · تمويل ${v} درهم`],
   [/^AED ([\d,]+k?)$/, (_, n) => `${n} درهم`],
+  [/^([\d,]+) - ([\d,]+) AED$/, (_, a, b) => `${a} - ${b} درهم`],
+  [/^([\d,]+) - ([\d,]+) km$/, (_, a, b) => `${a} - ${b} كم`],
+  [/^(\d+) - (\d+) cc$/, (_, a, b) => `${a} - ${b} سي سي`],
+  [/^([A-Za-z][A-Za-z ]+) \((\d+)\)$/, (_, x, n) => {
+    const hit = DICT[x];
+    return hit ? `${hit} (${n})` : null;
+  }],
 ];
 
 function translate(raw: string): string | null {
@@ -47,7 +73,8 @@ function translate(raw: string): string | null {
   if (hit !== undefined) return hit === key ? null : hit;
   for (const [re, fn] of PATTERNS) {
     const m = key.match(re);
-    if (m) return fn(...m);
+    const out = m ? fn(...m) : null;
+    if (out !== null) return out;
   }
   return null;
 }

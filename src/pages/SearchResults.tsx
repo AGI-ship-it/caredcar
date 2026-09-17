@@ -50,7 +50,7 @@ export default function SearchResults() {
             </h1>
           )}
           <p className="text-text-secondary mt-4 text-lg">
-            {filtered.length} vehicle{filtered.length !== 1 ? "s" : ""} found
+            {`${filtered.length} ${filtered.length === 1 ? "vehicle" : "vehicles"} found`}
           </p>
         </div>
       </section>

@@ -155,22 +155,22 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="bg-bg-inverse py-20 text-center">
+      <section className="bg-bg-brand py-20 text-center">
         <div className="container-x">
-          <h2 className="text-4xl font-bold text-white mb-2 font-display">Still Not Sure What You Need</h2>
-          <p className="text-text-on-inverse-secondary text-lg mb-8 max-w-lg mx-auto">
-            We&apos;re here to help sales, finance, or service questions. Reach us in the way that&apos;s easiest for you.
+          <h2 className="text-4xl font-bold text-white mb-2 font-display">Still Not Sure What You Need?</h2>
+          <p className="text-white/85 text-lg mb-8 max-w-lg mx-auto">
+            We&apos;re here to help with sales, finance, or service questions. Reach us in the way that&apos;s easiest for you.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               to="/buy"
-              className="inline-block bg-bg-brand text-white font-bold px-10 py-4 rounded-full hover:bg-bg-brand-hover transition text-lg"
+              className="inline-block bg-white text-text-brand font-bold px-10 py-4 rounded-full hover:bg-bg-brand-soft transition text-lg"
             >
               Browse Cars
             </Link>
             <Link
               to="/contact"
-              className="inline-block border border-white/30 text-white font-bold px-10 py-4 rounded-full hover:bg-white/10 transition text-lg"
+              className="inline-block border border-white/60 text-white font-bold px-10 py-4 rounded-full hover:bg-white/10 transition text-lg"
             >
               Contact Us
             </Link>

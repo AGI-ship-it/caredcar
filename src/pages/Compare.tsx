@@ -232,7 +232,7 @@ export default function Compare() {
             Compare Models
           </h1>
           <p className="text-white/85 mt-2 text-lg">
-            Pick up to {MAX_SLOTS} cars and weigh their specs, pricing and features side by side.
+            {`Pick up to ${MAX_SLOTS} cars and weigh their specs, pricing and features side by side.`}
           </p>
         </div>
       </section>
@@ -242,19 +242,11 @@ export default function Compare() {
           {/* Controls */}
           <div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
             <p className="text-text-secondary text-sm">
-              {selectedCars.length === 0 ? (
-                "No cars selected yet."
-              ) : (
-                <>
-                  Comparing <span className="font-semibold text-text-primary">{selectedCars.length}</span> of {MAX_SLOTS} cars
-                  {selectedCars.length > 1 && (
-                    <>
-                      {" · "}
-                      <span className="font-semibold text-text-primary">{diffCount}</span> {diffCount === 1 ? "difference" : "differences"}
-                    </>
-                  )}
-                </>
-              )}
+              {/* One text string per state so Arabic mode can translate the whole sentence */}
+              {selectedCars.length === 0
+                ? "No cars selected yet."
+                : `Comparing ${selectedCars.length} of ${MAX_SLOTS} cars` +
+                  (selectedCars.length > 1 ? ` · ${diffCount} ${diffCount === 1 ? "difference" : "differences"}` : "")}
             </p>
             {selectedCars.length > 0 && (
               <div className="flex items-center gap-x-5 gap-y-2 flex-wrap">
@@ -364,7 +356,7 @@ export default function Compare() {
                   ))}
                 </div>
               )}
-              <Button variant="outline" onClick={() => navigate("/buy")}>Browse Cars</Button>
+              <Button onClick={() => navigate("/buy")}>Browse Cars</Button>
             </div>
           ) : (
             <div className="overflow-x-auto rounded-[16px] border border-border-default">
@@ -447,7 +439,7 @@ export default function Compare() {
                     <td className="px-4 py-4" />
                     {selectedCars.map((c) => (
                       <td key={c.id} className="px-4 py-4">
-                        <Button variant="outline" size="sm" onClick={() => navigate(`/car/${c.id}`)}>
+                        <Button onClick={() => navigate(`/car/${c.id}`)}>
                           View details
                         </Button>
                       </td>

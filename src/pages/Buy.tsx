@@ -501,7 +501,7 @@ export default function Buy() {
                       return (
                         <button key={v} type="button" aria-pressed={filters.seats === v} disabled={count === 0 && filters.seats !== v}
                           onClick={() => setFilter("seats", v)} className={chip(filters.seats === v, count === 0)}>
-                          {n} seats
+                          {`${n} seats`}
                         </button>
                       );
                     })}
@@ -632,9 +632,7 @@ export default function Buy() {
               {/* Top bar */}
               <div className="flex items-center justify-between mb-6">
                 <p className="text-text-secondary text-sm">
-                  Showing{" "}
-                  <span className="font-semibold text-text-primary">{filtered.length}</span>{" "}
-                  vehicles
+                  {`Showing ${filtered.length} ${filtered.length === 1 ? "vehicle" : "vehicles"}`}
                 </p>
 <SortMenu
                   value={sort}

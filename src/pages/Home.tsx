@@ -6,6 +6,7 @@ import Select from "../components/Select";
 import { FIELD_CLASS, LABEL_CLASS } from "../lib/fieldStyles";
 import SellYourCarForm, { SELL_MAKES, SELL_MILEAGES } from "../components/SellYourCarForm";
 import { cars } from "../data/cars";
+import { useLanguage } from "../lib/language";
 import SmartImage from "../components/SmartImage";
 import FavoriteButton from "../components/FavoriteButton";
 import BroomIcon from "../components/BroomIcon";
@@ -182,6 +183,7 @@ function HeroDropdownField({
 
 // ─── Hero Section ─────────────────────────────────────────────────────────────
 function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
+  const isArabic = useLanguage().language === "ar";
   const [activeTab, setActiveTab] = useState<"buy" | "sell">("buy");
 
   const [buy, setBuy] = useState<BuyQuery>({ make: "", model: "", price: "", mileage: "" });
@@ -295,16 +297,17 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       {/* Hero text: centred between the floating nav and the car roofs */}
       <div className="relative xl:absolute xl:inset-x-0 xl:top-[calc(60px+23%)] xl:-translate-y-1/2 px-5 flex justify-center pointer-events-none">
       <div className="hero-parallax-fg hero-intro-text pointer-events-auto flex flex-col items-center gap-[36px] text-center">
-        <h1 className="relative isolate ty-display-xl text-text-brand">
+        <h1 data-no-translate className="relative isolate ty-display-xl text-text-brand">
           {/* Soft light halo so the brand blue stays legible on the sunset sky */}
           <span
             aria-hidden="true"
             className="absolute -inset-x-[16%] -inset-y-[40%] -z-10 pointer-events-none"
             style={{ background: "radial-gradient(closest-side, rgba(255,255,255,0.7), rgba(255,255,255,0.35) 55%, transparent)" }}
           />
-          Just{" "}
+          {/* The tagline is written per language so the swoosh stays under the word "good" in both */}
+          {isArabic ? "سيارات " : "Just "}
           <span className="relative inline-block">
-            Good
+            {isArabic ? "جيدة" : "Good"}
             {/* Brand-green brush stroke under "Good" */}
             <svg
               aria-hidden="true"
@@ -314,8 +317,8 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
             >
               <path d="M4 16C46 7 104 4 196 10" fill="none" stroke="var(--color-text-accent)" strokeWidth="9" strokeLinecap="round" />
             </svg>
-          </span>{" "}
-          Cars
+          </span>
+          {isArabic ? "، ببساطة" : " Cars"}
           {/* Cared play-mark motif */}
           <svg aria-hidden="true" viewBox="0 0 40 28" className="hero-mark inline-block align-baseline ms-[0.18em] h-[0.5em] w-auto -translate-y-[0.05em]">
             <path d="M3 5.2c0-3 3.2-4.9 5.8-3.4l13 7.6c2.6 1.5 2.6 5.3 0 6.8l-13 7.6C6.2 25.3 3 23.4 3 20.4V5.2z" fill="var(--color-text-brand)" />
