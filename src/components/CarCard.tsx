@@ -133,7 +133,7 @@ export default function CarCard({
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-1.5">
               <DirhamSymbol color="var(--color-text-primary)" size={16} />
-              <p className="text-text-primary font-bold text-[20px] leading-none tabular-nums">{formattedPrice}</p>
+              <p className="text-text-primary font-bold text-[22px] leading-none tabular-nums">{formattedPrice}</p>
             </div>
             <p className="text-text-secondary text-xs flex items-center gap-1">
               Est.

@@ -479,7 +479,7 @@ function BestSellerCard({ car, onClick }: { car: typeof ALL_BEST_SELLER_CARS[0];
           <div className="flex flex-col gap-[4px] items-start">
             <div className="flex gap-[6px] items-center">
               <AedSymbol size={16} />
-              <span className="text-text-primary text-[20px] font-bold leading-none tracking-[-0.01em] whitespace-nowrap tabular-nums">{car.price}</span>
+              <span className="text-text-primary text-[22px] font-bold leading-none tracking-[-0.01em] whitespace-nowrap tabular-nums">{car.price}</span>
             </div>
             <div className="flex gap-[3px] items-center text-text-secondary">
               <span className="text-xs font-medium leading-normal">Est.</span>
@@ -708,7 +708,7 @@ function CatalogCard({ id, name, make, img, price, monthly, onClick }: { id: str
         <div className="flex flex-col gap-[4px] items-start justify-end">
           <div className="flex gap-[6px] items-center">
             <AedSymbol size={16} />
-            <span className="text-text-primary text-[20px] font-bold leading-none tracking-[-0.01em] tabular-nums">{price}</span>
+            <span className="text-text-primary text-[22px] font-bold leading-none tracking-[-0.01em] tabular-nums">{price}</span>
           </div>
           <div className="flex gap-[3px] items-center text-text-secondary">
             <span className="text-xs font-medium leading-normal">Est.</span>
