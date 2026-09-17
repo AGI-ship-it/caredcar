@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Agentation } from "agentation";
 import ScrollToTop from "./components/ScrollToTop";
 import WhatsAppFab from "./components/WhatsAppFab";
 import { AuthProvider } from "./lib/auth";
@@ -48,7 +47,6 @@ export default function App() {
             <Route path="/account" element={<Account />} />
           </Routes>
           <WhatsAppFab />
-          <Agentation className="!z-[999999]" />
         </BrowserRouter>
       </AuthProvider>
     </LanguageProvider>

@@ -3,62 +3,40 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CarCard from "../components/CarCard";
-import { cars, Car } from "../data/cars";
+import { cars, type Car } from "../data/cars";
 import SortMenu from "../components/SortMenu";
 import BroomIcon from "../components/BroomIcon";
 import Button from "../components/Button";
 import CompareTray from "../components/CompareTray";
 
-const toOpts = (arr: string[]) => arr.map((v) => ({ value: v, label: v }));
+type MultiKey = "make" | "bodyType" | "seats" | "regionalSpec" | "transmission" | "fuelType" | "color" | "engineCapacity" | "promotion";
+type RangeKey = "priceRange" | "mileageRange" | "yearRange";
 
-interface Filters {
-  make: string;
-  bodyType: string;
-  fuelType: string;
-  transmission: string;
-  regionalSpec: string;
-  seats: string;
-  engineCapacity: string;
-  color: string;
-  promotion: string;
+interface Filters extends Record<MultiKey, string[]>, Record<RangeKey, string> {
+  model: string;
   minPrice: string;
   maxPrice: string;
-  minYear: string;
-  maxYear: string;
-  model: string;
   maxMileage: string;
 }
 
 const emptyFilters: Filters = {
-  make: "",
-  bodyType: "",
-  fuelType: "",
-  transmission: "",
-  regionalSpec: "",
-  seats: "",
-  engineCapacity: "",
-  color: "",
-  promotion: "",
-  minPrice: "",
-  maxPrice: "",
-  minYear: "",
-  maxYear: "",
-  model: "",
-  maxMileage: "",
+  make: [], bodyType: [], seats: [], regionalSpec: [], transmission: [], fuelType: [], color: [], engineCapacity: [], promotion: [],
+  priceRange: "", mileageRange: "", yearRange: "",
+  model: "", minPrice: "", maxPrice: "", maxMileage: "",
 };
 
+// Home search hands over make/model plus loose price and mileage bounds that don't line up with the range options
 function filtersFromParams(params: URLSearchParams): Filters {
+  const make = params.get("make");
   return {
     ...emptyFilters,
-    make: params.get("make") ?? "",
+    make: make ? [make] : [],
     model: params.get("model") ?? "",
     minPrice: params.get("minPrice") ?? "",
     maxPrice: params.get("maxPrice") ?? "",
     maxMileage: params.get("maxMileage") ?? "",
   };
 }
-
-const allMakes = Array.from(new Set(cars.map((c) => c.make))).sort();
 
 // ── Derived attributes (kept consistent between the filter UI and matching) ──
 const REGIONAL_SPECS = ["GCC Spec", "European Spec", "American Spec", "Imported"];
@@ -70,109 +48,88 @@ function strHash(s: string) {
 function getRegionalSpec(c: Car) {
   return REGIONAL_SPECS[strHash(c.id) % REGIONAL_SPECS.length];
 }
-function getSeats(c: Car): number {
-  switch (c.bodyType) {
-    case "SUV": return 7;
-    case "Coupe": return 2;
-    default: return 5; // Sedan, Hatchback, Pickup
-  }
+function getSeats(c: Car) {
+  return c.bodyType === "SUV" ? "7" : c.bodyType === "Coupe" ? "2" : "5";
 }
-const ENGINE_BUCKETS = [
-  { value: "0-2", label: "Under 2.0L" },
-  { value: "2-3", label: "2.0L – 3.0L" },
-  { value: "3-4", label: "3.0L – 4.0L" },
-  { value: "4+", label: "4.0L & above" },
-];
-function getEngineLiters(c: Car) {
-  const m = c.engineSize.match(/([\d.]+)/);
-  return m ? parseFloat(m[1]) : 0;
-}
+const BODY_LABELS: Record<Car["bodyType"], string> = { Sedan: "Sedan", SUV: "SUV", Hatchback: "Hatchback", Coupe: "Coupe", Pickup: "Pick Up Truck" };
+// 500 cc buckets, e.g. "1500 - 1999 cc"; electric cars have no engine capacity
 function getEngineBucket(c: Car) {
-  const l = getEngineLiters(c);
-  if (l < 2) return "0-2";
-  if (l < 3) return "2-3";
-  if (l < 4) return "3-4";
-  return "4+";
+  const m = c.engineSize.match(/([\d.]+)\s*L/i);
+  if (!m) return "";
+  const low = Math.floor((parseFloat(m[1]) * 1000) / 500) * 500;
+  return `${low} - ${low + 499} cc`;
 }
 const COLOR_KEYWORDS = ["White", "Black", "Silver", "Grey", "Gray", "Blue", "Red", "Green", "Brown", "Beige", "Gold", "Orange", "Yellow"];
 function getBaseColor(c: Car) {
   const found = COLOR_KEYWORDS.find((k) => c.color.toLowerCase().includes(k.toLowerCase()));
-  if (!found) return "Other";
+  if (!found) return "Other Color";
   return found === "Gray" ? "Grey" : found;
 }
-const allColors = Array.from(new Set(cars.map(getBaseColor))).sort();
-const allSeats = Array.from(new Set(cars.map(getSeats))).sort((a, b) => a - b);
+const PROMOTIONS = [
+  { value: "featured", label: "Featured" },
+  { value: "new_arrival", label: "New Arrivals" },
+];
 
-const BODY_TYPES = ["Sedan", "SUV", "Hatchback", "Coupe", "Pickup"] as const;
-const FUEL_TYPES = ["Petrol", "Diesel", "Electric", "Hybrid"] as const;
-const SWATCH: Record<string, string> = {
-  White: "#ffffff", Black: "#111418", Silver: "#c9ced6", Grey: "#7b828e", Blue: "#2f5fd0", Red: "#c8342f",
-  Green: "#2f7d4f", Brown: "#7a5236", Beige: "#d9c7a5", Gold: "#c9a24b", Orange: "#e07b2a", Yellow: "#e8c63a", Other: "#b8bcc6",
+const ATTR: Record<Exclude<MultiKey, "promotion">, (c: Car) => string> = {
+  make: (c) => c.make,
+  bodyType: (c) => BODY_LABELS[c.bodyType],
+  seats: getSeats,
+  regionalSpec: getRegionalSpec,
+  transmission: (c) => c.transmission,
+  fuelType: (c) => c.fuelType,
+  color: getBaseColor,
+  engineCapacity: getEngineBucket,
 };
-const PRICE_STEP = 5000;
-const PRICE_MIN = Math.floor(Math.min(...cars.map((c) => c.price)) / PRICE_STEP) * PRICE_STEP;
-const PRICE_MAX = Math.ceil(Math.max(...cars.map((c) => c.price)) / PRICE_STEP) * PRICE_STEP;
-const YEAR_MIN = Math.min(...cars.map((c) => c.year));
-const YEAR_MAX = Math.max(...cars.map((c) => c.year));
+const optionsFor = (get: (c: Car) => string, byNumber = false) =>
+  Array.from(new Set(cars.map(get).filter(Boolean))).sort((x, y) => (byNumber ? parseInt(x) - parseInt(y) : x.localeCompare(y)));
 
-function matchesFilters(c: Car, f: Filters, ignore?: keyof Filters) {
-  const on = (k: keyof Filters) => ignore !== k && f[k] !== "";
-  if (on("make") && c.make !== f.make) return false;
-  if (on("model") && c.model !== f.model) return false;
-  if (on("maxMileage") && c.mileage > Number(f.maxMileage)) return false;
-  if (on("bodyType") && c.bodyType !== f.bodyType) return false;
-  if (on("fuelType") && c.fuelType !== f.fuelType) return false;
-  if (on("transmission") && c.transmission !== f.transmission) return false;
-  if (on("regionalSpec") && getRegionalSpec(c) !== f.regionalSpec) return false;
-  if (on("seats") && String(getSeats(c)) !== f.seats) return false;
-  if (on("engineCapacity") && getEngineBucket(c) !== f.engineCapacity) return false;
-  if (on("color") && getBaseColor(c) !== f.color) return false;
-  if (on("promotion") && ((f.promotion === "featured" && !c.isFeatured) || (f.promotion === "new" && !c.isNew))) return false;
-  if (ignore !== "minPrice" && f.minPrice && c.price < Number(f.minPrice)) return false;
-  if (ignore !== "minPrice" && f.maxPrice && c.price > Number(f.maxPrice)) return false;
-  if (ignore !== "minYear" && f.minYear && c.year < Number(f.minYear)) return false;
-  if (ignore !== "minYear" && f.maxYear && c.year > Number(f.maxYear)) return false;
+// Range options use fixed cut-offs, with the top bucket capped at the highest value in stock
+type RangeOption = { value: string; label: string; min: number; max: number };
+function buildRanges(cuts: number[], values: number[], label: (lo: number, hi: number) => string): RangeOption[] {
+  const top = Math.max(...values);
+  return cuts
+    .filter((lo) => lo <= top)
+    .map((lo, i, arr) => {
+      const hi = i < arr.length - 1 ? arr[i + 1] : top;
+      return { value: `${lo === 0 ? 0 : lo + 1}:${hi}`, label: label(lo, hi), min: lo === 0 ? 0 : lo + 1, max: hi };
+    });
+}
+const fmtNum = (n: number) => n.toLocaleString("en-US");
+const PRICE_OPTIONS = buildRanges([0, 150000, 350000], cars.map((c) => c.price), (lo, hi) => `${fmtNum(lo)} - ${fmtNum(hi)} AED`);
+const MILEAGE_OPTIONS = buildRanges([0, 60000, 130000], cars.map((c) => c.mileage), (lo, hi) => `${fmtNum(lo)} - ${fmtNum(hi)} km`);
+const YEAR_OPTIONS: RangeOption[] = Array.from(new Set(cars.map((c) => c.year - ((c.year - 2017) % 5 + 5) % 5)))
+  .sort((a, b) => a - b)
+  .map((lo) => ({ value: `${lo}:${lo + 4}`, label: `${lo} - ${lo + 4}`, min: lo, max: lo + 4 }));
+const RANGES: Record<RangeKey, { options: RangeOption[]; get: (c: Car) => number }> = {
+  priceRange: { options: PRICE_OPTIONS, get: (c) => c.price },
+  mileageRange: { options: MILEAGE_OPTIONS, get: (c) => c.mileage },
+  yearRange: { options: YEAR_OPTIONS, get: (c) => c.year },
+};
+
+function matchesFilters(c: Car, f: Filters) {
+  for (const key of Object.keys(ATTR) as (keyof typeof ATTR)[]) {
+    if (f[key].length && !f[key].includes(ATTR[key](c))) return false;
+  }
+  if (f.promotion.length && !f.promotion.some((p) => (p === "featured" ? c.isFeatured : c.isNew))) return false;
+  for (const key of Object.keys(RANGES) as RangeKey[]) {
+    const opt = RANGES[key].options.find((o) => o.value === f[key]);
+    const v = RANGES[key].get(c);
+    if (opt && (v < opt.min || v > opt.max)) return false;
+  }
+  if (f.model && c.model !== f.model) return false;
+  if (f.minPrice && c.price < Number(f.minPrice)) return false;
+  if (f.maxPrice && c.price > Number(f.maxPrice)) return false;
+  if (f.maxMileage && c.mileage > Number(f.maxMileage)) return false;
   return true;
 }
 
-function BodyIcon({ type }: { type: string }) {
-  const paths: Record<string, string> = {
-    Sedan: "M3 15.5h26M5 15.5l2.5-4.5c.5-.9 1.4-1.5 2.4-1.5h9.6c.9 0 1.7.4 2.2 1.1l3.3 4.9M5 15.5v2.5h2.2M26.8 15.5v2.5h-2.2M12 18h8",
-    SUV: "M3 16h26M5 16l1.5-6c.2-.9 1-1.5 1.9-1.5h13.2c.8 0 1.5.4 1.9 1.1L27 16M5 16v2.5h2.2M27 16v2.5h-2.2M12 18.5h8M15 8.5v7",
-    Hatchback: "M4 15.5h24M6 15.5l3-5.3c.4-.7 1.1-1.2 2-1.2h8.2c.8 0 1.5.4 1.9 1l3.9 5.5M6 15.5v2.5h2.2M26 15.5v2.5h-2.2M13 18h6",
-    Coupe: "M3 16h26M5 16l4.5-4.2c.9-.8 2-1.3 3.2-1.3h5.8c1.1 0 2.2.5 3 1.2L27 16M5 16v2h2.2M27 16v2h-2.2M12 18h8",
-    Pickup: "M3 16h26M5 16l1.8-5.5c.3-.9 1.1-1.5 2-1.5H16v7M16 11.5h11v4.5M5 16v2.5h2.2M27 16v2.5h-2.2M12 18.5h8",
-  };
+// Collapsible filter group, closed by default like caredcars.com
+function FilterGroup({ title, active = 0, children }: { title: string; active?: number; children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
   return (
-    <svg width="32" height="24" viewBox="0 0 32 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d={paths[type]} />
-      <circle cx="9.5" cy="18.5" r="2" />
-      <circle cx="22.5" cy="18.5" r="2" />
-    </svg>
-  );
-}
-
-function FuelIcon({ type }: { type: string }) {
-  const d: Record<string, string> = {
-    Petrol: "M5 20V6a2 2 0 012-2h6a2 2 0 012 2v14M4 20h12M7 9h6M15 10h2a2 2 0 012 2v4a1 1 0 002 0V9l-3-3",
-    Diesel: "M12 3.5s6 6.4 6 10.5a6 6 0 01-12 0c0-4.1 6-10.5 6-10.5z",
-    Electric: "M13 3L5 13.5h6L10 21l8-10.5h-6L13 3z",
-    Hybrid: "M5 19c0-8 6-13 14-14 0 8-5 14-13 14M5 19l7-7",
-  };
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d={d[type]} />
-    </svg>
-  );
-}
-
-// Collapsible filter group; shows how many options are active in it.
-function FilterGroup({ title, active = 0, defaultOpen = true, children }: { title: string; active?: number; defaultOpen?: boolean; children: React.ReactNode }) {
-  const [open, setOpen] = useState(defaultOpen);
-  return (
-    <section className="border-b border-border-default last:border-b-0 py-4 first:pt-0">
-      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="w-full flex items-center justify-between gap-2 text-start">
-        <span className="flex items-center gap-2 text-text-primary text-sm font-semibold">
+    <section className="border-b border-border-default last:border-b-0">
+      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="w-full flex items-center justify-between gap-2 py-4 text-start">
+        <span className="flex items-center gap-2 text-text-primary text-[15px] font-semibold">
           {title}
           {active > 0 && <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-bg-brand text-white text-[11px] font-semibold flex items-center justify-center tabular-nums">{active}</span>}
         </span>
@@ -180,60 +137,24 @@ function FilterGroup({ title, active = 0, defaultOpen = true, children }: { titl
           <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
-      {open && <div className="pt-3">{children}</div>}
+      {open && <div className="flex flex-col gap-3 pb-4">{children}</div>}
     </section>
   );
 }
 
-const chip = (on: boolean, disabled = false) =>
-  `inline-flex items-center gap-1.5 h-[34px] px-3 rounded-full border text-[13px] font-medium transition-colors ${
-    on
-      ? "bg-bg-brand border-border-focus text-white"
-      : disabled
-        ? "bg-white border-border-default text-text-disabled cursor-not-allowed"
-        : "bg-white border-border-default text-text-primary hover:border-border-focus hover:text-text-brand"
-  }`;
-
-// Two thumbs on one track; empty string means "no bound".
-function RangeSlider({
-  min, max, step, low, high, onChange, format, histogram,
-}: {
-  min: number; max: number; step: number; low: number; high: number;
-  onChange: (low: number, high: number) => void; format: (v: number) => string; histogram?: number[];
-}) {
-  const pct = (v: number) => ((v - min) / (max - min)) * 100;
-  const peak = histogram ? Math.max(1, ...histogram) : 1;
+function FilterOption({ type, name, checked, onChange, children }: { type: "checkbox" | "radio"; name: string; checked: boolean; onChange: () => void; children: React.ReactNode }) {
   return (
-    <div>
-      {histogram && (
-        <div className="flex items-end gap-[2px] h-[40px] px-[2px]" aria-hidden="true">
-          {histogram.map((n, i) => {
-            const binLow = min + (i * (max - min)) / histogram.length;
-            const inRange = binLow + (max - min) / histogram.length > low && binLow < high;
-            return (
-              <span
-                key={i}
-                className={`flex-1 rounded-t-[3px] transition-colors ${inRange ? "bg-bg-brand/70" : "bg-bg-subtle"}`}
-                style={{ height: `${n ? Math.max(12, (n / peak) * 100) : 4}%` }}
-              />
-            );
-          })}
-        </div>
-      )}
-      <div className="range-dual relative h-[24px]">
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[4px] rounded-full bg-bg-subtle" />
-        <div className="absolute top-1/2 -translate-y-1/2 h-[4px] rounded-full bg-bg-brand" style={{ left: `${pct(low)}%`, right: `${100 - pct(high)}%` }} />
-        <input type="range" aria-label="Minimum" min={min} max={max} step={step} value={low}
-          onChange={(e) => onChange(Math.min(Number(e.target.value), high - step), high)} />
-        <input type="range" aria-label="Maximum" min={min} max={max} step={step} value={high}
-          onChange={(e) => onChange(low, Math.max(Number(e.target.value), low + step))} />
-      </div>
-      <div className="mt-2 flex items-center justify-between text-[13px] font-semibold text-text-primary tabular-nums">
-        <span className="px-2.5 py-1 rounded-[8px] bg-bg-surface">{format(low)}</span>
-        <span className="text-text-secondary font-normal">to</span>
-        <span className="px-2.5 py-1 rounded-[8px] bg-bg-surface">{format(high)}</span>
-      </div>
-    </div>
+    <label className="flex items-center gap-3 text-sm text-text-primary cursor-pointer">
+      <input
+        type={type}
+        name={name}
+        checked={checked}
+        onChange={onChange}
+        onClick={type === "radio" && checked ? onChange : undefined}
+        className="size-[18px] shrink-0 accent-bg-brand"
+      />
+      <span>{children}</span>
+    </label>
   );
 }
 
@@ -241,7 +162,6 @@ export default function Buy() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [filters, setFilters] = useState<Filters>(() => filtersFromParams(searchParams));
-  const [showAllMakes, setShowAllMakes] = useState(false);
   const [sort, setSort] = useState("year-desc");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(9);
@@ -276,52 +196,84 @@ export default function Buy() {
     setVisibleCount(9);
   }
 
-  function setFilter(key: keyof Filters, value: string) {
+  function toggleMulti(key: MultiKey, value: string) {
+    setFilters((prev) => ({ ...prev, [key]: prev[key].includes(value) ? prev[key].filter((v) => v !== value) : [...prev[key], value] }));
+    setVisibleCount(9);
+  }
+
+  // Clicking the selected range again clears it, since radios can't be unticked
+  function toggleRange(key: RangeKey, value: string) {
     setFilters((prev) => ({ ...prev, [key]: prev[key] === value ? "" : value }));
     setVisibleCount(9);
   }
 
-  const facet = (key: keyof Filters, test: (c: Car) => boolean) =>
-    cars.filter((c) => matchesFilters(c, filters, key) && test(c)).length;
-
-  const priceLow = filters.minPrice ? Number(filters.minPrice) : PRICE_MIN;
-  const priceHigh = filters.maxPrice ? Number(filters.maxPrice) : PRICE_MAX;
-  const yearLow = filters.minYear ? Number(filters.minYear) : YEAR_MIN;
-  const yearHigh = filters.maxYear ? Number(filters.maxYear) : YEAR_MAX;
-  const PRICE_BINS = 16;
-  const priceHistogram = Array.from({ length: PRICE_BINS }, (_, i) => {
-    const lo = PRICE_MIN + (i * (PRICE_MAX - PRICE_MIN)) / PRICE_BINS;
-    const hi = lo + (PRICE_MAX - PRICE_MIN) / PRICE_BINS;
-    return cars.filter((c) => matchesFilters(c, filters, "minPrice") && c.price >= lo && (c.price < hi || (i === PRICE_BINS - 1 && c.price <= hi))).length;
-  });
-
-  const makeOptions = allMakes
-    .map((m) => ({ make: m, count: facet("make", (c) => c.make === m) }))
-    .sort((x, y) => y.count - x.count || x.make.localeCompare(y.make));
-  const shownMakes = showAllMakes ? makeOptions : makeOptions.slice(0, 8);
-
-  const fmtAed = (v: number) => (v >= 1000 ? `${Math.round(v / 1000)}k` : String(v));
-
-  type ActiveChip = { label: string; clear: () => void };
+  type ActiveChip = { key: string; label: string; clear: () => void };
+  const labelFor = (key: MultiKey, v: string) => (key === "seats" ? `${v} Seats` : key === "promotion" ? PROMOTIONS.find((p) => p.value === v)?.label ?? v : v);
   const activeChips: ActiveChip[] = [
-    ...(["make", "model", "bodyType", "fuelType", "transmission", "regionalSpec", "engineCapacity", "color"] as const)
-      .filter((k) => filters[k])
-      .map((k) => ({
-        label: k === "engineCapacity" ? ENGINE_BUCKETS.find((b) => b.value === filters[k])?.label ?? filters[k] : filters[k],
-        clear: () => setFilters((f) => ({ ...f, [k]: "" })),
+    ...(["make", "bodyType", "seats", "regionalSpec", "transmission", "fuelType", "color", "engineCapacity", "promotion"] as const).flatMap((key) =>
+      filters[key].map((v) => ({ key: `${key}:${v}`, label: labelFor(key, v), clear: () => toggleMulti(key, v) })),
+    ),
+    ...(["priceRange", "mileageRange", "yearRange"] as const)
+      .filter((key) => filters[key])
+      .map((key) => ({
+        key,
+        label: RANGES[key].options.find((o) => o.value === filters[key])?.label ?? filters[key],
+        clear: () => toggleRange(key, filters[key]),
       })),
-    ...(filters.seats ? [{ label: `${filters.seats} Seats`, clear: () => setFilters((f) => ({ ...f, seats: "" })) }] : []),
-    ...(filters.promotion ? [{ label: filters.promotion === "new" ? "New Arrival" : "Featured", clear: () => setFilters((f) => ({ ...f, promotion: "" })) }] : []),
+    ...(filters.model ? [{ key: "model", label: filters.model, clear: () => setFilters((f) => ({ ...f, model: "" })) }] : []),
     ...(filters.minPrice || filters.maxPrice
-      ? [{ label: `AED ${fmtAed(priceLow)} – ${fmtAed(priceHigh)}`, clear: () => setFilters((f) => ({ ...f, minPrice: "", maxPrice: "" })) }]
-      : []),
-    ...(filters.minYear || filters.maxYear
-      ? [{ label: `${yearLow} – ${yearHigh}`, clear: () => setFilters((f) => ({ ...f, minYear: "", maxYear: "" })) }]
+      ? [{
+          key: "price",
+          label: `AED ${fmtNum(Number(filters.minPrice || 0))}${filters.maxPrice ? ` - ${fmtNum(Number(filters.maxPrice))}` : "+"}`,
+          clear: () => setFilters((f) => ({ ...f, minPrice: "", maxPrice: "" })),
+        }]
       : []),
     ...(filters.maxMileage
-      ? [{ label: `Up to ${Number(filters.maxMileage).toLocaleString("en-US")} km`, clear: () => setFilters((f) => ({ ...f, maxMileage: "" })) }]
+      ? [{ key: "maxMileage", label: `Up to ${fmtNum(Number(filters.maxMileage))} km`, clear: () => setFilters((f) => ({ ...f, maxMileage: "" })) }]
       : []),
   ];
+
+  const multiGroups: { key: MultiKey; title: string; options: { value: string; label: string }[] }[] = [
+    { key: "make", title: "Make", options: optionsFor(ATTR.make).map((v) => ({ value: v, label: v })) },
+    { key: "bodyType", title: "Body Type", options: optionsFor(ATTR.bodyType).map((v) => ({ value: v, label: v })) },
+    { key: "seats", title: "Seat Count", options: optionsFor(ATTR.seats, true).map((v) => ({ value: v, label: v })) },
+    { key: "regionalSpec", title: "Regional Spec", options: optionsFor(ATTR.regionalSpec).map((v) => ({ value: v, label: v })) },
+    { key: "transmission", title: "Transmission", options: optionsFor(ATTR.transmission).map((v) => ({ value: v, label: v })) },
+    { key: "fuelType", title: "Fuel Type", options: optionsFor(ATTR.fuelType).map((v) => ({ value: v, label: v })) },
+    { key: "color", title: "Exterior Color", options: optionsFor(ATTR.color).map((v) => ({ value: v, label: v })) },
+    { key: "engineCapacity", title: "Engine Capacity", options: optionsFor(ATTR.engineCapacity, true).map((v) => ({ value: v, label: v })) },
+    { key: "promotion", title: "Promotions", options: PROMOTIONS },
+  ];
+  const rangeGroups: { key: RangeKey; title: string }[] = [
+    { key: "priceRange", title: "Total Price" },
+    { key: "mileageRange", title: "Mileage" },
+    { key: "yearRange", title: "Year" },
+  ];
+  const group = (title: string) => {
+    const multi = multiGroups.find((g) => g.title === title);
+    if (multi) {
+      return (
+        <FilterGroup key={multi.key} title={multi.title} active={filters[multi.key].length}>
+          {multi.options.map((o) => (
+            <FilterOption key={o.value} type="checkbox" name={multi.key} checked={filters[multi.key].includes(o.value)} onChange={() => toggleMulti(multi.key, o.value)}>
+              {o.label}
+            </FilterOption>
+          ))}
+        </FilterGroup>
+      );
+    }
+    const range = rangeGroups.find((g) => g.title === title)!;
+    return (
+      <FilterGroup key={range.key} title={range.title} active={filters[range.key] ? 1 : 0}>
+        {RANGES[range.key].options.map((o) => (
+          <FilterOption key={o.value} type="radio" name={range.key} checked={filters[range.key] === o.value} onChange={() => toggleRange(range.key, o.value)}>
+            {o.label}
+          </FilterOption>
+        ))}
+      </FilterGroup>
+    );
+  };
+  const GROUP_ORDER = ["Make", "Total Price", "Body Type", "Seat Count", "Mileage", "Year", "Regional Spec", "Transmission", "Fuel Type", "Exterior Color", "Engine Capacity", "Promotions"];
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -363,7 +315,7 @@ export default function Buy() {
               <div className="md:sticky md:top-[96px] md:max-h-[calc(100vh-120px)] md:overflow-y-auto rounded-[20px] border border-border-default bg-white p-5 shadow-[0_10px_30px_rgba(28,41,88,0.05)]">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="flex items-center gap-2 font-extrabold text-text-brand text-lg">
-                    Filters
+                    Filter
                     {activeChips.length > 0 && (
                       <span className="text-xs font-semibold text-text-brand bg-bg-brand-soft rounded-full px-2 py-0.5 tabular-nums">{activeChips.length}</span>
                     )}
@@ -374,177 +326,7 @@ export default function Buy() {
                   </button>
                 </div>
 
-                <FilterGroup title="Price" active={filters.minPrice || filters.maxPrice ? 1 : 0}>
-                  <RangeSlider
-                    min={PRICE_MIN} max={PRICE_MAX} step={PRICE_STEP} low={priceLow} high={priceHigh}
-                    histogram={priceHistogram}
-                    format={(v) => `AED ${fmtAed(v)}`}
-                    onChange={(lo, hi) => {
-                      setFilters((f) => ({ ...f, minPrice: lo <= PRICE_MIN ? "" : String(lo), maxPrice: hi >= PRICE_MAX ? "" : String(hi) }));
-                      setVisibleCount(9);
-                    }}
-                  />
-                </FilterGroup>
-
-                <FilterGroup title="Make" active={filters.make ? 1 : 0}>
-                  <div className="flex flex-wrap gap-2">
-                    {shownMakes.map(({ make, count }) => (
-                      <button key={make} type="button" aria-pressed={filters.make === make} disabled={count === 0 && filters.make !== make}
-                        onClick={() => setFilter("make", make)} className={chip(filters.make === make, count === 0)}>
-                        {make}
-                        <span className={`text-[11px] tabular-nums ${filters.make === make ? "text-white/80" : "text-text-secondary"}`}>{count}</span>
-                      </button>
-                    ))}
-                  </div>
-                  {makeOptions.length > 8 && (
-                    <button type="button" onClick={() => setShowAllMakes((v) => !v)} className="mt-3 text-sm font-medium text-text-brand hover:underline">
-                      {showAllMakes ? "Show fewer" : `Show all ${makeOptions.length} makes`}
-                    </button>
-                  )}
-                </FilterGroup>
-
-                <FilterGroup title="Body type" active={filters.bodyType ? 1 : 0}>
-                  <div className="grid grid-cols-3 gap-2">
-                    {BODY_TYPES.map((t) => {
-                      const on = filters.bodyType === t;
-                      const count = facet("bodyType", (c) => c.bodyType === t);
-                      return (
-                        <button key={t} type="button" aria-pressed={on} disabled={count === 0 && !on} onClick={() => setFilter("bodyType", t)}
-                          className={`flex flex-col items-center gap-1 rounded-[12px] border py-2.5 text-[12px] font-medium transition-colors ${
-                            on ? "border-border-focus bg-bg-brand-soft text-text-brand" : count === 0 ? "border-border-default text-text-disabled cursor-not-allowed" : "border-border-default text-text-primary hover:border-border-focus"
-                          }`}>
-                          <BodyIcon type={t} />
-                          {t}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </FilterGroup>
-
-                <FilterGroup title="Fuel type" active={filters.fuelType ? 1 : 0}>
-                  <div className="grid grid-cols-2 gap-2">
-                    {FUEL_TYPES.map((t) => {
-                      const on = filters.fuelType === t;
-                      const count = facet("fuelType", (c) => c.fuelType === t);
-                      return (
-                        <button key={t} type="button" aria-pressed={on} disabled={count === 0 && !on} onClick={() => setFilter("fuelType", t)}
-                          className={`${chip(on, count === 0)} justify-start rounded-[10px] h-[40px]`}>
-                          <FuelIcon type={t} />
-                          {t}
-                          <span className={`ms-auto text-[11px] tabular-nums ${on ? "text-white/80" : "text-text-secondary"}`}>{count}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </FilterGroup>
-
-                <FilterGroup title="Transmission" active={filters.transmission ? 1 : 0}>
-                  <div className="grid grid-cols-3 p-1 rounded-full bg-bg-surface" role="radiogroup" aria-label="Transmission">
-                    {["", "Automatic", "Manual"].map((t) => {
-                      const on = filters.transmission === t;
-                      return (
-                        <button key={t || "any"} type="button" role="radio" aria-checked={on}
-                          onClick={() => setFilters((f) => ({ ...f, transmission: t }))}
-                          className={`h-[34px] rounded-full text-[13px] font-semibold transition-colors ${on ? "bg-white text-text-primary shadow-[0_1px_3px_rgba(18,42,94,0.15)]" : "text-text-secondary hover:text-text-primary"}`}>
-                          {t || "Any"}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </FilterGroup>
-
-                <FilterGroup title="Year" active={filters.minYear || filters.maxYear ? 1 : 0}>
-                  <RangeSlider
-                    min={YEAR_MIN} max={YEAR_MAX} step={1} low={yearLow} high={yearHigh}
-                    format={(v) => String(v)}
-                    onChange={(lo, hi) => {
-                      setFilters((f) => ({ ...f, minYear: lo <= YEAR_MIN ? "" : String(lo), maxYear: hi >= YEAR_MAX ? "" : String(hi) }));
-                      setVisibleCount(9);
-                    }}
-                  />
-                </FilterGroup>
-
-                <FilterGroup title="Exterior colour" active={filters.color ? 1 : 0}>
-                  <div className="flex flex-wrap gap-2.5">
-                    {allColors.map((col) => {
-                      const on = filters.color === col;
-                      const count = facet("color", (c) => getBaseColor(c) === col);
-                      return (
-                        <button key={col} type="button" aria-pressed={on} aria-label={`${col} (${count})`} disabled={count === 0 && !on}
-                          onClick={() => setFilter("color", col)}
-                          className={`has-tip relative size-[32px] rounded-full border transition-all disabled:opacity-35 disabled:cursor-not-allowed ${on ? "ring-2 ring-offset-2 ring-border-focus border-transparent" : "border-border-default hover:scale-110"}`}
-                          style={{ background: SWATCH[col] ?? SWATCH.Other }}>
-                          {on && (
-                            <svg className="absolute inset-0 m-auto" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                              <path d="M3.5 8.5l3 3 6-7" stroke={["White", "Silver", "Beige", "Yellow"].includes(col) ? "var(--color-text-primary)" : "#fff"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          )}
-                          <span role="tooltip" className="tip tip--below">{col}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </FilterGroup>
-
-                <FilterGroup title="Seats" active={filters.seats ? 1 : 0} defaultOpen={false}>
-                  <div className="flex flex-wrap gap-2">
-                    {allSeats.map((n) => {
-                      const v = String(n);
-                      const count = facet("seats", (c) => getSeats(c) === n);
-                      return (
-                        <button key={v} type="button" aria-pressed={filters.seats === v} disabled={count === 0 && filters.seats !== v}
-                          onClick={() => setFilter("seats", v)} className={chip(filters.seats === v, count === 0)}>
-                          {n} seats
-                        </button>
-                      );
-                    })}
-                  </div>
-                </FilterGroup>
-
-                <FilterGroup title="Engine size" active={filters.engineCapacity ? 1 : 0} defaultOpen={false}>
-                  <div className="flex flex-wrap gap-2">
-                    {ENGINE_BUCKETS.map((b) => {
-                      const count = facet("engineCapacity", (c) => getEngineBucket(c) === b.value);
-                      return (
-                        <button key={b.value} type="button" aria-pressed={filters.engineCapacity === b.value} disabled={count === 0 && filters.engineCapacity !== b.value}
-                          onClick={() => setFilter("engineCapacity", b.value)} className={chip(filters.engineCapacity === b.value, count === 0)}>
-                          {b.label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </FilterGroup>
-
-                <FilterGroup title="Regional spec" active={filters.regionalSpec ? 1 : 0} defaultOpen={false}>
-                  <div className="flex flex-wrap gap-2">
-                    {REGIONAL_SPECS.map((r) => {
-                      const count = facet("regionalSpec", (c) => getRegionalSpec(c) === r);
-                      return (
-                        <button key={r} type="button" aria-pressed={filters.regionalSpec === r} disabled={count === 0 && filters.regionalSpec !== r}
-                          onClick={() => setFilter("regionalSpec", r)} className={chip(filters.regionalSpec === r, count === 0)}>
-                          {r}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </FilterGroup>
-
-                <FilterGroup title="Offers" active={filters.promotion ? 1 : 0} defaultOpen={false}>
-                  <div className="flex flex-col gap-3">
-                    {[{ v: "featured", label: "Featured cars only" }, { v: "new", label: "New arrivals only" }].map((o) => {
-                      const on = filters.promotion === o.v;
-                      return (
-                        <label key={o.v} className="flex items-center justify-between gap-3 text-sm text-text-primary cursor-pointer">
-                          {o.label}
-                          <button type="button" role="switch" aria-checked={on} onClick={() => setFilter("promotion", o.v)}
-                            className={`relative w-[40px] h-[22px] rounded-full transition-colors ${on ? "bg-bg-brand" : "bg-bg-subtle"}`}>
-                            <span className={`absolute top-[3px] start-[3px] size-[16px] rounded-full bg-white shadow transition-transform ${on ? "translate-x-[18px] rtl:-translate-x-[18px]" : ""}`} />
-                          </button>
-                        </label>
-                      );
-                    })}
-                  </div>
-                </FilterGroup>
+                {GROUP_ORDER.map(group)}
               </div>
             </aside>
 
@@ -574,7 +356,7 @@ export default function Buy() {
                 <div className="flex flex-wrap items-center gap-2 -mt-2 mb-6">
                   {activeChips.map((c) => (
                     <button
-                      key={c.label}
+                      key={c.key}
                       type="button"
                       onClick={() => {
                         c.clear();
