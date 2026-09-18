@@ -121,8 +121,8 @@ export default function Offers() {
 
       {/* Finance Section */}
       <section className="bg-bg-surface py-16">
-        <div className="container-x">
- <h2 className="ty-h1 ty-title ty-title-gradient mb-4 flex items-center gap-2 font-display">
+        <div className="container-x text-center">
+          <h2 className="ty-h1 ty-title ty-title-gradient mb-4 flex items-center justify-center gap-2 font-display">
             Finance from
             <span className="inline-flex items-center gap-1.5">
               <DirhamSymbol size={26} />
@@ -130,7 +130,7 @@ export default function Offers() {
             </span>
             <span className="text-text-secondary text-lg font-medium self-end mb-1">/mo</span>
           </h2>
-          <p className="text-text-secondary text-lg mb-8 max-w-xl">
+          <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
             Use our interactive calculator to find a plan that fits your budget. Quick approval, competitive rates.
           </p>
           <div className="bg-white rounded-[16px] shadow p-8 max-w-lg mx-auto mb-8 text-start">

@@ -112,7 +112,7 @@ export default function Blog() {
           {/* Featured Article */}
           {featuredPost && (
             <div className="mb-14">
- <h2 className="ty-h2 ty-title ty-title-gradient mb-6">Featured Article</h2>
+ <h2 className="ty-h1 ty-title ty-title-gradient mb-6">Featured Article</h2>
               <div className="bg-white rounded-[12px] shadow overflow-hidden flex flex-col md:flex-row">
                 <div className="md:w-[40%]">
                   <img

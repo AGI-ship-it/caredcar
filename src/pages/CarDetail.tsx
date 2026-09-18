@@ -287,7 +287,7 @@ export default function CarDetail() {
 
           {/* Condition Details */}
           <div className="mb-8">
- <h2 className="ty-h2 text-text-brand mb-4">Condition Details</h2>
+ <h2 className="ty-h1 text-text-brand mb-4">Condition Details</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {CONDITION_BADGES.map((b) => (
                 <div key={b.label} className="flex items-center gap-2 bg-bg-inverse text-white rounded-[10px] px-4 py-3.5">
@@ -300,7 +300,7 @@ export default function CarDetail() {
 
           {/* Vehicle Overview */}
           <section className="bg-bg-brand-soft rounded-[20px] p-8 mb-16">
- <h2 className="ty-h2 text-text-brand mb-2">Vehicle Overview</h2>
+ <h2 className="ty-h1 text-text-brand mb-2">Vehicle Overview</h2>
             <p className="text-text-secondary mb-6">
               Fully inspected, professionally prepared, and approved to Al Ghurair standards. What you see is exactly what you get.
             </p>
@@ -636,7 +636,7 @@ export default function CarDetail() {
           {/* Similar Vehicles */}
           {similarCars.length > 0 && (
             <section>
- <h2 className="ty-h2 text-text-brand mb-6">
+ <h2 className="ty-h1 text-text-brand mb-6">
                 Similar Vehicles
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

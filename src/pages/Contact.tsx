@@ -113,7 +113,7 @@ export default function Contact() {
 
             {/* Left: Contact Info */}
             <div>
- <h2 className="ty-h2 ty-title ty-title-gradient mb-2">Get In Touch</h2>
+ <h2 className="ty-h1 ty-title ty-title-gradient mb-2">Get In Touch</h2>
               <p className="text-text-secondary leading-relaxed mb-8">
                 Whether you are looking to buy, sell, or just have a question, our friendly team is here to help. Visit us at our Dubai Motor City showroom or reach out through any of the channels below.
               </p>
@@ -157,7 +157,7 @@ export default function Contact() {
 
             {/* Right: Contact Form */}
             <div className="bg-bg-surface rounded-[16px] p-8">
- <h2 className="ty-h2 ty-title ty-title-gradient mb-6">Send Us a Message</h2>
+ <h2 className="ty-h1 ty-title ty-title-gradient mb-6">Send Us a Message</h2>
 
               {submitted ? (
                 <div role="status" className="relative bg-green-50 border border-green-200 rounded-[12px] p-6 text-center">
