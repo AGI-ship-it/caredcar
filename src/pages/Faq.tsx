@@ -41,7 +41,7 @@ export default function Faq() {
             <div key={faq.q} className="border border-gray-200 rounded-[10px] overflow-hidden">
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition"
+                className="w-full flex items-center justify-between px-6 py-4 text-start hover:bg-gray-50 transition"
               >
                 <span className="font-semibold text-text-primary">{faq.q}</span>
                 <svg

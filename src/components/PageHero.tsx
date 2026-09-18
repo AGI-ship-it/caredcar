@@ -28,7 +28,7 @@ export default function PageHero({ title, subtitle, image, imagePosition = "cent
           {/* Navy fades in from the text side so the heading reads on any photo */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/95 from-25% via-bg-inverse/80 via-65% to-bg-inverse/25 max-lg:via-bg-inverse/85 max-lg:to-bg-inverse/55"
+            className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-inverse/92 from-20% via-bg-inverse/62 via-52% to-transparent to-78% max-lg:via-bg-inverse/72 max-lg:to-bg-inverse/20 max-lg:to-90%"
           />
         </>
       )}
@@ -36,7 +36,7 @@ export default function PageHero({ title, subtitle, image, imagePosition = "cent
         <div>
           {/* Titles stay on one line from lg up; below that they wrap as normal */}
           <h1
-            className={`text-4xl md:text-5xl font-bold leading-tight font-display ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
+            className={`ty-title text-4xl md:text-5xl font-bold leading-tight font-display ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
             style={image ? { textShadow: "0 2px 16px rgba(8, 18, 45, 0.55)" } : undefined}
           >
             {title}

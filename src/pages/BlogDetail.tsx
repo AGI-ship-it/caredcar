@@ -196,7 +196,7 @@ const articleContent: Record<string, React.ReactNode> = {
 
       <h2 className="text-text-brand text-xl font-extrabold mt-8 mb-4">Common Traffic Violations and Their Penalties</h2>
       <div className="overflow-x-auto mb-8 rounded-[16px] border border-border-default">
-        <table className="w-full text-left border-collapse min-w-[560px]">
+        <table className="w-full text-start border-collapse min-w-[560px]">
           <thead>
             <tr className="bg-bg-inverse text-white">
               <th className="px-5 py-4 text-sm font-semibold">Violation</th>
@@ -315,7 +315,7 @@ const articleContent: Record<string, React.ReactNode> = {
         Keep this quick reference in mind while you inspect. Each warning sign points to a likely underlying cause worth investigating further.
       </p>
       <div className="overflow-x-auto mb-8 rounded-[16px] border border-border-default">
-        <table className="w-full text-left border-collapse min-w-[520px]">
+        <table className="w-full text-start border-collapse min-w-[520px]">
           <thead>
             <tr className="bg-bg-inverse text-white">
               <th className="px-5 py-4 text-sm font-semibold">Warning Sign</th>
@@ -526,7 +526,7 @@ export default function BlogDetail() {
         </div>
 
         {/* CTA */}
-        <section className="brand-pattern bg-bg-brand py-12 text-white text-center">
+        <section className="bg-bg-brand py-12 text-white text-center">
           <div className="container-x">
             <h2 className="text-3xl font-bold mb-2 font-display">Find Your Perfect Car</h2>
             <p className="text-white/80 mb-6">

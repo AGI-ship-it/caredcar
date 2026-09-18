@@ -76,7 +76,7 @@ export default function Select({
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className={`${triggerBase} flex items-center justify-between gap-2 text-left ${open ? "!border-border-focus ring-4 ring-border-focus/15" : ""}`}
+        className={`${triggerBase} flex items-center justify-between gap-2 text-start ${open ? "!border-border-focus ring-4 ring-border-focus/15" : ""}`}
       >
         <span className={`truncate ${displayLabel ? "text-text-primary" : "text-text-secondary"}`}>
           {displayLabel || placeholder}

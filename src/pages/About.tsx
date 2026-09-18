@@ -88,21 +88,23 @@ export default function About() {
       </section>
 
       {/* In Pursuit of Better — Al Ghurair */}
-      <section className="relative overflow-hidden bg-bg-partner">
-        <img
-          src={imgAboutPursuit}
-          alt="A happy customer giving a thumbs up from the driver's seat of his new car"
-          className="absolute inset-y-0 end-0 h-full w-full md:w-[65%] object-cover object-[62%_center]"
-        />
-        {/* Al Ghurair purple washes over the photo so the copy stays readable while the customer shows through */}
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-partner from-30% via-bg-partner/85 to-bg-partner/50 max-md:via-bg-partner/80 max-md:to-bg-partner/75" />
-        <div className="container-x relative py-20 md:py-28">
-          <div className="max-w-[560px] text-white">
-            <img src={logoAlGhurairColor} alt="Al Ghurair" className="h-16 md:h-20 w-auto mb-10" />
-            <h2 className="text-4xl md:text-5xl font-bold mb-5 font-display">In pursuit of better</h2>
-            <p className="text-white/90 text-lg leading-relaxed">
+      <section className="container-x pb-20 w-full">
+        <div className="relative overflow-hidden rounded-[24px] bg-bg-partner">
+          <img
+            src={imgAboutPursuit}
+            alt="A happy customer giving a thumbs up from the driver's seat of his new car"
+            className="absolute inset-y-0 end-0 h-full w-full md:w-[65%] object-cover object-[62%_center]"
+          />
+          {/* Al Ghurair purple washes over the photo so the copy stays readable while the customer shows through */}
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-partner from-30% via-bg-partner/85 to-bg-partner/50 max-md:via-bg-partner/80 max-md:to-bg-partner/75" />
+          <div className="relative px-6 sm:px-10 md:px-14 py-14 md:py-16">
+            <div className="max-w-[560px] text-white">
+              <img src={logoAlGhurairColor} alt="Al Ghurair" className="h-14 md:h-16 w-auto mb-8" />
+              <h2 className="ty-title text-4xl md:text-5xl font-bold mb-5 font-display">In pursuit of better</h2>
+              <p className="text-white/90 text-lg leading-relaxed">
               At Al Ghurair, we have always been driven by our pursuit of better. As one of the largest diversified family businesses in the Middle East, we drive transformation across industries: food, mobility, infrastructure, and real estate. Headquartered in Dubai, we operate in 20+ countries and employ over 28,000 people worldwide.
-            </p>
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -111,7 +113,7 @@ export default function About() {
       <section className="container-x py-20 w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1">
-            <h2 className="text-4xl font-extrabold text-text-brand mb-4 font-display">Cared</h2>
+            <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-4 font-display">Cared</h2>
             <p className="text-text-secondary leading-relaxed">
               Cared has inherited the tradition and values built by the Al Ghurair family, so, we believe in enhancing the life of our employees, customers, and the community. We have the expertise to buy, prepare and sell the right quality vehicles that will meet the needs of our customers to buy with confidence. What you can expect from us? Vehicles that will meet the needs of customers to buy with confidence.
             </p>
@@ -138,7 +140,7 @@ export default function About() {
       {/* Why choose Cared */}
       <section className="bg-bg-surface py-20">
         <div className="max-w-[880px] mx-auto">
-          <h2 className="text-4xl font-extrabold text-text-brand mb-8 font-display">Why choose Cared?</h2>
+          <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-8 font-display">Why choose Cared?</h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             {WHY_POINTS.map((point) => (
               <li key={point} className="flex items-start gap-3 bg-white rounded-[12px] border border-border-default p-5">
@@ -156,9 +158,9 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="brand-pattern bg-bg-brand py-20 text-center">
+      <section className="bg-bg-brand py-20 text-center">
         <div className="container-x">
-          <h2 className="text-4xl font-bold text-white mb-2 font-display">Still Not Sure What You Need?</h2>
+          <h2 className="ty-title text-4xl font-bold text-white mb-2 font-display">Still Not Sure What You Need?</h2>
           <p className="text-white/85 text-lg mb-8 max-w-lg mx-auto">
             We&apos;re here to help with sales, finance, or service questions. Reach us in the way that&apos;s easiest for you.
           </p>

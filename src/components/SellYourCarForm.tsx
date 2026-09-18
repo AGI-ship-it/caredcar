@@ -178,7 +178,7 @@ export default function SellYourCarForm({ onNavigate, showVisual = true, classNa
       >
         {/* Title */}
         <div>
-          <span className="text-text-brand ty-h1 block">Sell your car in 3 steps</span>
+          <span className="ty-title ty-title-gradient ty-h1 block">Sell your car in 3 steps</span>
           <span className="text-text-secondary text-lg leading-normal block mt-[8px] font-normal">
             Get an instant valuation, then book an inspection.<br />Fast, transparent, verified.
           </span>
@@ -306,7 +306,7 @@ export default function SellYourCarForm({ onNavigate, showVisual = true, classNa
                 <span className="text-white text-base font-semibold leading-[18px] whitespace-nowrap">
                   {step < 3 ? `Continue (${step}/3)` : "Get My Valuation"}
                 </span>
-                <svg className="block size-[24px] shrink-0 rtl:-scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg className="block size-[24px] shrink-0 text-white rtl:-scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h13M12.5 6l6 6-6 6" />
                 </svg>
               </div>
@@ -341,7 +341,7 @@ function TradeInModal({ onClose }: { onClose: () => void }) {
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-[20px] right-[20px] size-[36px] flex items-center justify-center rounded-full border border-border-default text-text-primary hover:bg-bg-surface transition-colors"
+          className="absolute top-[20px] end-[20px] size-[36px] flex items-center justify-center rounded-full border border-border-default text-text-primary hover:bg-bg-surface transition-colors"
         >
           <svg fill="none" height="16" viewBox="0 0 24 24" width="16"><path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
         </button>

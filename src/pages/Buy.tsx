@@ -413,9 +413,9 @@ export default function Buy() {
 
             {/* Sidebar filters */}
             <aside id="buy-filters" className={`w-full md:w-[280px] shrink-0 ${filtersOpen ? "block" : "hidden"} md:block`}>
-              <div className="md:sticky md:top-[96px] md:max-h-[calc(100vh-120px)] md:overflow-y-auto md:pe-4 pb-2">
+              <div className="md:pe-4 pb-2">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="flex items-center gap-2 font-extrabold text-text-brand text-lg">
+                  <h2 className="flex items-center gap-2 font-extrabold ty-title ty-title-gradient text-lg">
                     Filter
                     {activeChips.length > 0 && (
                       <span className="text-xs font-semibold text-text-brand bg-bg-brand-soft rounded-full px-2 py-0.5 tabular-nums">{activeChips.length}</span>

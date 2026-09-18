@@ -49,7 +49,7 @@ export default function AuthGateModal({
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-[16px] right-[16px] size-[32px] flex items-center justify-center rounded-full text-text-secondary hover:bg-bg-surface transition-colors"
+          className="absolute top-[16px] end-[16px] size-[32px] flex items-center justify-center rounded-full text-text-secondary hover:bg-bg-surface transition-colors"
         >
           <svg fill="none" height="16" viewBox="0 0 24 24" width="16" aria-hidden="true">
             <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />

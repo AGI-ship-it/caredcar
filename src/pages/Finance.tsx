@@ -154,7 +154,7 @@ export default function Finance() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgFinanceHero} imagePosition="75% 38%" title="Finance your car the smart way." subtitle="Check eligibility, compare plans and drive away with clear monthly payments." />
+      <PageHero image={imgFinanceHero} imagePosition="75% 38%" title="Finance Made Simple" subtitle="Check eligibility, compare plans and drive away with clear monthly payments." />
 
       {/* Benefits */}
       <section className="container-x py-16 w-full">
@@ -177,14 +177,13 @@ export default function Finance() {
       <section className="bg-bg-surface py-16">
         <div className="container-x">
           <div className="mb-12">
-            <h2 className="text-4xl font-extrabold text-text-brand font-display">How It Works</h2>
+            <h2 className="text-4xl font-extrabold ty-title ty-title-gradient font-display">How It Works</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            {STEPS.map((step, i) => (
+            {/* One line through the centre of the step circles, running first to last */}
+            <div aria-hidden="true" className="hidden md:block absolute top-[48px] -translate-y-1/2 left-[16.667%] right-[16.667%] h-0.5 bg-bg-brand/20 z-0" />
+            {STEPS.map((step) => (
               <div key={step.n} className="relative h-full">
-                {i < STEPS.length - 1 && (
-                  <div className="hidden md:block absolute top-[47px] left-1/2 w-full h-0.5 bg-bg-brand/20 z-0" />
-                )}
                 <div className="relative z-10 h-full text-center bg-white rounded-[12px] p-6 shadow">
                   <div className="w-12 h-12 bg-bg-brand rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg">
                     {step.n}
@@ -202,7 +201,7 @@ export default function Finance() {
       {/* Calculator */}
       <section id="emi-calculator" className="bg-bg-inverse py-16 sm:py-20 scroll-mt-[96px]">
         <div className="container-x">
-          <h2 className="text-3xl font-bold text-white font-display mb-10">EMI Calculator</h2>
+          <h2 className="ty-title text-3xl font-bold text-white font-display mb-10">EMI Calculator</h2>
 
           <div className="calc-card max-w-[1040px] mx-auto rounded-[24px] grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
             {/* Inputs */}
@@ -294,7 +293,7 @@ export default function Finance() {
       <section className="bg-bg-surface py-16">
         <div className="container-x">
           <div className="mb-10">
-            <h2 className="text-4xl font-extrabold text-text-brand font-display">Eligibility & Documents</h2>
+            <h2 className="text-4xl font-extrabold ty-title ty-title-gradient font-display">Eligibility & Documents</h2>
             <p className="text-text-secondary mt-2">What you need to apply for finance</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
@@ -335,9 +334,9 @@ export default function Finance() {
       </section>
 
       {/* Application CTA */}
-      <section className="brand-pattern bg-bg-brand py-20">
+      <section className="bg-bg-brand py-20">
         <div className="max-w-[640px] mx-auto px-5 text-center">
-          <h2 className="text-4xl font-bold text-white mb-2 font-display">Ready to Apply?</h2>
+          <h2 className="ty-title text-4xl font-bold text-white mb-2 font-display">Ready to Apply?</h2>
           <p className="text-white/85 mb-8">Leave your details and our finance team will call you back within 2 hours.</p>
 
           {submitted ? (

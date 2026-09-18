@@ -111,7 +111,7 @@ export default function Blog() {
           {/* Featured Article */}
           {featuredPost && (
             <div className="mb-14">
-              <h2 className="text-text-brand text-2xl font-extrabold mb-6">Featured Article</h2>
+              <h2 className="ty-title ty-title-gradient text-2xl font-extrabold mb-6">Featured Article</h2>
               <div className="bg-white rounded-[12px] shadow overflow-hidden flex flex-col md:flex-row">
                 <div className="md:w-[40%]">
                   <img
@@ -209,9 +209,9 @@ export default function Blog() {
         </div>
 
         {/* CTA */}
-        <section className="brand-pattern bg-bg-brand py-12 text-white text-center">
+        <section className="bg-bg-brand py-12 text-white text-center">
           <div className="container-x">
-            <h2 className="text-3xl font-bold mb-2">Looking for your next car?</h2>
+            <h2 className="ty-title text-3xl font-bold mb-2">Looking for your next car?</h2>
             <p className="text-white/80 mb-6">
               Browse hundreds of quality-checked vehicles available across the UAE.
             </p>

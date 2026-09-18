@@ -8,7 +8,6 @@ import PageHero from "../components/PageHero";
 const OFFER_CARDS = [
   {
     id: 1,
-    category: "Finance",
     title: "0% APR Finance",
     description: "Drive away today with zero interest on selected vehicles. Available for up to 60 months with flexible repayment options.",
     validity: "Valid until 31 Oct 2026",
@@ -16,7 +15,6 @@ const OFFER_CARDS = [
   },
   {
     id: 2,
-    category: "Warranty",
     title: "Free 2-Year Warranty",
     description: "Every car sold comes with a complimentary 2-year comprehensive warranty covering mechanical and electrical components.",
     validity: "On all purchases in Sep 2026",
@@ -24,7 +22,6 @@ const OFFER_CARDS = [
   },
   {
     id: 3,
-    category: "Trade-In",
     title: "AED 5,000 Trade-In Bonus",
     description: "Get AED 5,000 extra on top of your trade-in valuation when you purchase any car from our current stock.",
     validity: "Valid until 15 Oct 2026",
@@ -32,7 +29,6 @@ const OFFER_CARDS = [
   },
   {
     id: 4,
-    category: "Service",
     title: "Free Service Package",
     description: "Receive 3 free services including oil change, filter replacement, and full vehicle health check for the first year.",
     validity: "Valid until 30 Nov 2026",
@@ -40,7 +36,6 @@ const OFFER_CARDS = [
   },
   {
     id: 5,
-    category: "Test Drive",
     title: "Extended Test Drive",
     description: "Take the car home for 48 hours. Experience it in your daily routine before making any commitment.",
     validity: "Available weekends only",
@@ -48,22 +43,12 @@ const OFFER_CARDS = [
   },
   {
     id: 6,
-    category: "Referral",
     title: "Referral Reward",
     description: "Refer a friend and earn AED 1,000 cash when they complete a purchase. No limit on referrals.",
     validity: "Ongoing offer",
     img: "https://images.unsplash.com/photo-1574023240744-64c47c8c0676?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYXIlMjBkZWFsZXJzaGlwJTIwbHV4dXJ5JTIwc2hvd3Jvb218ZW58MXx8fHwxNzg5MDM3ODU5fDA&ixlib=rb-4.1.0&q=80&w=600",
   },
 ];
-
-const CATEGORY_COLORS: Record<string, string> = {
-  Finance: "bg-blue-100 text-blue-700",
-  Warranty: "bg-green-100 text-green-700",
-  "Trade-In": "bg-orange-100 text-orange-700",
-  Service: "bg-purple-100 text-purple-700",
-  "Test Drive": "bg-yellow-100 text-yellow-700",
-  Referral: "bg-pink-100 text-pink-700",
-};
 
 export default function Offers() {
   return (
@@ -82,7 +67,7 @@ export default function Offers() {
             <div className="inline-block bg-bg-accent text-text-on-accent text-xs font-bold px-3 py-1 rounded-full mb-4">
               LIMITED TIME
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-2 font-display">0% Finance Available</h2>
+            <h2 className="ty-title text-4xl md:text-5xl font-bold text-white mb-2 font-display">0% Finance Available</h2>
             <p className="text-blue-200 text-lg">On selected vehicles for 60 months</p>
           </div>
           <div className="relative z-10 flex-shrink-0">
@@ -99,7 +84,7 @@ export default function Offers() {
       {/* Current Offers */}
       <section className="container-x pb-16 w-full">
         <div className="mb-10">
-          <h2 className="text-3xl font-extrabold text-text-brand mb-2 font-display">Current Offers</h2>
+          <h2 className="text-3xl font-extrabold ty-title ty-title-gradient mb-2 font-display">Current Offers</h2>
           <p className="text-text-secondary">Take advantage of these deals before they expire</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -113,10 +98,7 @@ export default function Offers() {
                 <img src={offer.img} alt={offer.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <div className="bg-bg-surface p-5 flex flex-1 flex-col">
-                <span className={`self-start text-xs font-bold px-3 py-1 rounded-full ${CATEGORY_COLORS[offer.category] || "bg-gray-100 text-gray-600"}`}>
-                  {offer.category}
-                </span>
-                <h3 className="text-lg font-extrabold text-text-brand mt-3 mb-2">{offer.title}</h3>
+                <h3 className="text-lg font-extrabold text-text-brand mb-2">{offer.title}</h3>
                 <p className="text-text-secondary text-sm mb-4 leading-relaxed">{offer.description}</p>
                 <div className="flex items-center justify-between gap-3 mt-auto">
                   <span className="text-xs text-text-secondary flex items-center gap-1.5">
@@ -140,7 +122,7 @@ export default function Offers() {
       {/* Finance Section */}
       <section className="bg-bg-surface py-16">
         <div className="container-x">
-          <h2 className="text-4xl font-extrabold text-text-brand mb-4 flex items-center gap-2 font-display">
+          <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-4 flex items-center gap-2 font-display">
             Finance from
             <span className="inline-flex items-center gap-1.5">
               <DirhamSymbol size={26} />
@@ -151,7 +133,7 @@ export default function Offers() {
           <p className="text-text-secondary text-lg mb-8 max-w-xl">
             Use our interactive calculator to find a plan that fits your budget. Quick approval, competitive rates.
           </p>
-          <div className="bg-white rounded-[16px] shadow p-8 max-w-lg mx-auto mb-8 text-left">
+          <div className="bg-white rounded-[16px] shadow p-8 max-w-lg mx-auto mb-8 text-start">
             <div className="space-y-4">
               <div className="flex justify-between text-sm">
                 <span className="text-text-secondary">Vehicle Price</span>

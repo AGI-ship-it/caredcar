@@ -513,7 +513,7 @@ function BestSellersSection({ onNavigate }: { onNavigate: (path: string) => void
         {/* Header */}
         <div className="flex flex-wrap items-end justify-between gap-[16px] mb-[32px] sm:mb-[40px]">
           <div className="flex flex-col gap-[8px] max-w-[611px]">
-            <span className="text-text-brand ty-h1">Best Sellers</span>
+            <span className="ty-title ty-title-gradient ty-h1">Best Sellers</span>
             <span className="text-text-secondary text-lg leading-normal font-normal">Quickly browse popular car categories in your budget.</span>
           </div>
           <div className="flex gap-[8px] items-center h-[50px]">
@@ -623,7 +623,7 @@ function WhyUsSection() {
     <section className="bg-bg-inverse py-[56px] sm:py-[80px]">
       <div className="container-x flex flex-col gap-[32px] sm:gap-[40px] items-center">
         <div className="flex flex-col gap-[8px] items-center text-center text-white">
-          <span className="ty-h1">Why Us?</span>
+          <span className="ty-title ty-h1">Why Us?</span>
           <span className="text-lg font-normal leading-normal">A trusted car-buying experience, built around your peace of mind.</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[16px] sm:gap-[24px] w-full">
@@ -693,7 +693,7 @@ function CatalogCard({ id, name, make, img, price, monthly, onClick }: { id: str
       />
       {/* No gradient overlay */}
       {/* Car name */}
-      <div className="absolute flex flex-col gap-[4px] items-start left-[16px] top-[16px]">
+      <div className="absolute flex flex-col gap-[4px] items-start start-[16px] top-[16px]">
         <span className="font-bold text-text-primary text-lg tracking-[-0.01em] leading-snug">{name}</span>
         <span className="font-normal text-text-secondary text-sm leading-normal">{make}</span>
       </div>
@@ -701,10 +701,10 @@ function CatalogCard({ id, name, make, img, price, monthly, onClick }: { id: str
       <FavoriteButton
         carId={id}
         size={20}
-        className="absolute right-[12px] top-[12px] size-[36px] flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm text-text-primary hover:text-text-brand hover:bg-white transition-colors"
+        className="absolute end-[12px] top-[12px] size-[36px] flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm text-text-primary hover:text-text-brand hover:bg-white transition-colors"
       />
       {/* Bottom panel */}
-      <div className="absolute bottom-[16px] flex items-end justify-between left-[16px] right-[16px]">
+      <div className="absolute bottom-[16px] flex items-end justify-between start-[16px] end-[16px]">
         <div className="flex flex-col gap-[4px] items-start justify-end">
           <div className="flex gap-[6px] items-center">
             <AedSymbol size={16} />
@@ -738,7 +738,7 @@ function FeaturedCarsSection({ onNavigate }: { onNavigate: (path: string) => voi
     <section className="bg-bg-surface py-[56px] sm:py-[80px]">
       <div className="container-x">
         <div className="flex flex-col gap-[8px] items-start mb-[40px]">
-          <span className="text-text-brand ty-h1">Featured Cars</span>
+          <span className="ty-title ty-title-gradient ty-h1">Featured Cars</span>
           <span className="text-text-secondary text-lg font-normal leading-normal">Handpicked deals with verified inspection.</span>
         </div>
 
@@ -822,7 +822,7 @@ function ShopByBrandsSection({ onNavigate }: { onNavigate: (path: string) => voi
     <section className="py-[56px] sm:py-[80px] bg-white">
       <div className="container-x mb-[32px] sm:mb-[40px]">
         <div className="flex flex-col gap-[8px]">
-          <span className="text-text-brand ty-h1">Shop by Brands</span>
+          <span className="ty-title ty-title-gradient ty-h1">Shop by Brands</span>
           <span className="text-text-secondary text-lg font-normal leading-normal">Choose from a wide range of trusted car brands.</span>
         </div>
       </div>
@@ -897,7 +897,7 @@ function CustomerReviewsSection() {
     <section className="py-[56px] sm:py-[80px] bg-white">
       <div className="container-x">
         <div className="flex flex-col gap-[8px] items-start mb-[40px]">
-          <span className="text-text-brand ty-h1">Customer Reviews</span>
+          <span className="ty-title ty-title-gradient ty-h1">Customer Reviews</span>
           <span className="text-text-secondary text-lg font-normal leading-normal">What people say after they drive away</span>
         </div>
 
@@ -1062,7 +1062,7 @@ function CarTipsSection({ onNavigate }: { onNavigate: (path: string) => void }) 
 
           <div className="order-first md:col-span-2 lg:col-span-1 lg:order-none flex flex-col gap-[24px] items-center justify-center text-center px-[16px] pb-[8px] lg:pb-0">
             <div className="flex flex-col gap-[8px] items-center">
-              <h2 className="text-text-brand ty-h1">{"Car Tips & Guides"}</h2>
+              <h2 className="ty-title ty-title-gradient ty-h1">{"Car Tips & Guides"}</h2>
               <p className="text-text-secondary text-lg leading-[1.6] max-w-[320px]">Tips and insights to help you make confident car decisions.</p>
             </div>
             <button

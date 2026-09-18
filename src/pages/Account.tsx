@@ -84,7 +84,7 @@ export default function Account() {
               <button
                 key={t.id}
                 onClick={() => setTab(t.id)}
-                className={`text-left px-4 py-3 rounded-[10px] font-semibold text-sm transition-colors ${
+                className={`text-start px-4 py-3 rounded-[10px] font-semibold text-sm transition-colors ${
                   activeTab === t.id ? "bg-bg-brand text-white" : "text-text-primary hover:bg-white"
                 }`}
               >
@@ -96,7 +96,7 @@ export default function Account() {
             ))}
             <button
               onClick={() => { logout(); navigate("/"); }}
-              className="text-left px-4 py-3 rounded-[10px] font-semibold text-sm text-red-600 hover:bg-white transition-colors mt-2"
+              className="text-start px-4 py-3 rounded-[10px] font-semibold text-sm text-red-600 hover:bg-white transition-colors mt-2"
             >
               Log Out
             </button>
@@ -106,7 +106,7 @@ export default function Account() {
           <div className="flex-1 bg-white rounded-[16px] p-6 md:p-8">
             {activeTab === "profile" && (
               <form onSubmit={handleProfileSave} className="max-w-[420px] flex flex-col gap-4">
-                <h2 className="text-text-brand text-xl font-extrabold mb-2">Profile Settings</h2>
+                <h2 className="ty-title ty-title-gradient text-xl font-extrabold mb-2">Profile Settings</h2>
                 <div>
                   <label className={LABEL_CLASS}>Full Name</label>
                   <input className={FIELD_CLASS} value={name} onChange={(e) => setName(e.target.value)} />
@@ -124,7 +124,7 @@ export default function Account() {
 
             {activeTab === "password" && (
               <form onSubmit={handlePasswordSave} className="max-w-[420px] flex flex-col gap-4">
-                <h2 className="text-text-brand text-xl font-extrabold mb-2">Change Password</h2>
+                <h2 className="ty-title ty-title-gradient text-xl font-extrabold mb-2">Change Password</h2>
                 <div>
                   <label className={LABEL_CLASS}>Current Password</label>
                   <input type="password" className={FIELD_CLASS} value={currentPw} onChange={(e) => setCurrentPw(e.target.value)} />
@@ -147,7 +147,7 @@ export default function Account() {
 
             {activeTab === "favorites" && (
               <div>
-                <h2 className="text-text-brand text-xl font-extrabold mb-6">Saved Cars</h2>
+                <h2 className="ty-title ty-title-gradient text-xl font-extrabold mb-6">Saved Cars</h2>
                 {favoriteCars.length === 0 ? (
                   <p className="text-text-secondary">You haven&apos;t saved any cars yet. Tap the heart icon on any car to save it here.</p>
                 ) : (

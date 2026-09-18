@@ -37,7 +37,7 @@ export default function Sell() {
       <section className="py-16 bg-white">
         <div className="container-x">
           <div className="mb-10">
-            <h2 className="text-3xl font-extrabold text-text-brand font-display">A Simpler Way to Sell</h2>
+            <h2 className="text-3xl font-extrabold ty-title ty-title-gradient font-display">A Simpler Way to Sell</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {WHY_SELL.map((item, i) => (
