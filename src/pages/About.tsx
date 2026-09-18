@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import imgAboutHero from "@/imports/about-hero.jpg";
 import imgAboutPursuit from "@/imports/about-pursuit.jpg";
 import imgAboutCared from "@/imports/about-cared.jpg";
-import logoAlGhurairColor from "@/imports/brand/al-ghurair-color.svg";
 import logoAlGhurairWhite from "@/imports/brand/al-ghurair-white.svg";
 import logoCaredWhite from "@/imports/brand/cared-white.svg";
 import PageHero from "../components/PageHero";
@@ -74,7 +73,7 @@ export default function About() {
       <PageHero image={imgAboutHero} imagePosition="65% 32%" title="Just Good Cars" subtitle="Dubai's trusted pre-owned cars" />
 
       {/* Our Promise — same treatment as the "Why Us?" band on the home page */}
-      <section className="bg-bg-surface py-[56px] sm:py-[80px]">
+      <section className="bg-bg-surface py-20">
         <div className="container-x flex flex-col gap-[32px] sm:gap-[40px]">
           <div className="flex flex-col gap-[8px]">
             <span className="ty-title ty-title-gradient ty-h1">Our Promise</span>
@@ -84,9 +83,9 @@ export default function About() {
             {FEATURES.map((f) => (
               <div
                 key={f.title}
-                className="group flex flex-col gap-[20px] items-start p-[28px] rounded-[16px] bg-white border border-border-default shadow-[0_10px_30px_rgba(28,41,88,0.06)] transition-all duration-200 hover:-translate-y-1 hover:border-border-focus"
+                className="group flex flex-col gap-[20px] items-start p-[28px] rounded-[20px] bg-white shadow-[0_2px_4px_rgba(28,41,88,0.04),0_18px_40px_-24px_rgba(28,41,88,0.18)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(28,41,88,0.05),0_26px_50px_-24px_rgba(28,41,88,0.24)]"
               >
-                <div className="size-[56px] rounded-[14px] flex items-center justify-center text-text-brand bg-bg-brand-soft">
+                <div className="size-[56px] rounded-[18px] flex items-center justify-center text-text-brand bg-bg-brand-soft/70">
                   <FeatureIcon type={f.icon} />
                 </div>
                 <div className="flex flex-col gap-[6px] w-full">
@@ -100,23 +99,29 @@ export default function About() {
       </section>
 
       {/* In Pursuit of Better — Al Ghurair */}
-      <section className="container-x pb-20 w-full">
-        <div className="relative overflow-hidden rounded-[24px] bg-bg-partner">
-          <img
-            src={imgAboutPursuit}
-            alt="A happy customer giving a thumbs up from the driver's seat of his new car"
-            className="absolute inset-y-0 start-0 h-full w-full md:w-[65%] object-cover object-[62%_center]"
-          />
-          {/* Al Ghurair purple washes over the photo so the copy stays readable while the customer shows through */}
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-l rtl:bg-gradient-to-r from-bg-partner from-30% via-bg-partner/85 to-bg-partner/50 max-md:via-bg-partner/80 max-md:to-bg-partner/75" />
-          <div className="relative flex justify-end px-6 sm:px-10 md:px-14 py-14 md:py-16">
-            <div className="max-w-[560px] text-white">
-              <img src={logoAlGhurairColor} alt="Al Ghurair" className="h-14 md:h-16 w-auto mb-8" />
-              <h2 className="ty-title text-4xl md:text-5xl font-bold mb-5 font-display">In pursuit of better</h2>
-              <p className="text-white/90 text-lg leading-relaxed">
-              At Al Ghurair, we have always been driven by our pursuit of better. As one of the largest diversified family businesses in the Middle East, we drive transformation across industries: food, mobility, infrastructure, and real estate. Headquartered in Dubai, we operate in 20+ countries and employ over 28,000 people worldwide.
-              </p>
+      <section className="container-x py-20 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="relative h-96 rounded-[24px] overflow-hidden shadow-lg bg-bg-partner">
+            <img
+              src={imgAboutPursuit}
+              alt="A happy customer giving a thumbs up from the driver's seat of his new car"
+              className="absolute inset-0 w-full h-full object-cover object-[62%_center]"
+            />
+            {/* Al Ghurair purple over the photo, so the white logo reads on top of it */}
+            <div aria-hidden="true" className="absolute inset-0 bg-bg-partner/55" />
+            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-bg-partner/85 to-transparent" />
+            <div className="absolute inset-x-0 top-0 p-6 sm:p-8">
+              <img src={logoAlGhurairWhite} alt="Al Ghurair" className="h-9 sm:h-11 w-auto" />
             </div>
+          </div>
+          <div>
+            <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-4 font-display">In pursuit of better</h2>
+            <p className="text-text-secondary leading-relaxed mb-4">
+              At Al Ghurair, we have always been driven by our pursuit of better. As one of the largest diversified family businesses in the Middle East, we drive transformation across industries: food, mobility, infrastructure, and real estate.
+            </p>
+            <p className="text-text-secondary leading-relaxed">
+              Headquartered in Dubai, we operate in 20+ countries and employ over 28,000 people worldwide.
+            </p>
           </div>
         </div>
       </section>
@@ -126,8 +131,11 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1">
             <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-4 font-display">Cared</h2>
+            <p className="text-text-secondary leading-relaxed mb-4">
+              Cared has inherited the tradition and values built by the Al Ghurair family, so, we believe in enhancing the life of our employees, customers, and the community.
+            </p>
             <p className="text-text-secondary leading-relaxed">
-              Cared has inherited the tradition and values built by the Al Ghurair family, so, we believe in enhancing the life of our employees, customers, and the community. We have the expertise to buy, prepare and sell the right quality vehicles that will meet the needs of our customers to buy with confidence. What you can expect from us? Vehicles that will meet the needs of customers to buy with confidence.
+              We have the expertise to buy, prepare and sell the right quality vehicles that will meet the needs of our customers to buy with confidence.
             </p>
           </div>
           <div className="order-1 md:order-2 relative h-96 rounded-[24px] overflow-hidden shadow-lg">
@@ -148,21 +156,21 @@ export default function About() {
 
       {/* Why choose Cared */}
       <section className="bg-bg-surface py-20">
-        <div className="max-w-[880px] mx-auto">
-          <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-8 font-display">Why choose Cared?</h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            {WHY_POINTS.map((point) => (
-              <li key={point} className="flex items-start gap-3 bg-white rounded-[12px] border border-border-default p-5">
-                <span className="mt-0.5 w-8 h-8 shrink-0 bg-bg-brand-soft text-text-brand rounded-full flex items-center justify-center">
-                  <FeatureIcon type="check" />
-                </span>
-                <span className="text-text-primary font-medium leading-relaxed">{point}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="text-text-secondary text-lg leading-relaxed">
-            That&apos;s why Cared understands your needs, and we&apos;ll do the worrying for you, so you can feel confident and enjoy owning an Cared Car.
-          </p>
+        <div className="container-x">
+          <div className="max-w-[880px]">
+            <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-8 font-display">Why choose Cared?</h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              {WHY_POINTS.map((point) => (
+                <li key={point} className="flex items-start gap-3 bg-white rounded-[12px] border border-border-default p-5">
+                  <span aria-hidden="true" className="mt-0.5 w-8 h-8 shrink-0 bg-bg-brand-soft text-text-brand rounded-full flex items-center justify-center font-bold">?</span>
+                  <span className="text-text-primary font-medium leading-relaxed">{point}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="rounded-[16px] border-s-4 border-border-focus bg-white p-6 text-text-primary text-lg leading-relaxed">
+              That&apos;s why Cared understands your needs, and we&apos;ll do the worrying for you, so you can feel confident and enjoy owning a Cared car.
+            </p>
+          </div>
         </div>
       </section>
 
