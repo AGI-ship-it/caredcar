@@ -138,7 +138,7 @@ export default function Blog() {
                     to="/blog/1"
                     className="text-text-brand font-semibold hover:underline w-fit"
                   >
-                    Read Article →
+                    Read Article <span className="inline-block rtl:-scale-x-100">&#8594;</span>
                   </Link>
                 </div>
               </div>
@@ -195,7 +195,7 @@ export default function Blog() {
                         to={`/blog/${post.id}`}
                         className="text-text-brand font-semibold hover:underline"
                       >
-                        Read More →
+                        Read More <span className="inline-block rtl:-scale-x-100">&#8594;</span>
                       </Link>
                     </div>
                   </div>

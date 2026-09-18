@@ -27,7 +27,7 @@ interface SellFormData {
 
 export const SELL_MAKES = ["Toyota", "BMW", "Mercedes-Benz", "Audi", "Nissan", "Ford", "Chevrolet", "Hyundai", "Kia", "Honda"];
 export const SELL_MILEAGES = ["0–10,000 km", "10,000–30,000 km", "30,000–60,000 km", "60,000–100,000 km", "100,000+ km"];
-const YEARS = Array.from({ length: 15 }, (_, i) => String(2024 - i));
+export const YEARS = Array.from({ length: 15 }, (_, i) => String(2024 - i));
 const SERVICE_HISTORY = ["Full", "Partial", "No History"];
 const GCC_SPECS = ["GCC Spec", "Imported", "European Spec", "American Spec"];
 const CONDITIONS = ["Excellent", "Good", "Fair"];
@@ -63,12 +63,14 @@ interface SellYourCarFormProps {
   showVisual?: boolean;
   className?: string;
   /** Prefills step 1, e.g. from the home page search. */
-  initial?: Partial<Pick<SellFormData, "plateVin" | "make" | "mileage">>;
+  initial?: Partial<Pick<SellFormData, "plateVin" | "make" | "mileage" | "year">>;
+  // Home search already collects the step 1 details, so it can drop people straight into step 2
+  startStep?: SellStep;
 }
 
-export default function SellYourCarForm({ onNavigate, showVisual = true, className = "", initial }: SellYourCarFormProps) {
-  const [step, setStep] = useState<SellStep>(1);
-  const [form, setForm] = useState<SellFormData>({ plateVin: "", make: "", mileage: "", ...initial, year: "", kilometers: "", serviceHistory: "", gccSpecs: "", condition: "", name: "", countryCode: "+971", phone: "", email: "", date: "", location: "" });
+export default function SellYourCarForm({ onNavigate, showVisual = true, className = "", initial, startStep = 1 }: SellYourCarFormProps) {
+  const [step, setStep] = useState<SellStep>(startStep);
+  const [form, setForm] = useState<SellFormData>({ plateVin: "", make: "", mileage: "", year: "", ...initial, kilometers: "", serviceHistory: "", gccSpecs: "", condition: "", name: "", countryCode: "+971", phone: "", email: "", date: "", location: "" });
   const [touched, setTouched] = useState<Partial<Record<keyof SellFormData, boolean>>>({});
   const [submitted, setSubmitted] = useState(false);
   const [tradeInOpen, setTradeInOpen] = useState(false);

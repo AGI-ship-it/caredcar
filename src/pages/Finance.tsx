@@ -324,7 +324,9 @@ export default function Finance() {
               <ul className="space-y-3">
                 {DOCUMENTS.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-sm text-text-secondary">
-                    <span className="text-text-brand mt-0.5">&#8594;</span>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className="mt-1 size-4 shrink-0 text-text-brand rtl:-scale-x-100">
+                      <path d="M5 12h13M12.5 6l6 6-6 6" />
+                    </svg>
                     {item}
                   </li>
                 ))}

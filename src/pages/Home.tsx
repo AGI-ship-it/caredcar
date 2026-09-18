@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Select from "../components/Select";
 import { FIELD_CLASS, LABEL_CLASS } from "../lib/fieldStyles";
-import SellYourCarForm, { SELL_MAKES, SELL_MILEAGES } from "../components/SellYourCarForm";
+import SellYourCarForm, { SELL_MAKES, SELL_MILEAGES, YEARS } from "../components/SellYourCarForm";
 import { cars } from "../data/cars";
 import { useLanguage } from "../lib/language";
 import SmartImage from "../components/SmartImage";
@@ -200,9 +200,8 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
     if (activeTab === "sell") plateRef.current?.focus({ preventScroll: true });
   }, [activeTab]);
   const [sellMake, setSellMake] = useState("");
-  const [sellModel, setSellModel] = useState("");
+  const [sellYear, setSellYear] = useState("");
   const [sellMileage, setSellMileage] = useState("");
-  const sellModelOptions = toOptions(Array.from(new Set(cars.filter((c) => c.make === sellMake).map((c) => c.model))).sort());
 
   const results = matchCars(buy);
   const makeOptions: Option[] = Array.from(new Set(cars.map((c) => c.make)))
@@ -235,7 +234,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       const params = new URLSearchParams();
       if (sellPlate.trim()) params.set("plate", sellPlate.trim());
       if (sellMake) params.set("make", sellMake);
-      if (sellModel) params.set("model", sellModel);
+      if (sellYear) params.set("year", sellYear);
       if (sellMileage) params.set("mileage", sellMileage);
       const qs = params.toString();
       onNavigate(qs ? `/sell?${qs}` : "/sell");
@@ -338,35 +337,35 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       </div>
 
       {/* Search card */}
-      <div className="w-full max-w-[1040px] mt-0 sm:mt-[30px]">
-        <form onSubmit={submit} className="hero-search relative w-full rounded-[20px] p-[14px] sm:px-[24px] sm:pb-[24px] sm:pt-[50px] flex flex-col gap-[14px] sm:gap-[16px]">
-            {/* Type toggle straddles the top edge of the card */}
-            <div role="tablist" aria-label="Search type" className="hero-tabs relative sm:absolute z-30 sm:top-0 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 grid grid-cols-2 p-[4px] rounded-full w-full sm:w-[360px] h-[52px] sm:h-[60px]">
-              <span
-                aria-hidden="true"
-                className="hero-tab-indicator absolute top-[4px] bottom-[4px] start-[4px] w-[calc(50%-4px)] rounded-full"
-                style={{ transform: `translateX(${activeTab === "buy" ? "0" : "var(--tab-shift)"})` }}
-              />
-              {(["buy", "sell"] as const).map((tab) => (
-                <button
-                  key={tab}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeTab === tab}
-                  onClick={() => {
-                  tabSwitched.current = true;
-                  setActiveTab(tab);
-                }}
-                  className={`relative z-10 h-[44px] sm:h-[52px] flex items-center justify-center rounded-full text-[16px] sm:text-[18px] font-bold transition-colors duration-200 ${
-                    activeTab === tab ? "text-white" : "text-white/70 hover:text-white"
-                  }`}
-                >
-                  {tab === "buy" ? "Buy a Car" : "Sell a Car"}
-                </button>
-              ))}
-            </div>
+      <div className="w-full max-w-[1040px] mt-0 sm:mt-[30px] flex flex-col gap-[12px] sm:gap-[16px]">
+          {/* Type toggle sits above the search card */}
+          <div role="tablist" aria-label="Search type" className="hero-tabs relative z-30 grid grid-cols-2 p-[5px] rounded-full w-full sm:w-[70%] sm:max-w-[560px] sm:mx-auto h-[62px] sm:h-[72px]">
+            <span
+              aria-hidden="true"
+              className="hero-tab-indicator absolute top-[5px] bottom-[5px] start-[5px] w-[calc(50%-5px)] rounded-full"
+              style={{ transform: `translateX(${activeTab === "buy" ? "0" : "var(--tab-shift)"})` }}
+            />
+            {(["buy", "sell"] as const).map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                role="tab"
+                aria-selected={activeTab === tab}
+                onClick={() => {
+                tabSwitched.current = true;
+                setActiveTab(tab);
+              }}
+                className={`relative z-10 h-[52px] sm:h-[62px] flex items-center justify-center rounded-full text-[17px] sm:text-[19px] font-bold transition-colors duration-200 ${
+                  activeTab === tab ? "text-white" : "text-white/70 hover:text-white"
+                }`}
+              >
+                {tab === "buy" ? "Buy a Car" : "Sell a Car"}
+              </button>
+            ))}
+          </div>
+        <form onSubmit={submit} className="hero-search relative w-full rounded-[20px] p-[14px] sm:p-[24px] flex flex-col gap-[14px] sm:gap-[16px]">
             {activeTab === "buy" && hasFilters && (
-              <div className="flex justify-end sm:absolute sm:top-[14px] sm:end-[24px]">
+              <div className="flex justify-end">
                 <button
                   type="button"
                   onClick={() => setBuy({ make: "", model: "", price: "", mileage: "" })}
@@ -402,8 +401,8 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
                       className="hero-field h-[48px] px-[14px] rounded-[10px] w-full text-base text-white placeholder:text-white/65"
                     />
                   </div>
-                  <HeroDropdownField id="hero-sell-make" label="Make" value={sellMake} options={toOptions(SELL_MAKES)} anyLabel="Not sure" placeholder="Select make" onChange={(v) => { setSellMake(v); setSellModel(""); }} />
-                  <HeroDropdownField id="hero-sell-model" label="Model" value={sellModel} options={sellModelOptions} anyLabel="Not sure" placeholder="Select model" disabled={!sellMake} onChange={setSellModel} />
+                  <HeroDropdownField id="hero-sell-make" label="Make" value={sellMake} options={toOptions(SELL_MAKES)} anyLabel="Not sure" placeholder="Select make" onChange={setSellMake} />
+                  <HeroDropdownField id="hero-sell-year" label="Year" value={sellYear} options={toOptions(YEARS)} anyLabel="Not sure" placeholder="Select year" onChange={setSellYear} />
                   <HeroDropdownField id="hero-sell-mileage" label="Mileage" value={sellMileage} options={toOptions(SELL_MILEAGES)} anyLabel="Not sure" placeholder="Select mileage" onChange={setSellMileage} />
                 </>
               )}

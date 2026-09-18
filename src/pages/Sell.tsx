@@ -19,8 +19,11 @@ export default function Sell() {
     plateVin: params.get("plate") ?? "",
     make: params.get("make") ?? "",
     mileage: params.get("mileage") ?? "",
+    year: params.get("year") ?? "",
   };
-  const fromSearch = Boolean(initial.plateVin || initial.make || initial.mileage);
+  const fromSearch = Boolean(initial.plateVin || initial.make || initial.mileage || initial.year);
+  // Home search covers everything step 1 asks for, so open on step 2 when it is complete
+  const startStep = initial.make && initial.mileage && initial.year ? 2 : 1;
 
   useEffect(() => {
     if (fromSearch) document.getElementById("sell-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -55,7 +58,7 @@ export default function Sell() {
 
       {/* Sell form */}
       <section id="sell-form" className="py-[80px] bg-bg-surface relative overflow-hidden flex-1 scroll-mt-[96px]">
-        <SellYourCarForm onNavigate={navigate} className="container-x" initial={initial} />
+        <SellYourCarForm onNavigate={navigate} className="container-x" initial={initial} startStep={startStep} />
       </section>
 
       <Footer />
