@@ -339,10 +339,10 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       {/* Search card */}
       <div className="w-full max-w-[1040px] mt-0 sm:mt-[30px] flex flex-col gap-[12px] sm:gap-[16px]">
           {/* Type toggle sits above the search card */}
-          <div role="tablist" aria-label="Search type" className="hero-tabs relative z-30 grid grid-cols-2 p-[5px] rounded-full w-full sm:w-[70%] sm:max-w-[560px] sm:mx-auto h-[62px] sm:h-[72px]">
+          <div role="tablist" aria-label="Search type" className="hero-tabs relative z-30 grid grid-cols-2 p-[6px] rounded-full w-full sm:w-[78%] sm:max-w-[640px] sm:mx-auto h-[68px] sm:h-[80px]">
             <span
               aria-hidden="true"
-              className="hero-tab-indicator absolute top-[5px] bottom-[5px] start-[5px] w-[calc(50%-5px)] rounded-full"
+              className="hero-tab-indicator absolute top-[6px] bottom-[6px] start-[6px] w-[calc(50%-6px)] rounded-full"
               style={{ transform: `translateX(${activeTab === "buy" ? "0" : "var(--tab-shift)"})` }}
             />
             {(["buy", "sell"] as const).map((tab) => (
@@ -355,7 +355,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
                 tabSwitched.current = true;
                 setActiveTab(tab);
               }}
-                className={`relative z-10 h-[52px] sm:h-[62px] flex items-center justify-center rounded-full text-[17px] sm:text-[19px] font-bold transition-colors duration-200 ${
+                className={`relative z-10 h-[56px] sm:h-[68px] flex items-center justify-center rounded-full text-[18px] sm:text-[21px] font-bold transition-colors duration-200 ${
                   activeTab === tab ? "text-white" : "text-white/70 hover:text-white"
                 }`}
               >
@@ -476,15 +476,15 @@ function BestSellerCard({ car, onClick }: { car: typeof ALL_BEST_SELLER_CARS[0];
         </div>
         <div className="flex items-center justify-between mt-[24px] sm:mt-[40px] w-full shrink-0">
           <div className="flex flex-col gap-[4px] items-start">
-            <div className="flex gap-[6px] items-center">
+            <div className="flex gap-[6px] items-baseline">
               <AedSymbol size={16} />
-              <span className="text-text-primary text-[22px] font-bold leading-none tracking-[-0.01em] whitespace-nowrap tabular-nums">{car.price}</span>
+              <span className="text-text-primary text-[22px] font-bold leading-none tracking-[-0.01em] whitespace-nowrap tabular-nums">{car.monthly}</span>
+              <span className="text-text-secondary text-sm font-medium leading-none">/mo</span>
             </div>
             <div className="flex gap-[3px] items-center text-text-secondary">
-              <span className="text-xs font-medium leading-normal">Est.</span>
               <AedSymbol color="var(--color-text-secondary)" size={11} />
-              <span className="text-[13px] font-semibold leading-normal tabular-nums">{car.monthly}</span>
-              <span className="text-xs font-medium leading-normal">/mo</span>
+              <span className="text-[13px] font-semibold leading-normal tabular-nums">{car.price}</span>
+              <span className="text-xs font-medium leading-normal">total</span>
             </div>
           </div>
           <span className="card-arrow" aria-hidden="true">
@@ -705,15 +705,15 @@ function CatalogCard({ id, name, make, img, price, monthly, onClick }: { id: str
       {/* Bottom panel */}
       <div className="absolute bottom-[16px] flex items-end justify-between start-[16px] end-[16px]">
         <div className="flex flex-col gap-[4px] items-start justify-end">
-          <div className="flex gap-[6px] items-center">
+          <div className="flex gap-[6px] items-baseline">
             <AedSymbol size={16} />
-            <span className="text-text-primary text-[22px] font-bold leading-none tracking-[-0.01em] tabular-nums">{price}</span>
+            <span className="text-text-primary text-[22px] font-bold leading-none tracking-[-0.01em] tabular-nums">{monthly}</span>
+            <span className="text-text-secondary text-sm font-medium leading-none">/mo</span>
           </div>
           <div className="flex gap-[3px] items-center text-text-secondary">
-            <span className="text-xs font-medium leading-normal">Est.</span>
             <AedSymbol color="var(--color-text-secondary)" size={11} />
-            <span className="text-[13px] font-semibold leading-normal tabular-nums">{monthly}</span>
-            <span className="text-xs font-medium leading-normal">/mo</span>
+            <span className="text-[13px] font-semibold leading-normal tabular-nums">{price}</span>
+            <span className="text-xs font-medium leading-normal">total</span>
           </div>
         </div>
         <span className="card-arrow" aria-hidden="true">

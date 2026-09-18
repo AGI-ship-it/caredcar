@@ -128,17 +128,17 @@ export default function CarCard({
           )}
         </div>
 
-        {/* Price + Arrow — total price primary, estimated monthly secondary */}
+        {/* Price + Arrow — estimated monthly primary, total price secondary */}
         <div className="flex justify-between items-end mt-auto">
           <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-baseline gap-1.5">
               <DirhamSymbol color="var(--color-text-primary)" size={16} />
-              <p className="text-text-primary font-bold text-[22px] leading-none tabular-nums">{formattedPrice}</p>
+              <p className="text-text-primary font-bold text-[22px] leading-none tabular-nums">{car.monthlyPayment.toLocaleString("en-AE")}</p>
+              <span className="text-text-secondary text-sm font-medium">/mo</span>
             </div>
             <p className="text-text-secondary text-xs flex items-center gap-1">
-              Est.
               <DirhamSymbol color="var(--color-text-secondary)" size={10} />
-              <span className="font-semibold tabular-nums">{car.monthlyPayment.toLocaleString("en-AE")}</span>/mo
+              <span className="font-semibold tabular-nums">{formattedPrice}</span> total
             </p>
           </div>
           <span className="card-arrow" aria-hidden="true">
