@@ -154,11 +154,11 @@ export default function Finance() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgFinanceHero} imagePosition="75% 58%" title="Finance your car the smart way." subtitle="Check eligibility, compare plans and drive away with clear monthly payments." />
+      <PageHero image={imgFinanceHero} imagePosition="75% 38%" title="Finance your car the smart way." subtitle="Check eligibility, compare plans and drive away with clear monthly payments." />
 
       {/* Benefits */}
       <section className="container-x py-16 w-full">
-        <div className="text-center mb-10">
+        <div className="mb-10">
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {BENEFITS.map((b) => (
@@ -176,7 +176,7 @@ export default function Finance() {
       {/* How It Works */}
       <section className="bg-bg-surface py-16">
         <div className="container-x">
-          <div className="text-center mb-12">
+          <div className="mb-12">
             <h2 className="text-4xl font-extrabold text-text-brand font-display">How It Works</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
@@ -195,14 +195,14 @@ export default function Finance() {
               </div>
             ))}
           </div>
-          <p className="text-center text-text-secondary text-xs mt-8 italic">Final approval is subject to bank assessment.</p>
+          <p className="text-text-secondary text-xs mt-8 italic">Final approval is subject to bank assessment.</p>
         </div>
       </section>
 
       {/* Calculator */}
       <section id="emi-calculator" className="bg-bg-inverse py-16 sm:py-20 scroll-mt-[96px]">
         <div className="container-x">
-          <h2 className="text-center text-3xl font-bold text-white font-display mb-10">EMI Calculator</h2>
+          <h2 className="text-3xl font-bold text-white font-display mb-10">EMI Calculator</h2>
 
           <div className="calc-card max-w-[1040px] mx-auto rounded-[24px] grid grid-cols-1 lg:grid-cols-2 overflow-hidden">
             {/* Inputs */}
@@ -284,9 +284,6 @@ export default function Finance() {
                 className="group mt-8 lg:mt-auto inline-flex items-center justify-center gap-2 bg-bg-brand text-white font-semibold h-[48px] rounded-full hover:bg-bg-brand-hover transition-colors"
               >
                 Apply with this plan
-                <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 transition-transform group-hover:translate-x-1 rtl:-scale-x-100" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
               </button>
             </div>
           </div>
@@ -296,7 +293,7 @@ export default function Finance() {
       {/* Eligibility */}
       <section className="bg-bg-surface py-16">
         <div className="container-x">
-          <div className="text-center mb-10">
+          <div className="mb-10">
             <h2 className="text-4xl font-extrabold text-text-brand font-display">Eligibility & Documents</h2>
             <p className="text-text-secondary mt-2">What you need to apply for finance</p>
           </div>
@@ -338,7 +335,7 @@ export default function Finance() {
       </section>
 
       {/* Application CTA */}
-      <section className="bg-bg-brand py-20">
+      <section className="brand-pattern bg-bg-brand py-20">
         <div className="max-w-[640px] mx-auto px-5 text-center">
           <h2 className="text-4xl font-bold text-white mb-2 font-display">Ready to Apply?</h2>
           <p className="text-white/85 mb-8">Leave your details and our finance team will call you back within 2 hours.</p>

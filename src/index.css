@@ -520,6 +520,30 @@
   animation: hero-menu-in 0.16s ease-out both;
 }
 
+/* Subtle brand pattern for CTA bands: the Cared play-mark, tiled and barely-there */
+.brand-pattern {
+  position: relative;
+  isolation: isolate;
+}
+.brand-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Cpath d='M28 44c0-6.6 7-10.8 12.7-7.5l28.6 16.7c5.7 3.3 5.7 11.6 0 14.9L40.7 84.8C35 88.1 28 83.9 28 77.3V44z'/%3E%3Cpath d='M59 44c0-6.6 7-10.8 12.7-7.5l28.6 16.7c5.7 3.3 5.7 11.6 0 14.9L71.7 84.8C66 88.1 59 83.9 59 77.3V44z'/%3E%3Cpath d='M118 134c0-6.6 7-10.8 12.7-7.5l28.6 16.7c5.7 3.3 5.7 11.6 0 14.9l-28.6 16.7c-5.7 3.3-12.7-.9-12.7-7.5V134z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  background-repeat: repeat;
+  -webkit-mask-image: radial-gradient(ellipse 80% 120% at 50% 50%, #000 20%, transparent 78%);
+  mask-image: radial-gradient(ellipse 80% 120% at 50% 50%, #000 20%, transparent 78%);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .brand-pattern::before {
+    transition: opacity 0.3s ease;
+  }
+}
+
 /* Finance EMI calculator */
 .calc-card {
   background: linear-gradient(180deg, var(--color-bg-inverse-raised) 0%, var(--color-bg-inverse) 100%);

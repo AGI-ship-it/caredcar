@@ -70,7 +70,7 @@ export default function About() {
       <Header />
 
       {/* Hero */}
-      <PageHero overlap image={imgAboutHero} imagePosition="65% 45%" title="Just Good Cars" subtitle="Dubai's trusted pre-owned cars" />
+      <PageHero overlap image={imgAboutHero} imagePosition="65% 32%" title="Just Good Cars" subtitle="Dubai's trusted pre-owned cars" />
 
       {/* Key Features */}
       <section className="container-x py-20 w-full -mt-24 relative z-10">
@@ -138,7 +138,7 @@ export default function About() {
       {/* Why choose Cared */}
       <section className="bg-bg-surface py-20">
         <div className="max-w-[880px] mx-auto">
-          <h2 className="text-4xl font-extrabold text-text-brand mb-8 text-center font-display">Why choose Cared?</h2>
+          <h2 className="text-4xl font-extrabold text-text-brand mb-8 font-display">Why choose Cared?</h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             {WHY_POINTS.map((point) => (
               <li key={point} className="flex items-start gap-3 bg-white rounded-[12px] border border-border-default p-5">
@@ -149,14 +149,14 @@ export default function About() {
               </li>
             ))}
           </ul>
-          <p className="text-text-secondary text-lg leading-relaxed text-center">
+          <p className="text-text-secondary text-lg leading-relaxed">
             That&apos;s why Cared understands your needs, and we&apos;ll do the worrying for you, so you can feel confident and enjoy owning an Cared Car.
           </p>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-bg-brand py-20 text-center">
+      <section className="brand-pattern bg-bg-brand py-20 text-center">
         <div className="container-x">
           <h2 className="text-4xl font-bold text-white mb-2 font-display">Still Not Sure What You Need?</h2>
           <p className="text-white/85 text-lg mb-8 max-w-lg mx-auto">

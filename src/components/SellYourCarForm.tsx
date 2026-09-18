@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Select from "./Select";
 import { FIELD_CLASS, FIELD_ERROR_CLASS, LABEL_CLASS } from "../lib/fieldStyles";
-import svgPaths from "@/imports/00HomeV34/svg-qhcw3sf999";
 import imgSellCarVisual from "@/imports/Car.png";
 
 const toOpts = (arr: string[]) => arr.map((v) => ({ value: v, label: v }));
@@ -307,9 +306,9 @@ export default function SellYourCarForm({ onNavigate, showVisual = true, classNa
                 <span className="text-white text-base font-semibold leading-[18px] whitespace-nowrap">
                   {step < 3 ? `Continue (${step}/3)` : "Get My Valuation"}
                 </span>
-                <div className="shrink-0 size-[24px]">
-                  <svg className="block size-full" fill="none" height="24" viewBox="0 0 24 24" width="24"><path d={svgPaths.p24860100} fill="white" /></svg>
-                </div>
+                <svg className="block size-[24px] shrink-0 rtl:-scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M5 12h13M12.5 6l6 6-6 6" />
+                </svg>
               </div>
             </button>
           </div>

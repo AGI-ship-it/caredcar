@@ -526,7 +526,7 @@ export default function BlogDetail() {
         </div>
 
         {/* CTA */}
-        <section className="bg-bg-brand py-12 text-white text-center">
+        <section className="brand-pattern bg-bg-brand py-12 text-white text-center">
           <div className="container-x">
             <h2 className="text-3xl font-bold mb-2 font-display">Find Your Perfect Car</h2>
             <p className="text-white/80 mb-6">

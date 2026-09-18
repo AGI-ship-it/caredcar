@@ -117,7 +117,7 @@ export default function Blog() {
                   <img
                     src={featuredPost.image}
                     alt={featuredPost.title}
-                    className="w-full h-64 md:h-full object-cover"
+                    className="w-full aspect-square md:aspect-auto md:h-full object-cover"
                   />
                 </div>
                 <div className="md:w-[60%] p-8 flex flex-col justify-center">
@@ -176,7 +176,7 @@ export default function Blog() {
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-48 object-cover"
+                    className="w-full aspect-square sm:aspect-[416/375] object-cover"
                   />
                   <div className="p-5">
                     <span className="inline-block bg-bg-brand-soft text-text-brand text-xs font-semibold px-3 py-1 rounded-full mb-3">
@@ -209,7 +209,7 @@ export default function Blog() {
         </div>
 
         {/* CTA */}
-        <section className="bg-bg-brand py-12 text-white text-center">
+        <section className="brand-pattern bg-bg-brand py-12 text-white text-center">
           <div className="container-x">
             <h2 className="text-3xl font-bold mb-2">Looking for your next car?</h2>
             <p className="text-white/80 mb-6">

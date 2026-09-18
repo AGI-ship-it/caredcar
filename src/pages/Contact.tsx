@@ -104,7 +104,7 @@ export default function Contact() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgContactHero} imagePosition="left center" title="Contact Us" subtitle="Our team is ready to help you find the perfect car or answer any questions you may have." />
+      <PageHero image={imgContactHero} imagePosition="left 38%" title="Contact Us" subtitle="Our team is ready to help you find the perfect car or answer any questions you may have." />
 
       {/* Main Content */}
       <main className="flex-1 bg-white">
@@ -148,7 +148,7 @@ export default function Contact() {
                   className="flex items-center justify-between gap-3 bg-bg-surface px-4 py-3 text-sm font-semibold text-text-brand hover:bg-bg-brand-soft transition-colors"
                 >
                   Get directions
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className="size-[18px]" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className="size-[18px] rtl:-scale-x-100" aria-hidden="true">
                     <path d="M6 18L18 6M8.25 6H18v9.75" />
                   </svg>
                 </a>

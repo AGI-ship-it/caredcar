@@ -31,12 +31,12 @@ export default function Sell() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgSellHero} imagePosition="75% center" title="Get the Best Price for Your Car" subtitle="Fill in your details and book a free inspection — we handle the rest." />
+      <PageHero image={imgSellHero} imagePosition="75% 35%" title="Get the Best Price for Your Car" subtitle="Fill in your details and book a free inspection — we handle the rest." />
 
       {/* Why sell with us */}
       <section className="py-16 bg-white">
         <div className="container-x">
-          <div className="text-center mb-10">
+          <div className="mb-10">
             <h2 className="text-3xl font-extrabold text-text-brand font-display">A Simpler Way to Sell</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

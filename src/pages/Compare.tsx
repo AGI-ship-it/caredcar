@@ -214,7 +214,7 @@ export default function Compare() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgCompareHero} imagePosition="center 60%" title="Compare Models" subtitle={`Pick up to ${MAX_SLOTS} cars and weigh their specs, pricing and features side by side.`} />
+      <PageHero image={imgCompareHero} imagePosition="center 42%" title="Compare Models" subtitle={`Pick up to ${MAX_SLOTS} cars and weigh their specs, pricing and features side by side.`} />
 
       <main className="flex-1 bg-white">
         <div className="container-x py-10">

@@ -282,7 +282,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
         <div className="hero-intro absolute inset-0">
           <img
             alt=""
-            className="hero-parallax-bg absolute inset-x-0 bottom-0 top-[18%] w-full h-[82%] object-cover object-top"
+            className="hero-parallax-bg absolute inset-x-0 bottom-0 top-[10%] w-full h-[90%] object-cover object-top"
             style={{
               maskImage: "linear-gradient(to bottom, transparent 0%, #000 10%)",
               WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, #000 10%)",
@@ -313,7 +313,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
               aria-hidden="true"
               viewBox="0 0 200 24"
               preserveAspectRatio="none"
-              className="hero-swoosh absolute left-[-4%] right-[-4%] -bottom-[0.16em] w-[108%] h-[0.3em]"
+              className={`hero-swoosh absolute left-[-4%] right-[-4%] w-[108%] h-[0.3em] ${isArabic ? "-bottom-[0.34em]" : "-bottom-[0.16em]"}`}
             >
               <path d="M4 16C46 7 104 4 196 10" fill="none" stroke="var(--color-text-accent)" strokeWidth="9" strokeLinecap="round" />
             </svg>
@@ -325,7 +325,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
             <path d="M17 5.2c0-3 3.2-4.9 5.8-3.4l13 7.6c2.6 1.5 2.6 5.3 0 6.8l-13 7.6c-2.6 1.5-5.8-.4-5.8-3.4V5.2z" fill="var(--color-text-accent)" style={{ mixBlendMode: "multiply" }} />
           </svg>
         </h1>
-        <p className="relative isolate text-text-primary text-xl sm:text-2xl md:text-3xl font-semibold leading-snug">
+        <p className="relative isolate font-body text-text-primary text-2xl sm:text-3xl font-medium leading-snug">
           {/* Same light halo as the headline, so the line stays readable on the sunset sky */}
           <span
             aria-hidden="true"
@@ -523,7 +523,7 @@ function BestSellersSection({ onNavigate }: { onNavigate: (path: string) => void
               className="bg-[#e5efff] flex items-center justify-center p-[12px] rounded-[999px] size-[50px] transition-opacity"
               style={{ opacity: canGoLeft ? 1 : 0.4 }}
             >
-              <svg fill="none" height="24" viewBox="0 0 24 24" width="24">
+              <svg fill="none" height="24" viewBox="0 0 24 24" width="24" className="rtl:-scale-x-100">
                 <path d={svgPaths.p12a78bc0} fill="var(--color-text-brand)" />
               </svg>
             </button>
@@ -533,7 +533,7 @@ function BestSellersSection({ onNavigate }: { onNavigate: (path: string) => void
               className="bg-bg-brand flex items-center justify-center p-[12px] rounded-[999px] size-[50px] transition-opacity hover:bg-bg-brand-hover"
               style={{ opacity: canGoRight ? 1 : 0.4 }}
             >
-              <svg fill="none" height="24" viewBox="0 0 24 24" width="24">
+              <svg fill="none" height="24" viewBox="0 0 24 24" width="24" className="rtl:-scale-x-100">
                 <path d={svgPaths.p24860100} fill="white" />
               </svg>
             </button>
@@ -560,7 +560,7 @@ function BestSellersSection({ onNavigate }: { onNavigate: (path: string) => void
             className="group flex items-center gap-[12px] px-[28px] py-[13px] rounded-[999px] bg-bg-brand text-white transition-colors hover:bg-bg-brand-hover"
           >
             <span className="text-base font-semibold leading-[18px] whitespace-nowrap">Explore All</span>
-            <svg className="block size-[24px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
+            <svg className="block size-[24px] shrink-0 rtl:-scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
           </button>
         </div>
       </div>
@@ -781,7 +781,7 @@ function FeaturedCarsSection({ onNavigate }: { onNavigate: (path: string) => voi
             className="group flex items-center gap-[12px] px-[28px] py-[13px] rounded-[999px] bg-bg-brand text-white transition-colors hover:bg-bg-brand-hover"
           >
             <span className="text-base font-semibold leading-[18px] whitespace-nowrap">Explore All</span>
-            <svg className="block size-[24px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
+            <svg className="block size-[24px] shrink-0 rtl:-scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
           </button>
         </div>
       </div>
@@ -925,7 +925,7 @@ function CustomerReviewsSection() {
                 <path d={svgPaths.p35fbea00} fill="#1976D2" />
               </svg>
               <span className="text-text-brand text-sm font-semibold leading-[18px] whitespace-nowrap">Read Our Reviews</span>
-              <svg className="block size-[24px] shrink-0 text-text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
+              <svg className="block size-[24px] shrink-0 text-text-brand rtl:-scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
             </a>
           </div>
 
@@ -1028,7 +1028,7 @@ const BLOG_POSTS = [
 function BlogCard({ post, onClick }: { post: typeof BLOG_POSTS[0]; onClick: () => void }) {
   return (
     <button type="button" onClick={onClick} className="group flex flex-col gap-[14px] text-start w-full rounded-[16px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-border-focus">
-      <div className="relative w-full h-[240px] rounded-[16px] overflow-hidden bg-bg-surface">
+      <div className="relative w-full aspect-square sm:aspect-[416/375] rounded-[16px] overflow-hidden bg-bg-surface">
         <img
           alt=""
           src={post.img}
@@ -1070,7 +1070,7 @@ function CarTipsSection({ onNavigate }: { onNavigate: (path: string) => void }) 
               className="group flex items-center gap-[10px] h-[48px] px-[28px] rounded-[999px] bg-bg-brand text-white transition-colors duration-150 hover:bg-bg-brand-hover"
             >
               <span className="text-base font-semibold leading-none">View All</span>
-              <svg className="block size-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
+              <svg className="block size-[22px] rtl:-scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 18L18 6M8.25 6H18v9.75" /></svg>
             </button>
           </div>
 

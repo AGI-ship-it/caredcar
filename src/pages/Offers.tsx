@@ -71,7 +71,7 @@ export default function Offers() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgOffersHero} imagePosition="70% center" title="Exclusive Offers" subtitle="Limited-time deals on premium pre-owned vehicles — transparent pricing, zero hidden fees." />
+      <PageHero image={imgOffersHero} imagePosition="70% 38%" title="Exclusive Offers" subtitle="Limited-time deals on premium pre-owned vehicles — transparent pricing, zero hidden fees." />
 
       {/* Featured Banner */}
       <section className="container-x py-12 w-full">
@@ -98,7 +98,7 @@ export default function Offers() {
 
       {/* Current Offers */}
       <section className="container-x pb-16 w-full">
-        <div className="text-center mb-10">
+        <div className="mb-10">
           <h2 className="text-3xl font-extrabold text-text-brand mb-2 font-display">Current Offers</h2>
           <p className="text-text-secondary">Take advantage of these deals before they expire</p>
         </div>
@@ -139,8 +139,8 @@ export default function Offers() {
 
       {/* Finance Section */}
       <section className="bg-bg-surface py-16">
-        <div className="container-x text-center">
-          <h2 className="text-4xl font-extrabold text-text-brand mb-4 flex items-center justify-center gap-2 font-display">
+        <div className="container-x">
+          <h2 className="text-4xl font-extrabold text-text-brand mb-4 flex items-center gap-2 font-display">
             Finance from
             <span className="inline-flex items-center gap-1.5">
               <DirhamSymbol size={26} />
@@ -148,7 +148,7 @@ export default function Offers() {
             </span>
             <span className="text-text-secondary text-lg font-medium self-end mb-1">/mo</span>
           </h2>
-          <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
+          <p className="text-text-secondary text-lg mb-8 max-w-xl">
             Use our interactive calculator to find a plan that fits your budget. Quick approval, competitive rates.
           </p>
           <div className="bg-white rounded-[16px] shadow p-8 max-w-lg mx-auto mb-8 text-left">

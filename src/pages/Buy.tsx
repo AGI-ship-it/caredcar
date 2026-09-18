@@ -390,7 +390,7 @@ export default function Buy() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgBuyHero} imagePosition="center bottom" title="Browse Our Cars" subtitle="Find your perfect pre-owned vehicle from our curated UAE collection" />
+      <PageHero image={imgBuyHero} imagePosition="center 72%" title="Browse Our Cars" subtitle="Find your perfect pre-owned vehicle from our curated UAE collection" />
 
       {/* Main content */}
       <main className="flex-1 bg-white">
@@ -413,7 +413,7 @@ export default function Buy() {
 
             {/* Sidebar filters */}
             <aside id="buy-filters" className={`w-full md:w-[280px] shrink-0 ${filtersOpen ? "block" : "hidden"} md:block`}>
-              <div className="md:sticky md:top-[96px] md:max-h-[calc(100vh-120px)] md:overflow-y-auto rounded-[20px] border border-border-default bg-white p-5 shadow-[0_10px_30px_rgba(28,41,88,0.05)]">
+              <div className="md:sticky md:top-[96px] md:max-h-[calc(100vh-120px)] md:overflow-y-auto md:pe-4 pb-2">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="flex items-center gap-2 font-extrabold text-text-brand text-lg">
                     Filter
