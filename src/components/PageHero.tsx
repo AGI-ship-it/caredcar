@@ -43,7 +43,7 @@ export default function PageHero({ title, subtitle, image, imagePosition = "cent
           </h1>
           {subtitle && (
             <p
-              className="mt-4 max-w-[640px] text-xl md:text-2xl leading-relaxed text-white/90"
+              className="mt-4 max-w-[640px] text-lg md:text-xl leading-relaxed text-white/90"
               style={image ? { textShadow: "0 2px 14px rgba(8, 18, 45, 0.5)" } : undefined}
             >
               {subtitle}

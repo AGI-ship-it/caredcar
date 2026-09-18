@@ -6,6 +6,7 @@ import imgFinanceHero from "@/imports/finance-hero.jpg";
 import DirhamSymbol from "../components/DirhamSymbol";
 import EligibilityModal from "../components/EligibilityModal";
 import PageHero from "../components/PageHero";
+import BrandShape from "../components/BrandShape";
 
 // Content sourced from caredcars.com/finance, restyled to match this design system.
 const STEPS = [
@@ -334,7 +335,8 @@ export default function Finance() {
       </section>
 
       {/* Application CTA */}
-      <section className="bg-bg-brand py-20">
+      <section className="relative overflow-hidden bg-bg-brand py-20">
+        <BrandShape />
         <div className="max-w-[640px] mx-auto px-5 text-center">
           <h2 className="ty-title text-4xl font-bold text-white mb-2 font-display">Ready to Apply?</h2>
           <p className="text-white/85 mb-8">Leave your details and our finance team will call you back within 2 hours.</p>

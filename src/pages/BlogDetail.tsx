@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import BrandShape from "../components/BrandShape";
 
 const blogPosts = [
   {
@@ -526,7 +527,8 @@ export default function BlogDetail() {
         </div>
 
         {/* CTA */}
-        <section className="bg-bg-brand py-12 text-white text-center">
+        <section className="relative overflow-hidden bg-bg-brand py-12 text-white text-center">
+          <BrandShape />
           <div className="container-x">
             <h2 className="text-3xl font-bold mb-2 font-display">Find Your Perfect Car</h2>
             <p className="text-white/80 mb-6">
