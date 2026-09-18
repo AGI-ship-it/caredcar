@@ -292,9 +292,9 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,20,0.5) 100%)" }} />
       </div>
 
-      <div className="relative flex-1 flex flex-col items-center justify-between xl:justify-end gap-[24px] sm:gap-[32px] px-4 sm:px-5 pt-[32px] sm:pt-[40px] xl:pt-0 pb-[96px] sm:pb-[32px] xl:pb-[clamp(60px,11svh,112px)]">
+      <div className="relative flex-1 flex flex-col items-center justify-between xl:justify-end gap-[24px] sm:gap-[32px] px-4 sm:px-5 pt-[32px] sm:pt-[40px] xl:pt-0 pb-[96px] sm:pb-[32px] xl:pb-[clamp(12px,3svh,36px)]">
       {/* Hero text: centred between the floating nav and the car roofs */}
-      <div className="relative xl:absolute xl:inset-x-0 xl:top-[calc(60px+23%)] xl:-translate-y-1/2 px-5 flex justify-center pointer-events-none">
+      <div className="relative xl:absolute xl:inset-x-0 xl:top-[calc(60px+17%)] xl:-translate-y-1/2 px-5 flex justify-center pointer-events-none">
       <div className="hero-parallax-fg hero-intro-text pointer-events-auto flex flex-col items-center gap-[20px] text-center">
         <h1 data-no-translate className="relative isolate ty-display-xl text-text-brand">
           {/* Soft light halo so the brand blue stays legible on the sunset sky */}
@@ -337,7 +337,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       </div>
 
       {/* Search card */}
-      <div className="w-full max-w-[1040px] mt-0 sm:mt-[30px] flex flex-col gap-[12px] sm:gap-[16px]">
+      <div className="w-full max-w-[1040px] mt-[56px] mb-[20px] sm:mt-[152px] sm:mb-[32px] flex flex-col gap-[12px] sm:gap-[16px]">
           {/* Type toggle sits above the search card */}
           <div role="tablist" aria-label="Search type" className="hero-tabs relative z-30 grid grid-cols-2 p-[6px] rounded-full w-full sm:w-[78%] sm:max-w-[640px] sm:mx-auto h-[68px] sm:h-[80px]">
             <span
@@ -363,7 +363,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
               </button>
             ))}
           </div>
-        <form onSubmit={submit} className="hero-search relative w-full rounded-[20px] p-[14px] sm:p-[24px] flex flex-col gap-[14px] sm:gap-[16px]">
+        <form onSubmit={submit} className="hero-search relative w-full rounded-[20px] p-[20px] sm:p-[36px] flex flex-col gap-[14px] sm:gap-[16px]">
             {activeTab === "buy" && hasFilters && (
               <div className="flex justify-end">
                 <button

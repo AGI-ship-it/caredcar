@@ -115,7 +115,7 @@ export default function About() {
             </div>
           </div>
           <div>
-            <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-4 font-display">In pursuit of better</h2>
+ <h2 className="ty-h1 ty-title ty-title-gradient mb-4 font-display">In pursuit of better</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
               At Al Ghurair, we have always been driven by our pursuit of better. As one of the largest diversified family businesses in the Middle East, we drive transformation across industries: food, mobility, infrastructure, and real estate.
             </p>
@@ -130,7 +130,7 @@ export default function About() {
       <section className="container-x py-20 w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div className="order-2 md:order-1">
-            <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-4 font-display">Cared</h2>
+ <h2 className="ty-h1 ty-title ty-title-gradient mb-4 font-display">Cared</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
               Cared has inherited the tradition and values built by the Al Ghurair family, so, we believe in enhancing the life of our employees, customers, and the community.
             </p>
@@ -158,7 +158,7 @@ export default function About() {
       <section className="bg-bg-surface py-20">
         <div className="container-x">
           <div className="max-w-[880px]">
-            <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-8 font-display">Why choose Cared?</h2>
+ <h2 className="ty-h1 ty-title ty-title-gradient mb-8 font-display">Why choose Cared?</h2>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               {WHY_POINTS.map((point) => (
                 <li key={point} className="flex items-start gap-3 bg-white rounded-[12px] border border-border-default p-5">
@@ -178,7 +178,7 @@ export default function About() {
       <section className="relative overflow-hidden bg-bg-brand py-20 text-center">
         <BrandShape />
         <div className="container-x">
-          <h2 className="ty-title text-4xl font-bold text-white mb-2 font-display">Still Not Sure What You Need?</h2>
+ <h2 className="ty-h1 ty-title text-white mb-2 font-display">Still Not Sure What You Need?</h2>
           <p className="text-white/85 text-lg mb-8 max-w-lg mx-auto">
             We&apos;re here to help with sales, finance, or service questions. Reach us in the way that&apos;s easiest for you.
           </p>

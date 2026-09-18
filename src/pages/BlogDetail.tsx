@@ -496,7 +496,7 @@ export default function BlogDetail() {
         {/* Related Articles */}
         <div className="bg-bg-surface py-16">
           <div className="container-x">
-            <h2 className="text-text-brand text-2xl font-extrabold mb-8">Related Articles</h2>
+ <h2 className="ty-h2 text-text-brand mb-8">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedPosts.map((related) => (
                 <Link
@@ -530,7 +530,7 @@ export default function BlogDetail() {
         <section className="relative overflow-hidden bg-bg-brand py-12 text-white text-center">
           <BrandShape />
           <div className="container-x">
-            <h2 className="text-3xl font-bold mb-2 font-display">Find Your Perfect Car</h2>
+ <h2 className="ty-h1 mb-2 font-display">Find Your Perfect Car</h2>
             <p className="text-white/80 mb-6">
               Browse our quality-checked inventory and drive away with confidence.
             </p>

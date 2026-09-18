@@ -112,7 +112,7 @@ export default function Blog() {
           {/* Featured Article */}
           {featuredPost && (
             <div className="mb-14">
-              <h2 className="ty-title ty-title-gradient text-2xl font-extrabold mb-6">Featured Article</h2>
+ <h2 className="ty-h2 ty-title ty-title-gradient mb-6">Featured Article</h2>
               <div className="bg-white rounded-[12px] shadow overflow-hidden flex flex-col md:flex-row">
                 <div className="md:w-[40%]">
                   <img
@@ -213,7 +213,7 @@ export default function Blog() {
         <section className="relative overflow-hidden bg-bg-brand py-12 text-white text-center">
           <BrandShape />
           <div className="container-x">
-            <h2 className="ty-title text-3xl font-bold mb-2">Looking for your next car?</h2>
+ <h2 className="ty-h1 ty-title mb-2">Looking for your next car?</h2>
             <p className="text-white/80 mb-6">
               Browse hundreds of quality-checked vehicles available across the UAE.
             </p>

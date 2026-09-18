@@ -84,7 +84,7 @@ export default function Offers() {
       {/* Current Offers */}
       <section className="container-x pb-16 w-full">
         <div className="mb-10">
-          <h2 className="text-3xl font-extrabold ty-title ty-title-gradient mb-2 font-display">Current Offers</h2>
+ <h2 className="ty-h1 ty-title ty-title-gradient mb-2 font-display">Current Offers</h2>
           <p className="text-text-secondary">Take advantage of these deals before they expire</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -122,7 +122,7 @@ export default function Offers() {
       {/* Finance Section */}
       <section className="bg-bg-surface py-16">
         <div className="container-x">
-          <h2 className="text-4xl font-extrabold ty-title ty-title-gradient mb-4 flex items-center gap-2 font-display">
+ <h2 className="ty-h1 ty-title ty-title-gradient mb-4 flex items-center gap-2 font-display">
             Finance from
             <span className="inline-flex items-center gap-1.5">
               <DirhamSymbol size={26} />

@@ -106,7 +106,7 @@ export default function Account() {
           <div className="flex-1 bg-white rounded-[16px] p-6 md:p-8">
             {activeTab === "profile" && (
               <form onSubmit={handleProfileSave} className="max-w-[420px] flex flex-col gap-4">
-                <h2 className="ty-title ty-title-gradient text-xl font-extrabold mb-2">Profile Settings</h2>
+ <h2 className="ty-h2 ty-title ty-title-gradient mb-2">Profile Settings</h2>
                 <div>
                   <label className={LABEL_CLASS}>Full Name</label>
                   <input className={FIELD_CLASS} value={name} onChange={(e) => setName(e.target.value)} />
@@ -124,7 +124,7 @@ export default function Account() {
 
             {activeTab === "password" && (
               <form onSubmit={handlePasswordSave} className="max-w-[420px] flex flex-col gap-4">
-                <h2 className="ty-title ty-title-gradient text-xl font-extrabold mb-2">Change Password</h2>
+ <h2 className="ty-h2 ty-title ty-title-gradient mb-2">Change Password</h2>
                 <div>
                   <label className={LABEL_CLASS}>Current Password</label>
                   <input type="password" className={FIELD_CLASS} value={currentPw} onChange={(e) => setCurrentPw(e.target.value)} />
@@ -147,7 +147,7 @@ export default function Account() {
 
             {activeTab === "favorites" && (
               <div>
-                <h2 className="ty-title ty-title-gradient text-xl font-extrabold mb-6">Saved Cars</h2>
+ <h2 className="ty-h2 ty-title ty-title-gradient mb-6">Saved Cars</h2>
                 {favoriteCars.length === 0 ? (
                   <p className="text-text-secondary">You haven&apos;t saved any cars yet. Tap the heart icon on any car to save it here.</p>
                 ) : (
