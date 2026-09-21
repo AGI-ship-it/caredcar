@@ -159,7 +159,7 @@ export default function About() {
       <section className="bg-white py-10 lg:py-24">
         <div className="relative bg-bg-inverse">
           {/* Shape bleeds past the band top and bottom; only its page-edge side is cropped so the arrow tip stays whole */}
-          <div aria-hidden="true" className="pointer-events-none absolute start-0 top-[-10%] hidden h-[120%] w-[42%] overflow-hidden lg:block">
+          <div aria-hidden="true" className="pointer-events-none absolute start-0 top-[-10%] hidden h-[120%] aspect-[562/537] max-w-[42%] overflow-hidden lg:block">
             <img
               src={imgWhyShape}
               alt=""
