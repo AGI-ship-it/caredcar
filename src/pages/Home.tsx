@@ -9,7 +9,6 @@ import { cars } from "../data/cars";
 import { useLanguage } from "../lib/language";
 import SmartImage from "../components/SmartImage";
 import FavoriteButton from "../components/FavoriteButton";
-import BroomIcon from "../components/BroomIcon";
 import SpecIcon, { inferSpecKind } from "../components/SpecIcon";
 
 const toOpts = (arr: string[]) => arr.map((v) => ({ value: v, label: v }));
@@ -214,7 +213,6 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
     : [];
   const priceOptions: Option[] = PRICE_RANGES.map((r) => ({ value: r.value, label: r.label, count: matchCars({ ...buy, price: r.value }).length }));
   const mileageOptions: Option[] = MILEAGE_CAPS.map((m) => ({ value: m.value, label: m.label, count: matchCars({ ...buy, mileage: m.value }).length }));
-  const hasFilters = Boolean(buy.make || buy.model || buy.price || buy.mileage);
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -364,18 +362,6 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
             ))}
           </div>
         <form onSubmit={submit} className="hero-search relative w-full rounded-[20px] p-[20px] sm:p-[36px] flex flex-col gap-[14px] sm:gap-[16px]">
-            {activeTab === "buy" && hasFilters && (
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => setBuy({ make: "", model: "", price: "", mileage: "" })}
-                  className="text-white/80 text-sm font-medium underline-offset-4 hover:text-white hover:underline"
-                >
-                  <BroomIcon size={15} />
-                  Clear filters
-                </button>
-              </div>
-            )}
 
           {/* Row 2: fields + action */}
           <div className="flex flex-col lg:flex-row lg:items-end gap-[10px] sm:gap-[12px]">
