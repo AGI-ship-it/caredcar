@@ -18,21 +18,22 @@ export default function Offers() {
 
       {/* Featured Banner */}
       <section className="container-x py-12 w-full">
-        <div className="relative overflow-hidden rounded-[24px] bg-bg-inverse px-8 py-12 md:px-14 md:py-16">
+        <div className="relative overflow-hidden rounded-[24px] bg-bg-inverse px-8 py-8 md:px-12 md:py-10">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgba(0,99,255,0.35),transparent_55%)] rtl:-scale-x-100" />
           <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r rtl:bg-gradient-to-l from-bg-brand to-bg-accent" />
           <BrandShape variant="split" />
-          <div className="relative max-w-[560px]">
-            <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.22em] text-text-accent">
-              <span aria-hidden="true" className="breathe-dot size-1.5 rounded-full bg-bg-accent" />
-              LIMITED TIME
-            </span>
-            <h2 className="ty-title mt-5 text-4xl md:text-6xl font-bold leading-[1.05] text-white font-display">0% Finance Available</h2>
-            <span aria-hidden="true" className="mt-6 block h-px w-12 bg-white/25" />
-            <p className="mt-6 text-lg text-white/70">On selected vehicles for 60 months</p>
+          <div className="relative flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+            <div>
+              <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.22em] text-text-accent">
+                <span aria-hidden="true" className="breathe-dot size-1.5 rounded-full bg-bg-accent" />
+                LIMITED TIME
+              </span>
+              <h2 className="ty-title mt-3 text-3xl md:text-5xl font-bold leading-tight text-white font-display lg:whitespace-nowrap">0% Finance Available</h2>
+              <p className="mt-2 text-lg text-white/70">On selected vehicles for 60 months</p>
+            </div>
             <Link
               to="/finance#emi-calculator"
-              className="group mt-9 inline-flex items-center gap-3 rounded-full bg-white ps-7 pe-2 py-2 text-sm font-bold text-text-brand transition-colors hover:bg-bg-brand-soft"
+              className="group self-start md:self-auto shrink-0 inline-flex items-center gap-3 rounded-full bg-white ps-7 pe-2 py-2 text-sm font-bold text-text-brand transition-colors hover:bg-bg-brand-soft"
             >
               Apply Now
               <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-full bg-bg-brand text-white transition-transform duration-300 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
