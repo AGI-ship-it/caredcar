@@ -639,7 +639,7 @@ export default function CarDetail() {
  <h2 className="ty-h1 text-text-brand mb-6">
                 Similar Vehicles
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div data-parallax-cards className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {similarCars.map((c) => (
                   <CarCard key={c.id} car={c} />
                 ))}

@@ -44,7 +44,7 @@ export default function Offers() {
  <h2 className="ty-h1 ty-title ty-title-gradient mb-2 font-display">Current Offers</h2>
           <p className="text-text-secondary">Take advantage of these deals before they expire</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div data-parallax-cards className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {OFFERS.map((offer) => (
             <OfferCard key={offer.id} offer={offer} />
           ))}

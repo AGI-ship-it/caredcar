@@ -526,7 +526,7 @@ function BestSellersSection({ onNavigate }: { onNavigate: (path: string) => void
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
+        <div data-parallax-cards className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
           {visible.map((car) => (
             <BestSellerCard key={car.id} car={car} onClick={() => onNavigate(`/car/${car.id}`)} />
           ))}
@@ -611,7 +611,7 @@ function WhyUsSection() {
           <span className="ty-title ty-h1">Why Us?</span>
           <span className="text-lg font-normal leading-normal">A trusted car-buying experience, built around your peace of mind.</span>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[16px] sm:gap-[24px] w-full">
+        <div data-parallax-cards className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[16px] sm:gap-[24px] w-full">
           {features.map((f) => (
             <div
               key={f.title}
@@ -1042,7 +1042,7 @@ function CarTipsSection({ onNavigate }: { onNavigate: (path: string) => void }) 
     <section className="py-[56px] sm:py-[96px] bg-white">
       <div className="container-x">
         {/* 3 × 2 grid: the title sits in the top-middle cell and stretches to the row height */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[24px] lg:gap-x-[32px] gap-y-[32px] lg:gap-y-[40px]">
+        <div data-parallax-cards className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[24px] lg:gap-x-[32px] gap-y-[32px] lg:gap-y-[40px]">
           <BlogCard post={BLOG_POSTS[0]} onClick={open(0)} />
 
           <div className="order-first md:col-span-2 lg:col-span-1 lg:order-none flex flex-col gap-[24px] items-center justify-center text-center px-[16px] pb-[8px] lg:pb-0">

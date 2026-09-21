@@ -42,7 +42,7 @@ export default function Sell() {
           <div className="mb-10">
  <h2 className="ty-h1 ty-title ty-title-gradient font-display">A Simpler Way to Sell</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div data-parallax-cards className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {WHY_SELL.map((item, i) => (
               <div key={item.title} className="text-center">
                 <div className="w-14 h-14 bg-bg-brand rounded-full flex items-center justify-center mx-auto mb-5 text-white font-bold text-lg">

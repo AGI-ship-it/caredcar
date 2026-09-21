@@ -161,7 +161,7 @@ export default function Finance() {
       <section className="container-x py-16 w-full">
         <div className="mb-10">
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div data-parallax-cards className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {BENEFITS.map((b) => (
             <div key={b.title} className="text-center">
               <div className="w-16 h-16 bg-bg-brand-soft rounded-full flex items-center justify-center mx-auto mb-5">

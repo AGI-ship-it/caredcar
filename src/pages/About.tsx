@@ -86,7 +86,7 @@ export default function About() {
             <span className="ty-title ty-title-gradient ty-h1">Our Promise</span>
             <span className="text-lg font-normal leading-normal text-text-secondary">Every car is checked, covered and supported across the UAE.</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] w-full">
+          <div data-parallax-cards className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] w-full">
             {FEATURES.map((f, i) => (
               <div
                 key={f.title}
