@@ -337,8 +337,8 @@ export default function Finance() {
       </section>
 
       {/* Application CTA */}
-      <section className="relative overflow-hidden bg-bg-brand py-20">
-        <BrandShape />
+      <section className="relative overflow-hidden bg-bg-inverse-raised border-y border-white/10 py-16">
+        <BrandShape variant="split" />
         <div className="max-w-[640px] mx-auto px-5 text-center">
  <h2 className="ty-h1 ty-title text-white mb-2 font-display">Ready to Apply?</h2>
           <p className="text-white/85 mb-8">Leave your details and our finance team will call you back within 2 hours.</p>

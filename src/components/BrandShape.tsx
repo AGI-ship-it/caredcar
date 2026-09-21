@@ -8,18 +8,19 @@ const FADE = "linear-gradient(to left, #000 55%, transparent 100%)";
 
 export default function BrandShape({ variant = "corner" }: { variant?: "corner" | "split" }) {
   if (variant === "split") {
-    // Large pair filling the right half of a split band, the back mark running off the edge
+    // Navy-band version of the reference pattern: blue front mark, green back mark running off the edge
     return (
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 end-0 hidden md:block w-1/2 overflow-hidden select-none rtl:-scale-x-100"
+        className="pointer-events-none absolute inset-y-0 end-0 hidden lg:block w-[40%] overflow-hidden select-none rtl:-scale-x-100"
+        style={{ maskImage: FADE, WebkitMaskImage: FADE }}
       >
         <svg
           viewBox="0 0 870 661"
           fill="none"
-          className="absolute top-1/2 end-0 h-[72%] w-auto -translate-y-1/2 translate-x-[9%]"
+          className="absolute top-1/2 end-0 h-[64%] w-auto -translate-y-1/2 translate-x-[9%]"
         >
-          <path d={MARK} stroke="white" strokeOpacity={0.55} strokeWidth={1.5} vectorEffect="non-scaling-stroke" />
+          <path d={MARK} stroke="var(--color-bg-brand)" strokeWidth={1.5} vectorEffect="non-scaling-stroke" />
           <path d={MARK} transform="translate(310 0)" stroke="var(--color-bg-accent)" strokeWidth={1.5} vectorEffect="non-scaling-stroke" />
         </svg>
       </div>

@@ -183,7 +183,8 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-bg-brand py-20 md:py-28 text-center md:text-start">
+      {/* Raised navy so the band reads apart from the navy section above and the footer below */}
+      <section className="relative overflow-hidden bg-bg-inverse-raised border-y border-white/10 py-12 md:py-16 text-center md:text-start">
         <BrandShape variant="split" />
         <div className="container-x relative">
           <div className="md:w-1/2 md:pe-10">
