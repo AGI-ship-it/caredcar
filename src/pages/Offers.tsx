@@ -5,6 +5,7 @@ import DirhamSymbol from "../components/DirhamSymbol";
 import imgOffersHero from "@/imports/offers-hero.jpg";
 import PageHero from "../components/PageHero";
 import OfferCard from "../components/OfferCard";
+import BrandShape from "../components/BrandShape";
 import { OFFERS } from "../data/offers";
 
 export default function Offers() {
@@ -17,22 +18,28 @@ export default function Offers() {
 
       {/* Featured Banner */}
       <section className="container-x py-12 w-full">
-        <div className="bg-gradient-to-r from-bg-brand to-bg-brand-hover rounded-[12px] p-10 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4" />
-          <div className="absolute bottom-0 left-1/2 w-48 h-48 bg-white/5 rounded-full translate-y-1/2" />
-          <div className="relative z-10">
-            <div className="inline-block bg-bg-accent text-text-on-accent text-xs font-bold px-3 py-1 rounded-full mb-4">
+        <div className="relative overflow-hidden rounded-[24px] bg-bg-inverse px-8 py-12 md:px-14 md:py-16">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgba(0,99,255,0.35),transparent_55%)] rtl:-scale-x-100" />
+          <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r rtl:bg-gradient-to-l from-bg-brand to-bg-accent" />
+          <BrandShape variant="split" />
+          <div className="relative max-w-[560px]">
+            <span className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.22em] text-text-accent">
+              <span aria-hidden="true" className="breathe-dot size-1.5 rounded-full bg-bg-accent" />
               LIMITED TIME
-            </div>
-            <h2 className="ty-title text-4xl md:text-5xl font-bold text-white mb-2 font-display">0% Finance Available</h2>
-            <p className="text-blue-200 text-lg">On selected vehicles for 60 months</p>
-          </div>
-          <div className="relative z-10 flex-shrink-0">
+            </span>
+            <h2 className="ty-title mt-5 text-4xl md:text-6xl font-bold leading-[1.05] text-white font-display">0% Finance Available</h2>
+            <span aria-hidden="true" className="mt-6 block h-px w-12 bg-white/25" />
+            <p className="mt-6 text-lg text-white/70">On selected vehicles for 60 months</p>
             <Link
               to="/finance#emi-calculator"
-              className="inline-block bg-white text-text-brand font-bold px-8 py-4 rounded-full text-sm hover:bg-blue-50 transition shadow-lg"
+              className="group mt-9 inline-flex items-center gap-3 rounded-full bg-white ps-7 pe-2 py-2 text-sm font-bold text-text-brand transition-colors hover:bg-bg-brand-soft"
             >
               Apply Now
+              <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-full bg-bg-brand text-white transition-transform duration-300 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className="size-4 rtl:-scale-x-100">
+                  <path d="M5 12h13M12.5 6l6 6-6 6" />
+                </svg>
+              </span>
             </Link>
           </div>
         </div>
