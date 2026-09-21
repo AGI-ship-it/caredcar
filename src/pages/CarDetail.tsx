@@ -369,8 +369,7 @@ export default function CarDetail() {
                     step={1000}
                     value={clampedDown}
                     onChange={(e) => setDownPayment(Number(e.target.value))}
-                    className="calc-range w-full"
-                    style={{ "--fill": `${(clampedDown / car.price) * 100}%` } as React.CSSProperties}
+                    className="w-full accent-bg-brand"
                   />
                 </div>
 
@@ -408,8 +407,7 @@ export default function CarDetail() {
                     step={0.1}
                     value={annualRate}
                     onChange={(e) => setAnnualRate(Number(e.target.value))}
-                    className="calc-range w-full"
-                    style={{ "--fill": `${((annualRate - 1) / 11) * 100}%` } as React.CSSProperties}
+                    className="w-full accent-bg-brand"
                   />
                 </div>
               </div>

@@ -587,26 +587,26 @@
 }
 .calc-range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 40px;
+  width: 20px;
   height: 20px;
-  border: 0;
-  background: var(--car-end) center / contain no-repeat;
-  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.4));
-  cursor: grab;
-  transition: transform 0.15s ease, filter 0.15s ease;
+  border-radius: 9999px;
+  background: #fff;
+  border: 4px solid var(--color-border-focus);
+  box-shadow: 0 0 0 6px rgba(0, 99, 255, 0.18), 0 4px 10px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 .calc-range::-moz-range-thumb {
-  width: 40px;
-  height: 20px;
-  border: 0;
-  border-radius: 0;
-  background: var(--car-end) center / contain no-repeat;
-  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.4));
-  cursor: grab;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 4px solid var(--color-border-focus);
+  box-shadow: 0 0 0 6px rgba(0, 99, 255, 0.18), 0 4px 10px rgba(0, 0, 0, 0.35);
 }
-.calc-range:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.08); }
+.calc-range:hover::-webkit-slider-thumb,
 .calc-range:focus-visible::-webkit-slider-thumb {
-  filter: drop-shadow(0 0 5px rgba(102, 161, 255, 0.9));
+  box-shadow: 0 0 0 9px rgba(0, 99, 255, 0.25), 0 4px 10px rgba(0, 0, 0, 0.35);
+  transform: scale(1.05);
 }
 .donut-seg {
   transition: stroke-dasharray 0.45s cubic-bezier(0.3, 0.8, 0.2, 1), stroke-dashoffset 0.45s cubic-bezier(0.3, 0.8, 0.2, 1), stroke-width 0.2s ease, opacity 0.2s ease;
@@ -627,41 +627,29 @@
   -webkit-appearance: none;
   appearance: none;
 }
-/* Slider thumbs are little green cars seen from the side. Range pairs drive outward; single sliders face the way the value grows */
-:root {
-  --car-end: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 48 24%22%3E%3Cg%3E %3Cpath d=%22M2.5 15.8C2.5 13.9 3.4 12.8 5.2 12.3L14 10.6C17.5 7.9 21 6.6 25 6.5C29.5 6.4 33 7.6 36.5 10.3L43.5 11.4C45.2 11.7 46 12.8 46 14.4V16.2C46 17.5 45 18.5 43.7 18.5H5C3.6 18.5 2.5 17.4 2.5 16.2Z%22 fill=%22%2300F090%22 stroke=%22%23fff%22 stroke-width=%221.2%22 stroke-linejoin=%22round%22/%3E %3Cpath d=%22M16.5 10.6C19.5 8.5 22 7.7 25 7.6C28.8 7.5 31.6 8.4 34.2 10.3Z%22 fill=%22%230B1B45%22 fill-opacity=%220.85%22/%3E %3Cpath d=%22M26 7.6V10.4%22 stroke=%22%2300F090%22 stroke-width=%220.9%22/%3E %3Cpath d=%22M7.5 14.6H40.5%22 stroke=%22%2300C878%22 stroke-width=%220.6%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M40.6 12.3L44.4 13%22 stroke=%22%23FFE38A%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M4 13.6L7 13%22 stroke=%22%23FF4D5E%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%224.4%22 fill=%22%230B1B45%22 stroke=%22%23fff%22 stroke-width=%221.1%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%222.4%22 fill=%22%23CCE0FF%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%220.8%22 fill=%22%230B1B45%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%224.4%22 fill=%22%230B1B45%22 stroke=%22%23fff%22 stroke-width=%221.1%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%222.4%22 fill=%22%23CCE0FF%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%220.8%22 fill=%22%230B1B45%22/%3E %3C/g%3E%3C/svg%3E");
-  --car-start: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 48 24%22%3E%3Cg transform=%22translate%2848 0%29 scale%28-1 1%29%22%3E %3Cpath d=%22M2.5 15.8C2.5 13.9 3.4 12.8 5.2 12.3L14 10.6C17.5 7.9 21 6.6 25 6.5C29.5 6.4 33 7.6 36.5 10.3L43.5 11.4C45.2 11.7 46 12.8 46 14.4V16.2C46 17.5 45 18.5 43.7 18.5H5C3.6 18.5 2.5 17.4 2.5 16.2Z%22 fill=%22%2300F090%22 stroke=%22%23fff%22 stroke-width=%221.2%22 stroke-linejoin=%22round%22/%3E %3Cpath d=%22M16.5 10.6C19.5 8.5 22 7.7 25 7.6C28.8 7.5 31.6 8.4 34.2 10.3Z%22 fill=%22%230B1B45%22 fill-opacity=%220.85%22/%3E %3Cpath d=%22M26 7.6V10.4%22 stroke=%22%2300F090%22 stroke-width=%220.9%22/%3E %3Cpath d=%22M7.5 14.6H40.5%22 stroke=%22%2300C878%22 stroke-width=%220.6%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M40.6 12.3L44.4 13%22 stroke=%22%23FFE38A%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M4 13.6L7 13%22 stroke=%22%23FF4D5E%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%224.4%22 fill=%22%230B1B45%22 stroke=%22%23fff%22 stroke-width=%221.1%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%222.4%22 fill=%22%23CCE0FF%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%220.8%22 fill=%22%230B1B45%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%224.4%22 fill=%22%230B1B45%22 stroke=%22%23fff%22 stroke-width=%221.1%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%222.4%22 fill=%22%23CCE0FF%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%220.8%22 fill=%22%230B1B45%22/%3E %3C/g%3E%3C/svg%3E");
-}
-[dir="rtl"] {
-  --car-end: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 48 24%22%3E%3Cg transform=%22translate%2848 0%29 scale%28-1 1%29%22%3E %3Cpath d=%22M2.5 15.8C2.5 13.9 3.4 12.8 5.2 12.3L14 10.6C17.5 7.9 21 6.6 25 6.5C29.5 6.4 33 7.6 36.5 10.3L43.5 11.4C45.2 11.7 46 12.8 46 14.4V16.2C46 17.5 45 18.5 43.7 18.5H5C3.6 18.5 2.5 17.4 2.5 16.2Z%22 fill=%22%2300F090%22 stroke=%22%23fff%22 stroke-width=%221.2%22 stroke-linejoin=%22round%22/%3E %3Cpath d=%22M16.5 10.6C19.5 8.5 22 7.7 25 7.6C28.8 7.5 31.6 8.4 34.2 10.3Z%22 fill=%22%230B1B45%22 fill-opacity=%220.85%22/%3E %3Cpath d=%22M26 7.6V10.4%22 stroke=%22%2300F090%22 stroke-width=%220.9%22/%3E %3Cpath d=%22M7.5 14.6H40.5%22 stroke=%22%2300C878%22 stroke-width=%220.6%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M40.6 12.3L44.4 13%22 stroke=%22%23FFE38A%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M4 13.6L7 13%22 stroke=%22%23FF4D5E%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%224.4%22 fill=%22%230B1B45%22 stroke=%22%23fff%22 stroke-width=%221.1%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%222.4%22 fill=%22%23CCE0FF%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%220.8%22 fill=%22%230B1B45%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%224.4%22 fill=%22%230B1B45%22 stroke=%22%23fff%22 stroke-width=%221.1%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%222.4%22 fill=%22%23CCE0FF%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%220.8%22 fill=%22%230B1B45%22/%3E %3C/g%3E%3C/svg%3E");
-  --car-start: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 48 24%22%3E%3Cg%3E %3Cpath d=%22M2.5 15.8C2.5 13.9 3.4 12.8 5.2 12.3L14 10.6C17.5 7.9 21 6.6 25 6.5C29.5 6.4 33 7.6 36.5 10.3L43.5 11.4C45.2 11.7 46 12.8 46 14.4V16.2C46 17.5 45 18.5 43.7 18.5H5C3.6 18.5 2.5 17.4 2.5 16.2Z%22 fill=%22%2300F090%22 stroke=%22%23fff%22 stroke-width=%221.2%22 stroke-linejoin=%22round%22/%3E %3Cpath d=%22M16.5 10.6C19.5 8.5 22 7.7 25 7.6C28.8 7.5 31.6 8.4 34.2 10.3Z%22 fill=%22%230B1B45%22 fill-opacity=%220.85%22/%3E %3Cpath d=%22M26 7.6V10.4%22 stroke=%22%2300F090%22 stroke-width=%220.9%22/%3E %3Cpath d=%22M7.5 14.6H40.5%22 stroke=%22%2300C878%22 stroke-width=%220.6%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M40.6 12.3L44.4 13%22 stroke=%22%23FFE38A%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M4 13.6L7 13%22 stroke=%22%23FF4D5E%22 stroke-width=%221.2%22 stroke-linecap=%22round%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%224.4%22 fill=%22%230B1B45%22 stroke=%22%23fff%22 stroke-width=%221.1%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%222.4%22 fill=%22%23CCE0FF%22/%3E %3Ccircle cx=%2212%22 cy=%2218.4%22 r=%220.8%22 fill=%22%230B1B45%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%224.4%22 fill=%22%230B1B45%22 stroke=%22%23fff%22 stroke-width=%221.1%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%222.4%22 fill=%22%23CCE0FF%22/%3E %3Ccircle cx=%2236.5%22 cy=%2218.4%22 r=%220.8%22 fill=%22%230B1B45%22/%3E %3C/g%3E%3C/svg%3E");
-}
 .range-dual input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   pointer-events: auto;
-  width: 40px;
+  width: 20px;
   height: 20px;
-  border: 0;
-  background: var(--car-end) center / contain no-repeat;
-  filter: drop-shadow(0 2px 3px rgba(0, 40, 120, 0.3));
+  border-radius: 9999px;
+  background: #fff;
+  border: 2px solid var(--color-border-focus);
+  box-shadow: 0 2px 6px rgba(0, 40, 120, 0.25);
   cursor: grab;
-  transition: transform 0.15s ease;
 }
 .range-dual input[type="range"]::-moz-range-thumb {
   pointer-events: auto;
-  width: 40px;
-  height: 20px;
-  border: 0;
-  border-radius: 0;
-  background: var(--car-end) center / contain no-repeat;
-  filter: drop-shadow(0 2px 3px rgba(0, 40, 120, 0.3));
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 2px solid var(--color-border-focus);
+  box-shadow: 0 2px 6px rgba(0, 40, 120, 0.25);
   cursor: grab;
 }
-.range-dual input[type="range"]:first-of-type::-webkit-slider-thumb { background-image: var(--car-start); }
-.range-dual input[type="range"]:first-of-type::-moz-range-thumb { background-image: var(--car-start); }
-.range-dual input[type="range"]:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.08); }
 .range-dual input[type="range"]:focus-visible::-webkit-slider-thumb {
-  filter: drop-shadow(0 0 4px rgba(0, 99, 255, 0.7));
+  box-shadow: 0 0 0 4px rgba(0, 99, 255, 0.25);
 }
 .range-dual input[type="range"]::-webkit-slider-runnable-track,
 .range-dual input[type="range"]::-moz-range-track {
