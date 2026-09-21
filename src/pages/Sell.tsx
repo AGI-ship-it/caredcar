@@ -39,8 +39,8 @@ export default function Sell() {
       {/* Why sell with us */}
       <section className="py-16 bg-white">
         <div className="container-x">
-          <div className="mb-10">
- <h2 className="ty-h1 ty-title ty-title-gradient font-display">A Simpler Way to Sell</h2>
+          <div className="mb-12 text-center">
+            <h2 className="ty-h1 ty-title ty-title-gradient font-display">A Simpler Way to Sell</h2>
           </div>
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
             {/* Dashed path linking the step circles, first to last */}
