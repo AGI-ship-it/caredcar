@@ -36,7 +36,7 @@ export default function PageHero({ title, subtitle, image, imagePosition = "cent
         <div>
           {/* Titles stay on one line from lg up; below that they wrap as normal */}
           <h1
-            className={`ty-title normal-case text-4xl md:text-5xl font-bold leading-tight font-display ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
+            className={`ty-title normal-case! text-4xl md:text-5xl font-bold leading-tight font-display ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
             style={image ? { textShadow: "0 2px 16px rgba(8, 18, 45, 0.55)" } : undefined}
           >
             {title}
