@@ -175,7 +175,7 @@ export default function About() {
                 </li>
               ))}
             </ul>
-            <p className="mt-10 lg:mt-16 rounded-[16px] border border-white/10 bg-bg-brand/20 px-7 py-6 text-white text-lg leading-relaxed">
+            <p className="mt-4 md:mt-5 rounded-[16px] border border-white/10 bg-bg-brand/20 px-7 py-6 text-white text-lg leading-relaxed">
               That&apos;s why Cared understands your needs, and we&apos;ll do the worrying for you, so you can feel confident and enjoy owning a Cared car.
             </p>
           </div>
