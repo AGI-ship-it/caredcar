@@ -51,13 +51,7 @@ export default function Sell() {
             />
             {WHY_SELL.map((item, i) => (
               <div key={item.title} className="relative text-center">
-                <div
-                  className={`w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-8 font-bold text-lg ring-[6px] ${
-                    i === WHY_SELL.length - 1
-                      ? "bg-bg-accent text-text-on-accent ring-bg-accent-soft shadow-[0_8px_20px_-8px_rgba(0,240,144,0.7)]"
-                      : "bg-bg-brand text-white ring-bg-brand-soft shadow-[0_8px_20px_-8px_rgba(0,99,255,0.55)]"
-                  }`}
-                >
+                <div className="w-14 h-14 bg-bg-brand rounded-full flex items-center justify-center mx-auto mb-8 text-white font-bold text-lg ring-[6px] ring-bg-brand-soft shadow-[0_8px_20px_-8px_rgba(0,99,255,0.55)]">
                   {i + 1}
                 </div>
                 <h3 className="text-xl font-bold text-text-brand mb-3">{item.title}</h3>

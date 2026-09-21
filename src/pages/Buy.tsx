@@ -247,7 +247,7 @@ function RangeSlider({
       )}
       <div className="range-dual relative h-[24px]">
         <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[4px] rounded-full bg-bg-subtle" />
-        <div className="absolute top-1/2 -translate-y-1/2 h-[4px] rounded-full bg-bg-brand" style={{ left: `${pct(low)}%`, right: `${100 - pct(high)}%` }} />
+        <div className="absolute top-1/2 -translate-y-1/2 h-[4px] rounded-full bg-bg-brand" style={{ left: `calc(${pct(low)} * (100% - 36px) / 100 + 18px)`, right: `calc(${100 - pct(high)} * (100% - 36px) / 100 + 18px)` }} />
         <input type="range" aria-label="Minimum" min={min} max={max} step={step} value={low}
           onChange={(e) => onChange(Math.min(Number(e.target.value), high - step), high)} />
         <input type="range" aria-label="Maximum" min={min} max={max} step={step} value={high}
