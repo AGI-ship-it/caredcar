@@ -12,6 +12,14 @@ export default function SearchResults() {
   const q = (searchParams.get("q") || "").toLowerCase().trim();
   const [sort, setSort] = useState("");
   const [visibleCount, setVisibleCount] = useState(9);
+  const [loadingMore, setLoadingMore] = useState(false);
+  function loadMore() {
+    setLoadingMore(true);
+    window.setTimeout(() => {
+      setVisibleCount((v) => v + 9);
+      setLoadingMore(false);
+    }, 600);
+  }
 
   const filtered = useMemo(() => {
     let result = q
@@ -102,10 +110,20 @@ export default function SearchResults() {
               {visibleCount < filtered.length && (
                 <div className="flex justify-center mt-10">
                   <button
-                    onClick={() => setVisibleCount((v) => v + 9)}
-                    className="bg-bg-brand text-white px-8 py-3 rounded-full font-semibold text-sm hover:bg-bg-brand-hover transition-colors"
+                    type="button"
+                    onClick={loadMore}
+                    disabled={loadingMore}
+                    aria-busy={loadingMore}
+                    className="inline-flex items-center gap-2 bg-bg-brand text-white px-8 py-3 rounded-full font-semibold text-sm hover:bg-bg-brand-hover disabled:cursor-wait transition-colors"
                   >
-                    Load More ({filtered.length - visibleCount} remaining)
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className={`size-[18px] ${loadingMore ? "animate-spin" : ""}`}>
+                      {loadingMore ? (
+                        <path d="M21 12a9 9 0 1 1-6.2-8.56" />
+                      ) : (
+                        <path d="M21 12a9 9 0 1 1-2.64-6.36M21 4v5h-5" />
+                      )}
+                    </svg>
+                    {loadingMore ? "Loading…" : <>Load More ({filtered.length - visibleCount} remaining)</>}
                   </button>
                 </div>
               )}

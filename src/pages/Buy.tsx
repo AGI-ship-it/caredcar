@@ -289,6 +289,15 @@ export default function Buy() {
   const [sort, setSort] = useState("year-desc");
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(9);
+  const [loadingMore, setLoadingMore] = useState(false);
+  // A short beat with the spinner so the new cards read as freshly loaded rather than popping in
+  function loadMore() {
+    setLoadingMore(true);
+    window.setTimeout(() => {
+      setVisibleCount((v) => v + 9);
+      setLoadingMore(false);
+    }, 600);
+  }
   const [compareIds, setCompareIds] = useState<(number | string)[]>([]);
 
   const compareCars = cars.filter((c) => compareIds.includes(c.id));
@@ -706,10 +715,19 @@ export default function Buy() {
                         {shown < filtered.length && (
                           <button
                             type="button"
-                            onClick={() => setVisibleCount((v) => v + 9)}
-                            className="mt-2 h-[48px] px-10 rounded-full bg-bg-brand text-white font-semibold hover:bg-bg-brand-hover transition-colors"
+                            onClick={loadMore}
+                            disabled={loadingMore}
+                            aria-busy={loadingMore}
+                            className="mt-2 h-[48px] px-10 inline-flex items-center gap-2.5 rounded-full bg-bg-brand text-white font-semibold hover:bg-bg-brand-hover disabled:cursor-wait transition-colors"
                           >
-                            Load More
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className={`size-[18px] ${loadingMore ? "animate-spin" : ""}`}>
+                              {loadingMore ? (
+                                <path d="M21 12a9 9 0 1 1-6.2-8.56" />
+                              ) : (
+                                <path d="M21 12a9 9 0 1 1-2.64-6.36M21 4v5h-5" />
+                              )}
+                            </svg>
+                            {loadingMore ? "Loading…" : "Load More"}
                           </button>
                         )}
                       </div>
