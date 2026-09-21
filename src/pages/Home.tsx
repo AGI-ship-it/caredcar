@@ -296,7 +296,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       {/* Hero text: centred between the floating nav and the car roofs */}
       <div className="relative xl:absolute xl:inset-x-0 xl:top-[calc(60px+17%)] xl:-translate-y-1/2 px-5 flex justify-center pointer-events-none">
       <div className="hero-parallax-fg hero-intro-text pointer-events-auto flex flex-col items-center gap-[20px] text-center">
-        <h1 data-no-translate className="relative isolate ty-display-xl text-text-brand">
+        <h1 data-no-translate className="relative isolate ty-display-xl normal-case text-text-brand">
           {/* Soft light halo so the brand blue stays legible on the sunset sky */}
           <span
             aria-hidden="true"
