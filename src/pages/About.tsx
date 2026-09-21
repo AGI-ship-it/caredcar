@@ -158,13 +158,14 @@ export default function About() {
       {/* Why choose Cared */}
       <section className="bg-white py-10 lg:py-24">
         <div className="relative bg-bg-inverse">
-          {/* Shape bleeds past the band top and bottom; cropping from the page edge keeps the arrow tip intact */}
-          <img
-            src={imgWhyShape}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute start-0 top-[-17%] hidden h-[134%] w-[42%] object-cover object-right lg:block rtl:-scale-x-100"
-          />
+          {/* Shape bleeds past the band top and bottom; only its page-edge side is cropped so the arrow tip stays whole */}
+          <div aria-hidden="true" className="pointer-events-none absolute start-0 top-[-10%] hidden h-[120%] w-[42%] overflow-hidden lg:block">
+            <img
+              src={imgWhyShape}
+              alt=""
+              className="absolute end-0 top-0 h-full w-auto max-w-none rtl:-scale-x-100"
+            />
+          </div>
           <div className="container-x relative py-16 lg:py-24">
             <div className="lg:ms-[45%] lg:max-w-[760px]">
               <h2 className="ty-h1 ty-title text-white mb-5 font-display">Why choose Cared?</h2>
