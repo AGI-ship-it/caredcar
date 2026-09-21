@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useAuth } from "../lib/auth";
 import SignInForm from "./SignInForm";
 
@@ -33,11 +34,16 @@ export default function AuthGateModal({
 
   const subtitle = carId ? "Sign in to save this car to your favorites." : "Sign in to see your saved cars.";
 
-  return (
+  // Portalled to <body> so a transformed ancestor (e.g. a hovered car card) can't trap the fixed overlay.
+  // React still bubbles portal clicks to that ancestor, so they are stopped at the backdrop.
+  return createPortal(
     <div
       className="fixed inset-0 z-[300] flex items-center justify-center p-4 overflow-y-auto"
       style={{ background: "rgba(0,0,51,0.6)" }}
-      onClick={onClose}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClose();
+      }}
     >
       <div
         role="dialog"
@@ -67,6 +73,7 @@ export default function AuthGateModal({
 
         <SignInForm onSignedIn={finish} saveLabel={Boolean(carId)} autoFocus onModeChange={setMode} />
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
