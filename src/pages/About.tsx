@@ -169,12 +169,15 @@ export default function About() {
           <div className="container-x relative py-16 lg:py-24">
             <div className="lg:ms-[45%] lg:max-w-[760px]">
               <h2 className="ty-h1 ty-title text-white mb-5 font-display">Why choose Cared?</h2>
-              <ul className="list-disc ps-9 text-white text-lg leading-[1.75]">
+              <ul className="flex flex-col gap-3 text-white text-lg leading-relaxed">
                 {WHY_POINTS.map((point) => (
-                  <li key={point}>{point}</li>
+                  <li key={point} className="flex items-start gap-3">
+                    <span aria-hidden="true" className="mt-[0.7em] size-1.5 shrink-0 rounded-full bg-white" />
+                    {point}
+                  </li>
                 ))}
               </ul>
-              <p className="text-white text-lg leading-[1.75]">
+              <p className="mt-6 text-white text-lg leading-relaxed">
                 That&apos;s why Cared understands your needs, and we&apos;ll do the worrying for you, so you can feel confident and enjoy owning a Cared car.
               </p>
             </div>
