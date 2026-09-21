@@ -14,7 +14,7 @@ export default function OfferDetail() {
       <div className="min-h-screen flex flex-col bg-white">
         <Header />
         <section className="container-x flex-1 py-24 text-center">
-          <h1 className="ty-h1 ty-title ty-title-gradient mb-4 font-display">Offer not found</h1>
+          <h1 className="ty-h1 ty-title normal-case ty-title-gradient mb-4 font-display">Offer not found</h1>
           <p className="text-text-secondary mb-8">This offer may have ended. Take a look at what's on now.</p>
           <Link to="/offers" className="inline-block bg-bg-brand text-white font-bold px-8 py-4 rounded-full hover:bg-bg-brand-hover transition">
             View All Offers

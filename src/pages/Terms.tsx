@@ -9,7 +9,7 @@ export default function Terms() {
 
       <main className="flex-1 bg-white pt-[156px] pb-16">
         <div className="max-w-3xl mx-auto">
-          <h1 className="ty-title ty-title-gradient font-extrabold text-4xl mb-2">Terms &amp; Conditions</h1>
+          <h1 className="ty-title normal-case ty-title-gradient font-extrabold text-4xl mb-2">Terms &amp; Conditions</h1>
           <p className="text-text-secondary mb-10">Last updated: January 2026</p>
 
           {/* 1. Introduction */}
