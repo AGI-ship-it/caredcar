@@ -5,7 +5,6 @@ import imgAboutHero from "@/imports/about-hero.jpg";
 import imgAboutPursuit from "@/imports/about-pursuit.jpg";
 import imgAboutCared from "@/imports/about-cared.jpg";
 import logoAlGhurairWhite from "@/imports/brand/al-ghurair-white.svg";
-import logoCaredWhite from "@/imports/brand/cared-white.svg";
 import imgWhyShape from "@/imports/brand/about-why-shape.svg";
 import PageHero from "../components/PageHero";
 import BrandShape from "../components/BrandShape";
@@ -152,12 +151,6 @@ export default function About() {
               alt="Cars on display in the Cared showroom"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            {/* Navy fade behind the logos so the white marks read against the bright showroom ceiling */}
-            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-3/5 bg-gradient-to-b from-bg-inverse/90 via-bg-inverse/45 to-transparent" />
-            <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-4 p-6 sm:p-8">
-              <img src={logoCaredWhite} alt="Cared — Just Good Cars" className="h-9 sm:h-11 w-auto" />
-              <img src={logoAlGhurairWhite} alt="by Al Ghurair" className="h-9 sm:h-11 w-auto" />
-            </div>
           </div>
         </div>
       </section>
