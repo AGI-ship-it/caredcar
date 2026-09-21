@@ -72,7 +72,7 @@ export default function Offers() {
           </div>
           <div className="relative z-10 flex-shrink-0">
             <Link
-              to="/finance"
+              to="/finance#emi-calculator"
               className="inline-block bg-white text-text-brand font-bold px-8 py-4 rounded-full text-sm hover:bg-blue-50 transition shadow-lg"
             >
               Apply Now
@@ -91,7 +91,7 @@ export default function Offers() {
           {OFFER_CARDS.map((offer) => (
             <Link
               key={offer.id}
-              to="/finance"
+              to="/finance#emi-calculator"
               className="group flex flex-col bg-white rounded-[12px] overflow-hidden cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[0px_18px_20px_rgba(28,41,88,0.12)]"
             >
               <div className="h-48 overflow-hidden shrink-0">
@@ -166,7 +166,7 @@ export default function Offers() {
             </div>
           </div>
           <Link
-            to="/finance"
+            to="/finance#emi-calculator"
             className="inline-block bg-bg-brand text-white font-bold px-8 py-4 rounded-full hover:bg-bg-brand-hover transition"
           >
             Try Full Calculator
