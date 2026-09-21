@@ -22,7 +22,8 @@ export default function PageHero({ title, subtitle, image, imagePosition = "cent
             src={image}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
+            data-parallax="0.12"
+            className="absolute inset-0 w-full h-full object-cover scale-[1.15]"
             style={{ objectPosition: imagePosition }}
           />
           {/* Navy fades in from the text side so the heading reads on any photo */}

@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollReveal from "./components/ScrollReveal";
+import Parallax from "./components/Parallax";
 import WhatsAppFab from "./components/WhatsAppFab";
 import { AuthProvider } from "./lib/auth";
 import { LanguageProvider } from "./lib/language";
@@ -28,6 +30,8 @@ export default function App() {
       <AuthProvider>
         <BrowserRouter basename={import.meta.env.BASE_URL}>
           <ScrollToTop />
+          <ScrollReveal />
+          <Parallax />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/buy" element={<Buy />} />

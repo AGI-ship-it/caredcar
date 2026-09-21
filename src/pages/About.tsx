@@ -87,18 +87,25 @@ export default function About() {
             <span className="text-lg font-normal leading-normal text-text-secondary">Every car is checked, covered and supported across the UAE.</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] w-full">
-            {FEATURES.map((f) => (
+            {FEATURES.map((f, i) => (
               <div
                 key={f.title}
-                className="group flex flex-col gap-[20px] items-start p-[28px] rounded-[20px] bg-white shadow-[0_2px_4px_rgba(28,41,88,0.04),0_18px_40px_-24px_rgba(28,41,88,0.18)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(28,41,88,0.05),0_26px_50px_-24px_rgba(28,41,88,0.24)]"
+                className="group relative flex flex-col p-[32px] rounded-[20px] bg-white ring-1 ring-border-default/70 overflow-hidden transition-[box-shadow,translate] duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_24px_48px_-28px_rgba(28,41,88,0.28)]"
               >
-                <div className="size-[56px] rounded-[18px] flex items-center justify-center text-text-brand bg-bg-brand-soft/70">
-                  <FeatureIcon type={f.icon} />
+                {/* Brand hairline that draws across the top on hover */}
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-[2px] origin-left rtl:origin-right scale-x-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-brand to-bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100"
+                />
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium tracking-[0.18em] text-text-disabled tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="size-[44px] rounded-full flex items-center justify-center text-text-brand ring-1 ring-bg-brand/15 bg-bg-brand-soft/50 transition-colors duration-300 group-hover:bg-bg-brand group-hover:text-white">
+                    <FeatureIcon type={f.icon} />
+                  </span>
                 </div>
-                <div className="flex flex-col gap-[6px] w-full">
-                  <span className="text-lg font-semibold leading-snug text-text-primary">{f.title}</span>
-                  <span className="text-[15px] font-normal leading-relaxed text-text-secondary">{f.desc}</span>
-                </div>
+                <span className="mt-[40px] font-display text-[26px] leading-tight text-text-primary">{f.title}</span>
+                <span className="mt-[16px] h-px w-[40px] bg-border-strong/40 transition-[width] duration-500 ease-out group-hover:w-[72px]" />
+                <span className="mt-[16px] text-[15px] font-normal leading-relaxed text-text-secondary">{f.desc}</span>
               </div>
             ))}
           </div>
@@ -112,7 +119,8 @@ export default function About() {
             <img
               src={imgAboutPursuit}
               alt="A happy customer giving a thumbs up from the driver's seat of his new car"
-              className="absolute inset-0 w-full h-full object-cover object-[62%_center]"
+              data-parallax="0.06"
+              className="absolute inset-0 w-full h-full object-cover object-[62%_center] scale-[1.2]"
             />
           </div>
           <div>
@@ -144,7 +152,8 @@ export default function About() {
             <img
               src={imgAboutCared}
               alt="Cars on display in the Cared showroom"
-              className="absolute inset-0 w-full h-full object-cover"
+              data-parallax="0.06"
+              className="absolute inset-0 w-full h-full object-cover scale-[1.2]"
             />
           </div>
         </div>
