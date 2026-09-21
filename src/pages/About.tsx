@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import imgAboutHero from "@/imports/about-hero.jpg";
 import imgAboutPursuit from "@/imports/about-pursuit.jpg";
 import imgAboutCared from "@/imports/about-cared.jpg";
+import logoAlGhurair from "@/imports/brand/al-ghurair-logo.svg";
 import imgWhyShape from "@/imports/brand/about-why-shape.svg";
 import PageHero from "../components/PageHero";
 import BrandShape from "../components/BrandShape";
@@ -115,7 +116,8 @@ export default function About() {
             />
           </div>
           <div>
- <h2 className="ty-h1 ty-title ty-title-gradient mb-4 font-display">In pursuit of better</h2>
+            <img src={logoAlGhurair} alt="Al Ghurair" className="h-10 sm:h-12 w-auto mb-5" />
+            <h2 className="ty-h1 ty-title ty-title-gradient mb-4 font-display">In pursuit of better</h2>
             <p className="text-text-secondary leading-relaxed mb-4">
               At Al Ghurair, we have always been driven by our pursuit of better. As one of the largest diversified family businesses in the Middle East, we drive transformation across industries: food, mobility, infrastructure, and real estate.
             </p>
