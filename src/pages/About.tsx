@@ -6,6 +6,7 @@ import imgAboutPursuit from "@/imports/about-pursuit.jpg";
 import imgAboutCared from "@/imports/about-cared.jpg";
 import logoAlGhurairWhite from "@/imports/brand/al-ghurair-white.svg";
 import logoCaredWhite from "@/imports/brand/cared-white.svg";
+import imgWhyShape from "@/imports/brand/about-why-shape.svg";
 import PageHero from "../components/PageHero";
 import BrandShape from "../components/BrandShape";
 
@@ -155,21 +156,27 @@ export default function About() {
       </section>
 
       {/* Why choose Cared */}
-      <section className="bg-bg-surface py-20">
-        <div className="container-x">
-          <div className="max-w-[880px]">
- <h2 className="ty-h1 ty-title ty-title-gradient mb-8 font-display">Why choose Cared?</h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              {WHY_POINTS.map((point) => (
-                <li key={point} className="flex items-start gap-3 bg-white rounded-[12px] border border-border-default p-5">
-                  <span aria-hidden="true" className="mt-0.5 w-8 h-8 shrink-0 bg-bg-brand-soft text-text-brand rounded-full flex items-center justify-center font-bold">?</span>
-                  <span className="text-text-primary font-medium leading-relaxed">{point}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="rounded-[16px] border-s-4 border-border-focus bg-white p-6 text-text-primary text-lg leading-relaxed">
-              That&apos;s why Cared understands your needs, and we&apos;ll do the worrying for you, so you can feel confident and enjoy owning a Cared car.
-            </p>
+      <section className="bg-white py-10 lg:py-24">
+        <div className="relative bg-bg-inverse">
+          {/* Shape bleeds past the band top and bottom; cropping from the page edge keeps the arrow tip intact */}
+          <img
+            src={imgWhyShape}
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute start-0 top-[-17%] hidden h-[134%] w-[42%] object-cover object-right lg:block rtl:-scale-x-100"
+          />
+          <div className="container-x relative py-16 lg:py-24">
+            <div className="lg:ms-[45%] lg:max-w-[760px]">
+              <h2 className="ty-h1 ty-title text-white mb-5 font-display">Why choose Cared?</h2>
+              <ul className="list-disc ps-9 text-white text-lg leading-[1.75]">
+                {WHY_POINTS.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <p className="text-white text-lg leading-[1.75]">
+                That&apos;s why Cared understands your needs, and we&apos;ll do the worrying for you, so you can feel confident and enjoy owning a Cared car.
+              </p>
+            </div>
           </div>
         </div>
       </section>
