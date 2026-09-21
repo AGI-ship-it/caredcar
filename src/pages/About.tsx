@@ -103,8 +103,8 @@ export default function About() {
                     <FeatureIcon type={f.icon} />
                   </span>
                 </div>
-                <span className="mt-[40px] font-display text-[26px] leading-tight text-text-primary">{f.title}</span>
-                <span className="mt-[16px] h-px w-[40px] bg-border-strong/40 transition-[width] duration-500 ease-out group-hover:w-[72px]" />
+                <span className="mt-[40px] font-display text-[26px] leading-tight text-text-brand">{f.title}</span>
+                <span className="mt-[16px] h-px w-[40px] bg-bg-brand/40 transition-[width] duration-500 ease-out group-hover:w-[72px]" />
                 <span className="mt-[16px] text-[15px] font-normal leading-relaxed text-text-secondary">{f.desc}</span>
               </div>
             ))}
