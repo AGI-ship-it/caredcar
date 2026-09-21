@@ -31,11 +31,18 @@ const FEATURES = [
 
 
 const WHY_POINTS = [
-  "Need a car, and you don't know where to start?",
-  "Worried you don't know what you're buying?",
-  "Who can you trust to buy with confidence?",
-  "Buying your next car should be a pleasurable experience!",
+  { title: "Need a car, and you don't know where to start?", desc: "We guide you from first search to final handshake.", icon: "pin" },
+  { title: "Worried you don't know what you're buying?", desc: "Every vehicle is inspected and fully disclosed.", icon: "shield" },
+  { title: "Who can you trust to buy with confidence?", desc: "Our advisors have no commission pressure — only your interest.", icon: "people" },
+  { title: "Buying your next car should be a pleasurable experience!", desc: "We make it enjoyable, from browse to drive-away.", icon: "smile" },
 ];
+
+const WHY_ICON_PATHS: Record<string, string> = {
+  pin: "M12 21s-7-6.1-7-11.5a7 7 0 1114 0C19 14.9 12 21 12 21zm0-9a2.5 2.5 0 100-5 2.5 2.5 0 000 5z",
+  shield: "M12 3l7 3v5.5c0 4.4-3 8.3-7 9.5-4-1.2-7-5.1-7-9.5V6l7-3zm-3 9l2 2 4-4",
+  people: "M16 20v-1.5a3.5 3.5 0 00-3.5-3.5h-5A3.5 3.5 0 004 18.5V20M10 11.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM20 20v-1.5a3.5 3.5 0 00-2.5-3.35M15.5 4.65a3.5 3.5 0 010 6.7",
+  smile: "M12 21a9 9 0 100-18 9 9 0 000 18zM8.5 14s1.3 2 3.5 2 3.5-2 3.5-2M9 9.5h.01M15 9.5h.01",
+};
 
 function FeatureIcon({ type }: { type: string }) {
   if (type === "check") return (
@@ -156,31 +163,33 @@ export default function About() {
       </section>
 
       {/* Why choose Cared */}
-      <section className="bg-white py-10 lg:py-24">
-        <div className="relative bg-bg-inverse">
-          {/* Shape bleeds past the band top and bottom; only its page-edge side is cropped so the arrow tip stays whole */}
-          <div aria-hidden="true" className="pointer-events-none absolute start-0 top-[-10%] hidden h-[120%] aspect-[562/537] max-w-[42%] overflow-hidden lg:block">
-            <img
-              src={imgWhyShape}
-              alt=""
-              className="absolute end-0 top-0 h-full w-auto max-w-none rtl:-scale-x-100"
-            />
-          </div>
-          <div className="container-x relative py-16 lg:py-24">
-            <div className="lg:ms-[45%] lg:max-w-[760px]">
-              <h2 className="ty-h1 ty-title text-white mb-5 font-display">Why choose Cared?</h2>
-              <ul className="flex flex-col gap-3 text-white text-lg leading-relaxed">
-                {WHY_POINTS.map((point) => (
-                  <li key={point} className="flex items-start gap-3">
-                    <span aria-hidden="true" className="mt-[0.7em] size-1.5 shrink-0 rounded-full bg-white" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 text-white text-lg leading-relaxed">
-                That&apos;s why Cared understands your needs, and we&apos;ll do the worrying for you, so you can feel confident and enjoy owning a Cared car.
-              </p>
-            </div>
+      <section className="relative overflow-hidden bg-bg-inverse">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(255,255,255,0.08),transparent_35%),radial-gradient(circle_at_100%_100%,rgba(102,161,255,0.14),transparent_40%)]" />
+        {/* Only the page-edge side of the shape is cropped so the arrow tip stays whole */}
+        <div aria-hidden="true" className="pointer-events-none absolute start-0 top-1/2 hidden h-[64%] aspect-[562/537] max-w-[30%] -translate-y-1/2 overflow-hidden lg:block">
+          <img src={imgWhyShape} alt="" className="absolute end-0 top-0 h-full w-auto max-w-none rtl:-scale-x-100" />
+        </div>
+        <div className="container-x relative py-16 lg:py-24">
+          <div className="lg:ms-[32%]">
+            <h2 className="ty-h1 ty-title text-white mb-8 font-display">Why choose Cared?</h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+              {WHY_POINTS.map((point) => (
+                <li key={point.title} className="flex items-start gap-4 rounded-[14px] border border-white/10 bg-white/[0.06] p-6">
+                  <span aria-hidden="true" className="flex size-11 shrink-0 items-center justify-center rounded-[10px] bg-bg-brand/25 text-[#66A1FF]">
+                    <svg className="size-5" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                      <path d={WHY_ICON_PATHS[point.icon]} />
+                    </svg>
+                  </span>
+                  <span className="flex flex-col gap-1">
+                    <span className="text-white text-base font-medium leading-snug">{point.title}</span>
+                    <span className="text-white/60 text-sm leading-relaxed">{point.desc}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 lg:mt-16 rounded-[16px] border border-white/10 bg-bg-brand/20 px-7 py-6 text-white text-lg leading-relaxed">
+              That&apos;s why Cared understands your needs, and we&apos;ll do the worrying for you, so you can feel confident and enjoy owning a Cared car.
+            </p>
           </div>
         </div>
       </section>
