@@ -90,21 +90,20 @@ export default function About() {
             {FEATURES.map((f, i) => (
               <div
                 key={f.title}
-                className="group relative flex flex-col p-[32px] rounded-[20px] bg-white ring-1 ring-border-default/70 overflow-hidden transition-[box-shadow,translate] duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_24px_48px_-28px_rgba(28,41,88,0.28)]"
+                className="relative flex flex-col p-[32px] rounded-[20px] bg-white ring-1 ring-border-default/70 overflow-hidden"
               >
-                {/* Brand hairline that draws across the top on hover */}
                 <span
                   aria-hidden="true"
-                  className="absolute inset-x-0 top-0 h-[2px] origin-left rtl:origin-right scale-x-0 bg-gradient-to-r rtl:bg-gradient-to-l from-bg-brand to-bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100"
+                  className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r rtl:bg-gradient-to-l from-bg-brand to-bg-accent"
                 />
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium tracking-[0.18em] text-text-disabled tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="size-[44px] rounded-full flex items-center justify-center text-text-brand ring-1 ring-bg-brand/15 bg-bg-brand-soft/50 transition-colors duration-300 group-hover:bg-bg-brand group-hover:text-white">
+                  <span className="size-[44px] rounded-full flex items-center justify-center text-text-brand ring-1 ring-bg-brand/15 bg-bg-brand-soft/50">
                     <FeatureIcon type={f.icon} />
                   </span>
                 </div>
                 <span className="mt-[40px] font-display text-[26px] leading-tight text-text-brand">{f.title}</span>
-                <span className="mt-[16px] h-px w-[40px] bg-bg-brand/40 transition-[width] duration-500 ease-out group-hover:w-[72px]" />
+                <span className="mt-[16px] h-px w-[40px] bg-bg-brand/40" />
                 <span className="mt-[16px] text-[15px] font-normal leading-relaxed text-text-secondary">{f.desc}</span>
               </div>
             ))}
