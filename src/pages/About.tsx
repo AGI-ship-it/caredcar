@@ -4,7 +4,6 @@ import Footer from "../components/Footer";
 import imgAboutHero from "@/imports/about-hero.jpg";
 import imgAboutPursuit from "@/imports/about-pursuit.jpg";
 import imgAboutCared from "@/imports/about-cared.jpg";
-import logoAlGhurairWhite from "@/imports/brand/al-ghurair-white.svg";
 import imgWhyShape from "@/imports/brand/about-why-shape.svg";
 import PageHero from "../components/PageHero";
 import BrandShape from "../components/BrandShape";
@@ -114,12 +113,6 @@ export default function About() {
               alt="A happy customer giving a thumbs up from the driver's seat of his new car"
               className="absolute inset-0 w-full h-full object-cover object-[62%_center]"
             />
-            {/* Al Ghurair purple over the photo, so the white logo reads on top of it */}
-            <div aria-hidden="true" className="absolute inset-0 bg-bg-partner/55" />
-            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-bg-partner/85 to-transparent" />
-            <div className="absolute inset-x-0 top-0 p-6 sm:p-8">
-              <img src={logoAlGhurairWhite} alt="Al Ghurair" className="h-9 sm:h-11 w-auto" />
-            </div>
           </div>
           <div>
  <h2 className="ty-h1 ty-title ty-title-gradient mb-4 font-display">In pursuit of better</h2>
