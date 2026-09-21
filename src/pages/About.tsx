@@ -183,26 +183,28 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-bg-brand py-20 text-center">
-        <BrandShape />
-        <div className="container-x">
- <h2 className="ty-h1 ty-title text-white mb-2 font-display">Still Not Sure What You Need?</h2>
-          <p className="text-white/85 text-lg mb-8 max-w-lg mx-auto">
-            We&apos;re here to help with sales, finance, or service questions. Reach us in the way that&apos;s easiest for you.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              to="/buy"
-              className="inline-block bg-white text-text-brand font-bold px-10 py-4 rounded-full hover:bg-bg-brand-soft transition text-lg"
-            >
-              Browse Cars
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-block border border-white/60 text-white font-bold px-10 py-4 rounded-full hover:bg-white/10 transition text-lg"
-            >
-              Contact Us
-            </Link>
+      <section className="relative overflow-hidden bg-bg-brand py-20 md:py-28 text-center md:text-start">
+        <BrandShape variant="split" />
+        <div className="container-x relative">
+          <div className="md:w-1/2 md:pe-10">
+            <h2 className="ty-h1 ty-title text-white mb-2 font-display">Still Not Sure What You Need?</h2>
+            <p className="text-white/85 text-lg mb-8 max-w-lg mx-auto md:mx-0">
+              We&apos;re here to help with sales, finance, or service questions. Reach us in the way that&apos;s easiest for you.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+              <Link
+                to="/buy"
+                className="inline-block bg-white text-text-brand font-bold px-10 py-4 rounded-full hover:bg-bg-brand-soft transition text-lg"
+              >
+                Browse Cars
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-block border border-white/60 text-white font-bold px-10 py-4 rounded-full hover:bg-white/10 transition text-lg"
+              >
+                Contact Us
+              </Link>
+            </div>
           </div>
         </div>
       </section>
