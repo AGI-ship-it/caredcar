@@ -42,14 +42,16 @@ export default function Sell() {
           <div className="mb-10">
  <h2 className="ty-h1 ty-title ty-title-gradient font-display">A Simpler Way to Sell</h2>
           </div>
-          <div data-parallax-cards className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+            {/* Dashed path linking the step circles, first to last */}
+            <div aria-hidden="true" className="hidden md:block absolute top-[28px] left-[16.667%] right-[16.667%] border-t-2 border-dashed border-bg-brand/20" />
             {WHY_SELL.map((item, i) => (
-              <div key={item.title} className="text-center">
-                <div className="w-14 h-14 bg-bg-brand rounded-full flex items-center justify-center mx-auto mb-5 text-white font-bold text-lg">
+              <div key={item.title} className="relative text-center">
+                <div className="w-14 h-14 bg-bg-brand rounded-full flex items-center justify-center mx-auto mb-6 text-white font-bold text-lg ring-[6px] ring-bg-brand-soft shadow-[0_8px_20px_-8px_rgba(0,99,255,0.55)]">
                   {i + 1}
                 </div>
-                <h3 className="text-xl font-extrabold text-text-brand mb-2">{item.title}</h3>
-                <p className="text-text-secondary leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-bold text-text-brand mb-2">{item.title}</h3>
+                <p className="text-text-secondary text-[15px] leading-relaxed max-w-[320px] mx-auto">{item.desc}</p>
               </div>
             ))}
           </div>

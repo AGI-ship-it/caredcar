@@ -119,7 +119,7 @@ function SocialIcon({ pathData, gradId, x1, x2, y1, y2 }: {
   return (
     <button
       type="button"
-      className="border border-[rgba(255,255,255,0.1)] flex items-center justify-center rounded-[9999px] size-[40px] transition-all duration-150 hover:border-(--color-bg-accent) hover:bg-white/5 hover:-translate-y-0.5"
+      className="border border-[rgba(255,255,255,0.1)] flex items-center justify-center rounded-[9999px] size-[36px] transition-all duration-150 hover:border-(--color-bg-accent) hover:bg-white/5 hover:-translate-y-0.5"
     >
       <div className="relative size-[18px]">
         <svg className="absolute block inset-0 size-full" fill="none" height="18" preserveAspectRatio="none" viewBox="0 0 18 18" width="18">
@@ -137,16 +137,16 @@ function SocialIcon({ pathData, gradId, x1, x2, y1, y2 }: {
   );
 }
 
-const HEADING = "text-text-accent text-[13px] font-semibold uppercase tracking-[0.1em] leading-5";
+const HEADING = "text-text-accent text-[12px] font-semibold uppercase tracking-[0.14em] leading-4";
 
 function FooterLinks({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
-    <nav aria-label={title} className="flex flex-col gap-4">
+    <nav aria-label={title} className="flex flex-col gap-5">
       <p className={HEADING}>{title}</p>
-      <ul className="flex flex-col gap-3">
+      <ul className="flex flex-col gap-2.5">
         {links.map((link) => (
           <li key={link.href}>
-            <Link to={link.href} className="text-white/75 text-[15px] leading-[1.6] hover:text-white transition-colors duration-150">
+            <Link to={link.href} className="text-white/70 text-[14px] leading-6 hover:text-white transition-colors duration-150">
               {link.label}
             </Link>
           </li>
@@ -158,19 +158,19 @@ function FooterLinks({ title, links }: { title: string; links: { label: string; 
 
 export default function Footer({ flushTop = false }: { flushTop?: boolean }) {
   return (
-    <footer className={`bg-bg-inverse pt-16 pb-8 ${flushTop ? "" : "rounded-tl-3xl rounded-tr-3xl"}`}>
-      <div className="container-x flex flex-col gap-12">
+    <footer className={`bg-bg-inverse pt-14 pb-7 ${flushTop ? "" : "rounded-tl-3xl rounded-tr-3xl"}`}>
+      <div className="container-x flex flex-col gap-10">
         {/* Main grid */}
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
           {/* Left: brand */}
-          <div className="flex flex-col gap-7 w-full md:w-[380px] shrink-0">
+          <div className="flex flex-col gap-6 w-full md:w-[380px] shrink-0">
             <div className="flex items-center gap-4">
               <AgCarsLogo />
               <AlGhurairLogo />
             </div>
             <div className="flex flex-col gap-3">
               <p className={HEADING}>About Us</p>
-              <div className="flex flex-col gap-3 max-w-[340px] text-white/75 text-[15px] leading-[1.7]">
+              <div className="flex flex-col gap-2 max-w-[340px] text-white/70 text-[14px] leading-[1.6]">
                 <p>At Al Ghurair, we drive transformation across food, mobility, infrastructure, and real estate.</p>
                 <p>
                   Headquartered in Dubai, we operate in <span className="text-white font-medium">20+ countries</span> with{" "}
@@ -205,10 +205,10 @@ export default function Footer({ flushTop = false }: { flushTop?: boolean }) {
             />
 
             {/* Join Us */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-5">
               <p className={HEADING}>Join Us</p>
-              <p className="text-white/75 text-[15px] leading-[1.6]">Follow AG CPO Cars</p>
-              <div className="flex flex-wrap gap-3">
+              <p className="-mt-1 text-white/70 text-[14px] leading-6">Follow AG CPO Cars</p>
+              <div className="flex flex-wrap gap-2.5">
                 <SocialIcon pathData={svgPaths.p2f65ad00} gradId="grad_fb" x1="6.75" x2="12.375" y1="9" y2="9" />
                 <SocialIcon pathData={svgPaths.p30001e00} gradId="grad_ig" x1="1.65039" x2="16.3804" y1="9.0299" y2="9.0299" />
                 <SocialIcon pathData={svgPaths.p27b9e900} gradId="grad_li" x1="2.295" x2="15.2175" y1="9.0225" y2="9.0225" />
@@ -220,9 +220,9 @@ export default function Footer({ flushTop = false }: { flushTop?: boolean }) {
         </div>
 
         {/* Divider + copyright */}
-        <div className="flex flex-col gap-6">
-          <div className="bg-white/15 h-px w-full" />
-          <p className="text-white/60 text-sm font-normal leading-normal text-center">© 2026 AG Cars. All rights reserved.</p>
+        <div className="flex flex-col gap-5">
+          <div className="bg-white/10 h-px w-full" />
+          <p className="text-white/50 text-[13px] font-normal leading-5 text-center">© 2026 AG Cars. All rights reserved.</p>
         </div>
       </div>
     </footer>
