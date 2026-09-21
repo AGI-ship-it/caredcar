@@ -10,6 +10,7 @@ import SearchResults from "./pages/SearchResults";
 import CarDetail from "./pages/CarDetail";
 import Sell from "./pages/Sell";
 import Offers from "./pages/Offers";
+import OfferDetail from "./pages/OfferDetail";
 import About from "./pages/About";
 import Finance from "./pages/Finance";
 import Blog from "./pages/Blog";
@@ -35,6 +36,7 @@ export default function App() {
             <Route path="/car/:id" element={<CarDetail />} />
             <Route path="/sell" element={<Sell />} />
             <Route path="/offers" element={<Offers />} />
+            <Route path="/offers/:slug" element={<OfferDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/finance" element={<Finance />} />
             <Route path="/blog" element={<Blog />} />
