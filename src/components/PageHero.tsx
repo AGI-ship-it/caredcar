@@ -34,7 +34,7 @@ export default function PageHero({ title, subtitle, image, imagePosition = "cent
       )}
       <div className="container-x relative">
         {/* From xl the floating header pill is wider than the container's content; this inset lines the text up with its logo */}
-        <div className="xl:ps-[clamp(20px,calc((100vw-1280px)/2),32px)]">
+        <div className="page-hero-text xl:ps-[clamp(20px,calc((100vw-1280px)/2),32px)]">
           {/* Titles stay on one line from lg up; below that they wrap as normal */}
           <h1
             className={`ty-title normal-case! text-4xl md:text-5xl font-bold leading-tight font-display ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
