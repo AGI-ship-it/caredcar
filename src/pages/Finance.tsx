@@ -7,6 +7,7 @@ import DirhamSymbol from "../components/DirhamSymbol";
 import EligibilityModal from "../components/EligibilityModal";
 import PageHero from "../components/PageHero";
 import BrandShape from "../components/BrandShape";
+import ArrowCircle from "../components/ArrowCircle";
 
 // Content sourced from caredcars.com/finance, restyled to match this design system.
 const STEPS = [
@@ -402,9 +403,10 @@ export default function Finance() {
               />
               <button
                 type="submit"
-                className="w-full bg-white text-text-brand font-bold py-4 rounded-full hover:bg-bg-brand-soft transition"
+                className="group relative w-full flex items-center justify-center bg-white text-text-brand font-bold py-4 rounded-full hover:bg-bg-brand-soft transition-colors"
               >
                 Submit Application
+                <span className="absolute end-2 top-1/2 -translate-y-1/2"><ArrowCircle /></span>
               </button>
             </form>
           )}

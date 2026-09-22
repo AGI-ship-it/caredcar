@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import BrandShape from "../components/BrandShape";
+import ArrowCircle from "../components/ArrowCircle";
 
 const blogPosts = [
   {
@@ -536,9 +537,10 @@ export default function BlogDetail() {
             </p>
             <Link
               to="/buy"
-              className="inline-block bg-white text-text-brand font-bold px-8 py-3 rounded-full hover:bg-bg-brand-soft transition-colors"
+              className="group inline-flex items-center gap-3 rounded-full bg-white ps-7 pe-2 py-2 font-bold text-text-brand transition-colors hover:bg-bg-brand-soft"
             >
               Browse Cars
+              <ArrowCircle />
             </Link>
           </div>
         </section>

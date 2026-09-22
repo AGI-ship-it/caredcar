@@ -7,6 +7,7 @@ import PageHero from "../components/PageHero";
 import OfferCard from "../components/OfferCard";
 import BrandShape from "../components/BrandShape";
 import { OFFERS } from "../data/offers";
+import ArrowCircle from "../components/ArrowCircle";
 
 export default function Offers() {
   return (
@@ -36,11 +37,7 @@ export default function Offers() {
               className="group self-start md:self-auto shrink-0 inline-flex items-center gap-3 rounded-full bg-white ps-7 pe-2 py-2 text-sm font-bold text-text-brand transition-colors hover:bg-bg-brand-soft"
             >
               Apply Now
-              <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-full bg-bg-brand text-white transition-transform duration-300 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className="size-4 rtl:-scale-x-100">
-                  <path d="M5 12h13M12.5 6l6 6-6 6" />
-                </svg>
-              </span>
+              <ArrowCircle />
             </Link>
           </div>
         </div>
