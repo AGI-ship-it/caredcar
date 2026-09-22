@@ -247,7 +247,7 @@
 /* Home hero headline: heavier and tracked in px, per the design spec */
 .ty-display-xl.ty-hero {
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 0;
 }
 
 /* Inner-page banner titles: heavier and tightly tracked */
