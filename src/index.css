@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Almarai:wght@300;400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@400;500;600;700&family=Almarai:wght@300;400;700;800&display=swap');
 @import 'tailwindcss';
 
 /* ── Cared theme (cared-design-system.md) ──────────────────────────────────
@@ -231,6 +231,17 @@
   letter-spacing: -0.01em;
   text-transform: uppercase;
 }
+/* Hero banners (brand guideline): Obviously Wide Semibold, all caps. Until the licensed Obviously files are
+   added with @font-face, Archivo's expanded width stands in for the Wide cut. */
+.ty-hero {
+  font-family: "Obviously Wide", "Obviously", var(--font-display);
+  font-weight: 600;
+  font-stretch: 125%;
+  font-variation-settings: "wdth" 125;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
 .ty-display-l {
   font-family: var(--font-display);
   font-size: clamp(2.25rem, 4vw, 3rem);

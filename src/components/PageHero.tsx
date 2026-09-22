@@ -40,7 +40,7 @@ export default function PageHero({ title, subtitle, image, imagePosition = "cent
         <div className="page-hero-text xl:ps-[clamp(20px,calc((100vw-1280px)/2),32px)]">
           {/* Titles stay on one line from lg up; below that they wrap as normal */}
           <h1
-            className={`ty-title normal-case! ${smallTitle ? "text-3xl md:text-[42px]" : "text-4xl md:text-5xl"} font-bold leading-tight font-display ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
+            className={`ty-hero ${smallTitle ? "text-3xl md:text-[42px]" : "text-4xl md:text-5xl"} leading-tight ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
             style={image ? { textShadow: "0 2px 16px rgba(8, 18, 45, 0.55)" } : undefined}
           >
             {title}
