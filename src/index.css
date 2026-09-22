@@ -225,7 +225,7 @@
 /* Type styles from the design system */
 .ty-display-xl {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5.2vw, 4rem);
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 900;
   line-height: 1.0625;
   letter-spacing: -0.01em;
@@ -239,8 +239,9 @@
   font-stretch: 125%;
   font-variation-settings: "wdth" 125;
   text-transform: uppercase;
-  letter-spacing: 0.01em;
-  word-spacing: 0.04em;
+  /* Measured off the reference lockup: open letter fit and a wide word gap */
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
 }
 
 .ty-display-l {
