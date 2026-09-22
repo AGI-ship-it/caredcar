@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PageHero from "../components/PageHero";
 import BrandShape from "../components/BrandShape";
-import ArrowCircle from "../components/ArrowCircle";
+import ArrowIcon from "../components/ArrowIcon";
 
 const blogPosts = [
   {
@@ -220,10 +220,10 @@ export default function Blog() {
             </p>
             <Link
               to="/buy"
-              className="group inline-flex items-center gap-3 rounded-full bg-white ps-7 pe-2 py-2 font-bold text-text-brand transition-colors hover:bg-bg-brand-soft"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-white h-[52px] px-8 font-bold text-text-brand transition-colors hover:bg-bg-brand-soft"
             >
               Browse Cars
-              <ArrowCircle />
+              <ArrowIcon />
             </Link>
           </div>
         </section>

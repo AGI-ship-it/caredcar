@@ -8,7 +8,7 @@ import logoAlGhurair from "@/imports/brand/al-ghurair-logo.svg";
 import imgWhyShape from "@/imports/brand/about-why-shape.svg";
 import PageHero from "../components/PageHero";
 import BrandShape from "../components/BrandShape";
-import ArrowCircle from "../components/ArrowCircle";
+import ArrowIcon from "../components/ArrowIcon";
 
 // Headings and body copy match caredcars.com/about-us verbatim.
 const FEATURES = [
@@ -204,17 +204,17 @@ export default function About() {
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <Link
                 to="/buy"
-                className="group inline-flex items-center gap-3 rounded-full bg-white ps-7 pe-2 py-2 font-bold text-text-brand transition-colors hover:bg-bg-brand-soft text-lg"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-white h-[52px] px-8 font-bold text-text-brand transition-colors hover:bg-bg-brand-soft text-lg"
               >
                 Browse Cars
-                <ArrowCircle />
+                <ArrowIcon />
               </Link>
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-3 rounded-full border border-white/60 ps-7 pe-2 py-2 font-bold text-white transition-colors hover:bg-white/10 text-lg"
+                className="group inline-flex items-center gap-2.5 rounded-full border border-white/60 h-[52px] px-8 font-bold text-white transition-colors hover:bg-white/10 text-lg"
               >
                 Contact Us
-                <ArrowCircle tone="light" />
+                <ArrowIcon />
               </Link>
             </div>
           </div>

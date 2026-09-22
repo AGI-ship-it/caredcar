@@ -2,7 +2,7 @@ import { useState } from "react";
 import Select from "./Select";
 import { FIELD_CLASS, FIELD_ERROR_CLASS, LABEL_CLASS } from "../lib/fieldStyles";
 import imgSellCarVisual from "@/imports/Car.png";
-import ArrowCircle from "./ArrowCircle";
+import ArrowIcon from "./ArrowIcon";
 
 const toOpts = (arr: string[]) => arr.map((v) => ({ value: v, label: v }));
 
@@ -299,7 +299,7 @@ export default function SellYourCarForm({ onNavigate, showVisual = true, classNa
               onClick={handlePrimaryClick}
               disabled={!currentStepValid}
               aria-disabled={!currentStepValid}
-              className="group flex h-[50px] items-center ps-[24px] pe-[7px] py-[7px] rounded-[999px] transition-colors"
+              className="group flex h-[50px] items-center px-[24px] py-[12px] rounded-[999px] transition-colors"
               style={{
                 background: currentStepValid ? "var(--color-bg-brand)" : "var(--color-bg-brand-disabled)",
                 cursor: currentStepValid ? "pointer" : "not-allowed",
@@ -309,7 +309,7 @@ export default function SellYourCarForm({ onNavigate, showVisual = true, classNa
                 <span className="text-white text-base font-semibold leading-[18px] whitespace-nowrap">
                   {step < 3 ? `Continue (${step}/3)` : "Get My Valuation"}
                 </span>
-                <ArrowCircle tone="light" />
+                <ArrowIcon />
               </div>
             </button>
           </div>

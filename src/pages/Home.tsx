@@ -10,7 +10,7 @@ import { useLanguage } from "../lib/language";
 import SmartImage from "../components/SmartImage";
 import FavoriteButton from "../components/FavoriteButton";
 import SpecIcon, { inferSpecKind } from "../components/SpecIcon";
-import ArrowCircle from "../components/ArrowCircle";
+import ArrowIcon from "../components/ArrowIcon";
 
 const toOpts = (arr: string[]) => arr.map((v) => ({ value: v, label: v }));
 import svgPaths from "@/imports/00HomeV34/svg-qhcw3sf999";
@@ -395,12 +395,12 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
               )}
             </div>
 
-            <button type="submit" disabled={ctaDisabled} className={`hero-cta group shrink-0 w-full lg:w-auto lg:min-w-[180px] h-[48px] ps-[20px] ${ctaDisabled ? "pe-[20px]" : "pe-[6px]"} flex items-center justify-center gap-[10px] rounded-[999px]`}>
+            <button type="submit" disabled={ctaDisabled} className={`hero-cta group shrink-0 w-full lg:w-auto lg:min-w-[180px] h-[48px] px-[20px] flex items-center justify-center gap-[10px] rounded-[999px]`}>
               <svg className="block size-[20px]" fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
                 <path d={svgPaths.p3ee3db00} fill="white" />
               </svg>
               <span className="text-white text-base font-semibold leading-[18px] tabular-nums" aria-live="polite">{ctaLabel}</span>
-              {!ctaDisabled && <ArrowCircle tone="light" />}
+              {!ctaDisabled && <ArrowIcon />}
             </button>
           </div>
         </form>
