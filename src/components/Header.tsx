@@ -275,15 +275,41 @@ export default function Header() {
           <Link to="/" className="flex items-center gap-3">
             <AgCarsLogo />
           </Link>
-          <button
-            className="text-white p-1"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label={t("Open menu")}
-          >
-            <svg fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-1">
+            <Link
+              to="/account?tab=favorites"
+              onClick={(e) => {
+                if (!user) {
+                  e.preventDefault();
+                  setAuthGateOpen(true);
+                }
+              }}
+              className="p-2 rounded-full text-white opacity-90 transition-[background-color,opacity] duration-200 hover:opacity-100 hover:bg-white/12 active:scale-95"
+              aria-label="Favorites"
+            >
+              <svg fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
+                <path d={svgPaths.p3f465200} fill="white" />
+              </svg>
+            </Link>
+            <Link
+              to={user ? "/account" : "/login"}
+              className="p-2 rounded-full text-white opacity-90 transition-[background-color,opacity] duration-200 hover:opacity-100 hover:bg-white/12 active:scale-95"
+              aria-label={user ? `Account: ${user.name}` : "Sign in"}
+            >
+              <svg fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
+                <path d={svgPaths.p1d1a2680} fill="white" />
+              </svg>
+            </Link>
+            <button
+              className="text-white p-2 ms-1"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label={t("Open menu")}
+            >
+              <svg fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 
