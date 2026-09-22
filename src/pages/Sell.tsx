@@ -34,7 +34,7 @@ export default function Sell() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgSellHero} imagePosition="75% 35%" title="Sell for the Best Price" subtitle="Fill in your details and book a free inspection — we handle the rest." />
+      <PageHero image={imgSellHero} imagePosition="75% 35%" title={<>Sell your car the<br />smartest way.</>} smallTitle subtitle="Fill in your details and book a free inspection — we handle the rest." />
 
       {/* Why sell with us */}
       <section className="py-20 md:py-24 bg-white">

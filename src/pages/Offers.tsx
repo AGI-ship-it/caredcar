@@ -14,7 +14,7 @@ export default function Offers() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgOffersHero} imagePosition="70% 38%" title="Exclusive Offers" subtitle="Limited-time deals on premium pre-owned vehicles — transparent pricing, zero hidden fees." />
+      <PageHero image={imgOffersHero} imagePosition="70% 38%" title="Limited-Time Special Offers" subtitle="Limited-time deals on premium pre-owned vehicles — transparent pricing, zero hidden fees." />
 
       {/* Featured Banner */}
       <section className="container-x py-12 w-full">

@@ -155,7 +155,7 @@ export default function Finance() {
       <Header />
 
       {/* Hero */}
-      <PageHero image={imgFinanceHero} imagePosition="75% 38%" title="Finance Made Simple" subtitle="Check eligibility, compare plans and drive away with clear monthly payments." />
+      <PageHero image={imgFinanceHero} imagePosition="75% 38%" title={<>Finance your car<br />the smart way.</>} smallTitle subtitle="Check eligibility, compare plans and drive away with clear monthly payments." />
 
       {/* Benefits */}
       <section className="container-x py-16 w-full">
