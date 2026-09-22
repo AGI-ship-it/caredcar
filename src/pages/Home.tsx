@@ -395,7 +395,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
               )}
             </div>
 
-            <button type="submit" disabled={ctaDisabled} className={`hero-cta group shrink-0 w-full lg:w-auto lg:min-w-[180px] h-[48px] px-[20px] flex items-center justify-center gap-[10px] rounded-[999px]`}>
+            <button type="submit" disabled={ctaDisabled} className={`hero-cta group shrink-0 text-white w-full lg:w-auto lg:min-w-[180px] h-[48px] px-[20px] flex items-center justify-center gap-[10px] rounded-[999px]`}>
               <svg className="block size-[20px]" fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
                 <path d={svgPaths.p3ee3db00} fill="white" />
               </svg>

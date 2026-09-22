@@ -299,7 +299,7 @@ export default function SellYourCarForm({ onNavigate, showVisual = true, classNa
               onClick={handlePrimaryClick}
               disabled={!currentStepValid}
               aria-disabled={!currentStepValid}
-              className="group flex h-[50px] items-center px-[24px] py-[12px] rounded-[999px] transition-colors"
+              className="group flex h-[50px] items-center px-[24px] py-[12px] rounded-[999px] text-white transition-colors"
               style={{
                 background: currentStepValid ? "var(--color-bg-brand)" : "var(--color-bg-brand-disabled)",
                 cursor: currentStepValid ? "pointer" : "not-allowed",
