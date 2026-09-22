@@ -303,8 +303,9 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
             style={{ background: "radial-gradient(closest-side, rgba(255,255,255,0.7), rgba(255,255,255,0.35) 55%, transparent)" }}
           />
           {/* The tagline is written per language so the swoosh stays under the word "good" in both */}
+          <span className="hero-headline-fill">
           {isArabic ? "سيارات " : "Just "}
-          <span className="relative inline-block">
+          <span className="relative">
             {isArabic ? "جيدة" : "Good"}
             {/* Brand-green brush stroke under "Good" */}
             <svg
@@ -317,6 +318,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
             </svg>
           </span>
           {isArabic ? "، ببساطة" : " Cars"}
+          </span>
           {/* Cared play-mark motif */}
           <svg aria-hidden="true" viewBox="0 0 40 28" className="hero-mark inline-block align-baseline ms-[0.18em] h-[0.5em] w-auto -translate-y-[0.05em]">
             <path d="M3 5.2c0-3 3.2-4.9 5.8-3.4l13 7.6c2.6 1.5 2.6 5.3 0 6.8l-13 7.6C6.2 25.3 3 23.4 3 20.4V5.2z" fill="var(--color-text-brand)" />
