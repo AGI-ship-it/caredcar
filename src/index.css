@@ -244,6 +244,19 @@
   word-spacing: 0.2em;
 }
 
+/* Home hero headline: heavier and tracked in px, per the design spec */
+.ty-display-xl.ty-hero {
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* Inner-page banner titles: heavier and tightly tracked */
+.page-hero .ty-hero {
+  font-weight: 800;
+  letter-spacing: -2px;
+  word-spacing: normal;
+}
+
 .ty-display-l {
   font-family: var(--font-display);
   font-size: clamp(2.25rem, 4vw, 3rem);

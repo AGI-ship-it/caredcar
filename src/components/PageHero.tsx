@@ -10,12 +10,10 @@ interface PageHeroProps {
   overlap?: boolean;
   // Search results hold a user-typed query, so that title has to stay wrappable
   wrapTitle?: boolean;
-  // Two-line titles read heavy at the full size, so they step down a notch
-  smallTitle?: boolean;
 }
 
 // Every inner page shares this banner so height, type sizes and text alignment stay identical.
-export default function PageHero({ title, subtitle, image, imagePosition = "center", overlap = false, wrapTitle = false, smallTitle = false }: PageHeroProps) {
+export default function PageHero({ title, subtitle, image, imagePosition = "center", overlap = false, wrapTitle = false }: PageHeroProps) {
   return (
     <section className={`page-hero ${overlap ? "page-hero--overlap" : ""} relative overflow-hidden bg-bg-inverse text-white`}>
       {image && (
@@ -40,7 +38,7 @@ export default function PageHero({ title, subtitle, image, imagePosition = "cent
         <div className="page-hero-text xl:ps-[clamp(20px,calc((100vw-1280px)/2),32px)]">
           {/* Titles stay on one line from lg up; below that they wrap as normal */}
           <h1
-            className={`ty-hero ${smallTitle ? "text-3xl md:text-[42px]" : "text-4xl md:text-5xl"} leading-tight ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
+            className={`ty-hero text-3xl md:text-[40px] leading-tight ${wrapTitle ? "" : "lg:whitespace-nowrap"}`}
             style={image ? { textShadow: "0 2px 16px rgba(8, 18, 45, 0.55)" } : undefined}
           >
             {title}
