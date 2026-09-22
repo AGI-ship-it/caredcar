@@ -291,7 +291,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 55%, rgba(0,0,20,0.5) 100%)" }} />
       </div>
 
-      <div className="relative flex-1 flex flex-col items-center justify-between xl:justify-end gap-[24px] sm:gap-[32px] px-4 sm:px-5 pt-[32px] sm:pt-[40px] xl:pt-0 pb-[140px] sm:pb-[32px] xl:pb-[clamp(12px,3svh,36px)]">
+      <div className="relative flex-1 flex flex-col items-center justify-start sm:justify-between xl:justify-end gap-[24px] sm:gap-[32px] px-4 sm:px-5 pt-[28px] sm:pt-[40px] xl:pt-0 pb-[96px] sm:pb-[32px] xl:pb-[clamp(12px,3svh,36px)]">
       {/* Hero text: centred between the floating nav and the car roofs */}
       <div className="relative xl:absolute xl:inset-x-0 xl:top-[calc(60px+17%)] xl:-translate-y-1/2 px-5 flex justify-center pointer-events-none">
       <div className="hero-parallax-fg hero-intro-text pointer-events-auto flex flex-col items-center gap-[20px] text-center">
@@ -336,7 +336,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
       </div>
 
       {/* Search card */}
-      <div className="w-full max-w-[1040px] mt-[36px] mb-[20px] sm:mt-[152px] sm:mb-[32px] flex flex-col gap-[12px] sm:gap-[16px]">
+      <div className="w-full max-w-[1040px] mt-[20px] mb-[20px] sm:mt-[152px] sm:mb-[32px] flex flex-col gap-[12px] sm:gap-[16px]">
           {/* Type toggle sits above the search card */}
           <div role="tablist" aria-label="Search type" className="hero-tabs relative z-30 grid grid-cols-2 p-[6px] rounded-full w-full sm:w-[78%] sm:max-w-[640px] sm:mx-auto h-[68px] sm:h-[80px]">
             <span
@@ -395,7 +395,7 @@ function HeroSection({ onNavigate }: { onNavigate: (path: string) => void }) {
               )}
             </div>
 
-            <button type="submit" disabled={ctaDisabled} className={`hero-cta group shrink-0 w-full lg:w-auto lg:min-w-[180px] h-[48px] ps-[20px] ${ctaDisabled ? "pe-[20px]" : "pe-[6px]"} flex items-center justify-center gap-[10px] rounded-[999px]">
+            <button type="submit" disabled={ctaDisabled} className={`hero-cta group shrink-0 w-full lg:w-auto lg:min-w-[180px] h-[48px] ps-[20px] ${ctaDisabled ? "pe-[20px]" : "pe-[6px]"} flex items-center justify-center gap-[10px] rounded-[999px]`}>
               <svg className="block size-[20px]" fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
                 <path d={svgPaths.p3ee3db00} fill="white" />
               </svg>

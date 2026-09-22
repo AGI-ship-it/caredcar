@@ -7,7 +7,6 @@ import PageHero from "../components/PageHero";
 import OfferCard from "../components/OfferCard";
 import BrandShape from "../components/BrandShape";
 import { OFFERS } from "../data/offers";
-import ArrowCircle from "../components/ArrowCircle";
 
 export default function Offers() {
   return (
@@ -34,10 +33,9 @@ export default function Offers() {
             </div>
             <Link
               to="/finance#emi-calculator"
-              className="group self-start md:self-auto shrink-0 inline-flex items-center gap-3 rounded-full bg-white ps-7 pe-2 py-2 text-sm font-bold text-text-brand transition-colors hover:bg-bg-brand-soft"
+              className="self-start md:self-auto shrink-0 inline-flex items-center justify-center h-[52px] px-8 rounded-full bg-bg-brand text-white text-base font-semibold transition-colors duration-150 hover:bg-bg-brand-hover"
             >
               Apply Now
-              <ArrowCircle />
             </Link>
           </div>
         </div>
