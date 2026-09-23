@@ -267,7 +267,7 @@ export default function Compare() {
                         />
                         <button
                           onClick={() => removeSlot(i)}
-                          className="absolute top-2 right-2 bg-white rounded-full p-1.5 shadow-sm text-text-secondary hover:text-text-primary"
+                          className="absolute top-2 end-2 bg-white rounded-full p-1.5 shadow-sm text-text-secondary hover:text-text-primary"
                           aria-label="Remove car"
                         >
                           <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4">

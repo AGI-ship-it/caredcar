@@ -32,7 +32,7 @@ export default function CompareTray({ cars, onRemove, onClear }: CompareTrayProp
               </span>
               <button
                 onClick={() => onRemove(c.id)}
-                className="absolute right-1 top-1 text-white/60 hover:text-white"
+                className="absolute end-1 top-1 text-white/60 hover:text-white"
                 aria-label="Remove from compare"
               >
                 <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5">

@@ -534,7 +534,7 @@ function BestSellersSection({ onNavigate }: { onNavigate: (path: string) => void
         {/* Progress bar */}
         <div className="relative mt-[40px] h-[8px]">
           <div className="absolute inset-0 bg-bg-subtle rounded-[99px]" />
-          <div className="absolute left-0 top-0 h-[8px] bg-bg-accent rounded-[99px] transition-all duration-300" style={{ width: `${progress}%` }} />
+          <div className="absolute start-0 top-0 h-[8px] bg-bg-accent rounded-[99px] transition-all duration-300" style={{ width: `${progress}%` }} />
         </div>
 
         {/* Explore All */}

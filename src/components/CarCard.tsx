@@ -56,14 +56,14 @@ export default function CarCard({
         <FavoriteButton
           carId={car.id}
           size={16}
-          className="absolute top-0 right-0 m-2 bg-white rounded-full p-1.5 shadow-sm transition-colors duration-150 text-gray-400 hover:text-red-400"
+          className="absolute top-0 end-0 m-2 bg-white rounded-full p-1.5 shadow-sm transition-colors duration-150 text-gray-400 hover:text-red-400"
         />
 
         {/* Compare Toggle */}
         {onToggleCompare && (
           <button
             onClick={handleCompareClick}
-            className={`absolute bottom-0 left-0 m-2 flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm transition-colors duration-150 ${
+            className={`absolute bottom-0 start-0 m-2 flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm transition-colors duration-150 ${
               isComparing
                 ? "bg-bg-brand text-white"
                 : "bg-white/95 text-text-primary hover:bg-white"
@@ -90,7 +90,7 @@ export default function CarCard({
 
         {/* New Badge */}
         {car.isNew && (
-          <span className="absolute top-0 left-0 m-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+          <span className="absolute top-0 start-0 m-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
             NEW
           </span>
         )}

@@ -51,7 +51,7 @@ export default function EligibilityModal({ onClose, contextLabel }: EligibilityM
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-bg-inverse/70 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full max-w-[480px] bg-white rounded-[20px] shadow-2xl max-h-[90vh] overflow-y-auto">
-        <button onClick={onClose} className="absolute top-4 right-4 text-text-secondary hover:text-text-primary z-10" aria-label="Close">
+        <button onClick={onClose} className="absolute top-4 end-4 text-text-secondary hover:text-text-primary z-10" aria-label="Close">
           <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
             <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
