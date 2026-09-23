@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import BrandShape from "../components/BrandShape";
 import ArrowIcon from "../components/ArrowIcon";
 
-const blogPosts = [
+export const blogPosts = [
   {
     id: "traffic-fines",
     category: "Ownership Tips",

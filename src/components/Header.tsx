@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import svgPaths from "@/imports/00HomeV34/svg-qhcw3sf999";
 import { useAuth } from "@/lib/auth";
 import { LANGUAGES, useLanguage } from "@/lib/language";
 import AuthGateModal from "./AuthGateModal";
 import ContactMenu from "./ContactMenu";
+import SearchPanel from "./SearchPanel";
 
 const navLinks = [
   { label: "Buy", href: "/buy" },
@@ -168,7 +169,20 @@ export default function Header() {
 
   const isActive = (href: string) => location.pathname.startsWith(href);
   const [authGateOpen, setAuthGateOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const closeSearch = useCallback(() => setSearchOpen(false), []);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
 
   // The floating pill docks into a full-width bar once the page scrolls.
   const [scrolled, setScrolled] = useState(false);
@@ -224,8 +238,20 @@ export default function Header() {
             {/* Right: account + language + call us */}
             <div className="flex items-center gap-3 shrink-0">
               <LanguageSwitch />
-              {/* Favorites + account */}
+              {/* Search + favorites + account */}
               <div className="flex items-center gap-2 me-1">
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen(true)}
+                  className="has-tip relative p-[7px] rounded-full text-white opacity-90 transition-[background-color,opacity,transform] duration-200 hover:opacity-100 hover:bg-white/12 focus-visible:opacity-100 focus-visible:bg-white/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--color-bg-accent) active:scale-95"
+                  aria-label={t("Search")}
+                >
+                  <svg fill="none" height="24" viewBox="0 0 24 24" width="24" stroke="white" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m20 20-3.5-3.5" />
+                  </svg>
+                  <span role="tooltip" className="tip tip--below">{t("Search")} · ⌘K</span>
+                </button>
                 <Link
                   to="/account?tab=favorites"
                   onClick={(e) => {
@@ -276,6 +302,17 @@ export default function Header() {
             <AgCarsLogo />
           </Link>
           <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="p-2 rounded-full text-white opacity-90 transition-[background-color,opacity] duration-200 hover:opacity-100 hover:bg-white/12 active:scale-95"
+              aria-label={t("Search")}
+            >
+              <svg fill="none" height="24" viewBox="0 0 24 24" width="24" stroke="white" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" />
+              </svg>
+            </button>
             <Link
               to="/account?tab=favorites"
               onClick={(e) => {
@@ -371,6 +408,7 @@ export default function Header() {
           </div>
         </div>
       )}
+      {searchOpen && <SearchPanel onClose={closeSearch} />}
       {authGateOpen && <AuthGateModal onClose={() => setAuthGateOpen(false)} onSuccess={() => navigate("/account?tab=favorites")} />}
     </>
   );

@@ -920,3 +920,15 @@ body,
 .dropdown-dark-scroll::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
 }
+
+/* Global search: panel drops in from the top edge */
+.search-panel {
+  animation: search-drop 0.22s ease-out;
+}
+@keyframes search-drop {
+  from { transform: translateY(-16px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-panel { animation: none; }
+}

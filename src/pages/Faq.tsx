@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PageHero from "../components/PageHero";
 
-const FAQS = [
+export const FAQS = [
   {
     q: "What does the 145-point inspection include?",
     a: "It covers the car's mechanical, electrical, exterior, interior, and safety checks — so you can review the condition clearly before you buy.",
