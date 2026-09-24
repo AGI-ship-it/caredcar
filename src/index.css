@@ -77,8 +77,8 @@
   --color-bg-partner: var(--purple-900);
 
   --font-display: "Obviously", "Archivo", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Forma DJR Micro", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Forma DJR Micro", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: forma-djr-micro, "Forma DJR Micro", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: forma-djr-micro, "Forma DJR Micro", "Inter", ui-sans-serif, system-ui, sans-serif;
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;

@@ -208,7 +208,7 @@ export default function Header() {
               : "rounded-[40px] border border-white/20 shadow-[0_12px_32px_rgba(0,0,30,0.22)]"
           }`}
         >
-          <div className={`flex items-center justify-between relative mx-auto w-full max-w-[1280px] ${scrolled ? "px-8 py-3" : "ps-8 pe-4 py-4"}`}>
+          <div className={`flex items-center gap-12 relative mx-auto w-full max-w-[1280px] ${scrolled ? "px-8 py-3" : "ps-8 pe-4 py-4"}`}>
             {/* Logos */}
             <Link to="/" className="flex items-center gap-4 shrink-0">
               <AgCarsLogo />
@@ -216,7 +216,7 @@ export default function Header() {
             </Link>
 
             {/* Center nav */}
-            <nav className="absolute left-1/2 -translate-x-1/2 flex items-center drop-shadow-[0px_4px_2px_rgba(0,0,0,0.12)]">
+            <nav className="flex flex-1 items-center justify-center drop-shadow-[0px_4px_2px_rgba(0,0,0,0.12)]">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -236,17 +236,16 @@ export default function Header() {
             </nav>
 
             {/* Right: account + language + call us */}
-            <div className="flex items-center gap-3 shrink-0">
-              <LanguageSwitch />
+            <div className="flex items-center gap-4 shrink-0">
               {/* Search + favorites + account */}
-              <div className="flex items-center gap-2 me-1">
+              <div className="flex items-center gap-1">
                 <button
                   type="button"
                   onClick={() => setSearchOpen(true)}
-                  className="has-tip relative p-[7px] rounded-full text-white opacity-90 transition-[background-color,opacity,transform] duration-200 hover:opacity-100 hover:bg-white/12 focus-visible:opacity-100 focus-visible:bg-white/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--color-bg-accent) active:scale-95"
+                  className="has-tip relative p-[6px] rounded-full text-white opacity-90 transition-[background-color,opacity,transform] duration-200 hover:opacity-100 hover:bg-white/12 focus-visible:opacity-100 focus-visible:bg-white/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--color-bg-accent) active:scale-95"
                   aria-label={t("Search")}
                 >
-                  <svg fill="none" height="24" viewBox="0 0 24 24" width="24" stroke="white" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <svg fill="none" height="20" viewBox="0 0 24 24" width="20" stroke="white" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
                     <circle cx="11" cy="11" r="7" />
                     <path d="m20 20-3.5-3.5" />
                   </svg>
@@ -260,25 +259,26 @@ export default function Header() {
                       setAuthGateOpen(true);
                     }
                   }}
-                  className="has-tip relative p-[7px] rounded-full text-white opacity-90 transition-[background-color,opacity,transform] duration-200 hover:opacity-100 hover:bg-white/12 focus-visible:opacity-100 focus-visible:bg-white/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--color-bg-accent) active:scale-95"
+                  className="has-tip relative p-[6px] rounded-full text-white opacity-90 transition-[background-color,opacity,transform] duration-200 hover:opacity-100 hover:bg-white/12 focus-visible:opacity-100 focus-visible:bg-white/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--color-bg-accent) active:scale-95"
                   aria-label="Favorites"
                 >
-                  <svg fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
+                  <svg fill="none" height="20" viewBox="0 0 24 24" width="20" aria-hidden="true">
                     <path d={svgPaths.p3f465200} fill="white" />
                   </svg>
                   <span role="tooltip" className="tip tip--below">Favorites</span>
                 </Link>
                 <Link
                   to={user ? "/account" : "/login"}
-                  className="has-tip relative p-[7px] rounded-full text-white opacity-90 transition-[background-color,opacity,transform] duration-200 hover:opacity-100 hover:bg-white/12 focus-visible:opacity-100 focus-visible:bg-white/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--color-bg-accent) active:scale-95"
+                  className="has-tip relative p-[6px] rounded-full text-white opacity-90 transition-[background-color,opacity,transform] duration-200 hover:opacity-100 hover:bg-white/12 focus-visible:opacity-100 focus-visible:bg-white/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-(--color-bg-accent) active:scale-95"
                   aria-label={user ? `Account: ${user.name}` : "Sign in"}
                 >
-                  <svg fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
+                  <svg fill="none" height="20" viewBox="0 0 24 24" width="20" aria-hidden="true">
                     <path d={svgPaths.p1d1a2680} fill="white" />
                   </svg>
                   <span role="tooltip" className="tip tip--below">{user ? "My account" : "Sign in"}</span>
                 </Link>
               </div>
+              <LanguageSwitch />
               {/* Call Us: contact card on desktop */}
               <ContactMenu
                 trigger={
@@ -313,30 +313,6 @@ export default function Header() {
                 <path d="m20 20-3.5-3.5" />
               </svg>
             </button>
-            <Link
-              to="/account?tab=favorites"
-              onClick={(e) => {
-                if (!user) {
-                  e.preventDefault();
-                  setAuthGateOpen(true);
-                }
-              }}
-              className="p-2 rounded-full text-white opacity-90 transition-[background-color,opacity] duration-200 hover:opacity-100 hover:bg-white/12 active:scale-95"
-              aria-label="Favorites"
-            >
-              <svg fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
-                <path d={svgPaths.p3f465200} fill="white" />
-              </svg>
-            </Link>
-            <Link
-              to={user ? "/account" : "/login"}
-              className="p-2 rounded-full text-white opacity-90 transition-[background-color,opacity] duration-200 hover:opacity-100 hover:bg-white/12 active:scale-95"
-              aria-label={user ? `Account: ${user.name}` : "Sign in"}
-            >
-              <svg fill="none" height="24" viewBox="0 0 24 24" width="24" aria-hidden="true">
-                <path d={svgPaths.p1d1a2680} fill="white" />
-              </svg>
-            </Link>
             <button
               className="text-white p-2 ms-1"
               onClick={() => setMobileMenuOpen(true)}
@@ -378,6 +354,34 @@ export default function Header() {
             ))}
           </nav>
           <div className="mt-8 flex flex-col gap-3">
+            <div className="grid grid-cols-2 gap-2">
+              <Link
+                to="/account?tab=favorites"
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  if (!user) {
+                    e.preventDefault();
+                    setAuthGateOpen(true);
+                  }
+                }}
+                className={`flex items-center justify-center gap-2 py-3 rounded-full border border-white/20 text-white text-base font-medium ${language === "ar" ? "font-arabic" : ""}`}
+              >
+                <svg fill="none" height="20" viewBox="0 0 24 24" width="20" aria-hidden="true">
+                  <path d={svgPaths.p3f465200} fill="white" />
+                </svg>
+                {t("Favorites")}
+              </Link>
+              <Link
+                to={user ? "/account" : "/login"}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center justify-center gap-2 py-3 rounded-full border border-white/20 text-white text-base font-medium ${language === "ar" ? "font-arabic" : ""}`}
+              >
+                <svg fill="none" height="20" viewBox="0 0 24 24" width="20" aria-hidden="true">
+                  <path d={svgPaths.p1d1a2680} fill="white" />
+                </svg>
+                {user ? t("My account") : t("Sign in")}
+              </Link>
+            </div>
             <div role="radiogroup" aria-label={t("Language")} data-no-translate className="grid grid-cols-2 gap-2 p-1 rounded-full border border-white/20">
               {LANGUAGES.map((l) => (
                 <button
