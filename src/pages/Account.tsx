@@ -6,6 +6,7 @@ import CarCard from "../components/CarCard";
 import { FIELD_CLASS, LABEL_CLASS } from "../lib/fieldStyles";
 import { useAuth } from "../lib/auth";
 import { cars } from "../data/cars";
+import Select from "../components/Select";
 import PageHero from "../components/PageHero";
 
 const TABS = [
@@ -14,6 +15,8 @@ const TABS = [
   { id: "favorites", label: "Favorites" },
 ] as const;
 type TabId = (typeof TABS)[number]["id"];
+
+const COUNTRY_CODES = ["+971", "+966", "+974", "+973", "+965", "+968", "+962", "+20", "+91", "+44", "+1"];
 
 export default function Account() {
   const { user, favorites, updateProfile, logout } = useAuth();
@@ -24,6 +27,8 @@ export default function Account() {
 
   const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
+  const [countryCode, setCountryCode] = useState(user?.countryCode || "+971");
+  const [phone, setPhone] = useState(user?.phone || "");
   const [savedMsg, setSavedMsg] = useState(false);
 
   const [currentPw, setCurrentPw] = useState("");
@@ -56,7 +61,7 @@ export default function Account() {
 
   function handleProfileSave(e: React.FormEvent) {
     e.preventDefault();
-    updateProfile({ name: name.trim() || user.name, email: email.trim() || user.email });
+    updateProfile({ name: name.trim() || user.name, email: email.trim() || user.email, countryCode, phone: phone.trim() });
     setSavedMsg(true);
     setTimeout(() => setSavedMsg(false), 3000);
   }
@@ -114,6 +119,15 @@ export default function Account() {
                 <div>
                   <label className={LABEL_CLASS}>Email Address</label>
                   <input type="email" className={FIELD_CLASS} value={email} onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <div>
+                  <label className={LABEL_CLASS}>Phone Number</label>
+                  <div className="flex gap-2">
+                    <div className="shrink-0 w-[110px]">
+                      <Select value={countryCode} onChange={setCountryCode} options={COUNTRY_CODES.map((c) => ({ value: c, label: c }))} placeholder="+971" />
+                    </div>
+                    <input type="tel" className={`${FIELD_CLASS} flex-1 min-w-px`} value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="50 000 0000" />
+                  </div>
                 </div>
                 {savedMsg && <p className="text-text-success text-sm font-semibold">Profile updated.</p>}
                 <button type="submit" className="self-start bg-bg-brand text-white px-6 py-3 rounded-full font-semibold hover:bg-bg-brand-hover transition-colors mt-2">

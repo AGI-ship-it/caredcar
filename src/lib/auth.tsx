@@ -7,6 +7,8 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 export interface AuthUser {
   name: string;
   email: string;
+  countryCode?: string;
+  phone?: string;
   provider: "email" | "google";
 }
 
@@ -17,7 +19,7 @@ interface AuthState {
   login: (email: string, name?: string) => void;
   loginWithGoogle: () => void;
   logout: () => void;
-  updateProfile: (patch: Partial<Pick<AuthUser, "name" | "email">>) => void;
+  updateProfile: (patch: Partial<Pick<AuthUser, "name" | "email" | "countryCode" | "phone">>) => void;
   toggleFavorite: (carId: string) => void;
   isFavorite: (carId: string) => boolean;
   addRecentlyViewed: (carId: string) => void;
@@ -67,7 +69,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setState((s) => ({ ...s, user: null }));
   }
 
-  function updateProfile(patch: Partial<Pick<AuthUser, "name" | "email">>) {
+  function updateProfile(patch: Partial<Pick<AuthUser, "name" | "email" | "countryCode" | "phone">>) {
     setState((s) => (s.user ? { ...s, user: { ...s.user, ...patch } } : s));
   }
 
