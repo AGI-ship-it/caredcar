@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -290,14 +290,15 @@ export default function Buy() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(9);
   const [loadingMore, setLoadingMore] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
   // A short beat with the spinner so the new cards read as freshly loaded rather than popping in
-  function loadMore() {
+  const loadMore = useCallback(() => {
     setLoadingMore(true);
     window.setTimeout(() => {
       setVisibleCount((v) => v + 9);
       setLoadingMore(false);
     }, 600);
-  }
+  }, []);
   const [compareIds, setCompareIds] = useState<(number | string)[]>([]);
 
   const compareCars = cars.filter((c) => compareIds.includes(c.id));
@@ -323,6 +324,22 @@ export default function Buy() {
   }, [filters, sort]);
 
   const visible = filtered.slice(0, visibleCount);
+  const hasMore = visibleCount < filtered.length;
+
+  // Infinite scroll: the sentinel below the grid pulls in the next nine cars as it comes into view
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el || !hasMore || loadingMore) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) loadMore();
+      },
+      { rootMargin: "400px 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasMore, loadingMore, loadMore]);
+
 
   function clearFilters() {
     setFilters(emptyFilters);
@@ -712,23 +729,14 @@ export default function Buy() {
                         >
                           <div className="h-full rounded-full bg-bg-inverse transition-[width] duration-500 ease-out" style={{ width: `${pct}%` }} />
                         </div>
+                        <div ref={sentinelRef} aria-hidden="true" className="h-px w-full" />
                         {shown < filtered.length && (
-                          <button
-                            type="button"
-                            onClick={loadMore}
-                            disabled={loadingMore}
-                            aria-busy={loadingMore}
-                            className="mt-2 h-[48px] px-10 inline-flex items-center gap-2.5 rounded-full bg-bg-brand text-white font-semibold hover:bg-bg-brand-hover disabled:cursor-wait transition-colors"
-                          >
-                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className={`size-[18px] ${loadingMore ? "animate-spin" : ""}`}>
-                              {loadingMore ? (
-                                <path d="M21 12a9 9 0 1 1-6.2-8.56" />
-                              ) : (
-                                <path d="M21 12a9 9 0 1 1-2.64-6.36M21 4v5h-5" />
-                              )}
+                          <p className="mt-2 inline-flex items-center gap-2.5 text-text-secondary text-sm" role="status" aria-live="polite">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className="size-[18px] animate-spin">
+                              <path d="M21 12a9 9 0 1 1-6.2-8.56" />
                             </svg>
-                            {loadingMore ? "Loading…" : "Load More"}
-                          </button>
+                            Loading more cars…
+                          </p>
                         )}
                       </div>
                     );
