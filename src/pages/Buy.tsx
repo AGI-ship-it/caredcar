@@ -334,7 +334,7 @@ export default function Buy() {
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) loadMore();
       },
-      { rootMargin: "400px 0px" },
+      { rootMargin: "120px 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -438,7 +438,7 @@ export default function Buy() {
             </button>
 
             {/* Sidebar filters */}
-            <aside id="buy-filters" className={`w-full md:w-[280px] shrink-0 ${filtersOpen ? "block" : "hidden"} md:block`}>
+            <aside id="buy-filters" className={`w-full md:w-[280px] shrink-0 ${filtersOpen ? "block" : "hidden"} md:block md:sticky md:top-[96px] md:self-start md:max-h-[calc(100vh-112px)] md:overflow-y-auto md:overscroll-contain`}>
               <div className="md:pe-4 pb-2">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="flex items-center gap-2 font-extrabold ty-title ty-title-gradient text-lg">
@@ -706,6 +706,17 @@ export default function Buy() {
                         isComparing={compareIds.includes(car.id)}
                       />
                     ))}
+                    {loadingMore &&
+                      Array.from({ length: Math.min(3, filtered.length - visible.length) }, (_, i) => (
+                        <div key={`skeleton-${i}`} aria-hidden="true" className="rounded-[12px] overflow-hidden bg-white border border-border-default animate-pulse">
+                          <div className="h-48 bg-bg-subtle" />
+                          <div className="p-4 flex flex-col gap-3">
+                            <div className="h-4 w-3/4 rounded bg-bg-subtle" />
+                            <div className="h-3 w-1/2 rounded bg-bg-subtle" />
+                            <div className="h-5 w-1/3 rounded bg-bg-subtle mt-2" />
+                          </div>
+                        </div>
+                      ))}
                   </div>
 
                   {/* Progress + load more */}
@@ -730,7 +741,7 @@ export default function Buy() {
                           <div className="h-full rounded-full bg-bg-inverse transition-[width] duration-500 ease-out" style={{ width: `${pct}%` }} />
                         </div>
                         <div ref={sentinelRef} aria-hidden="true" className="h-px w-full" />
-                        {shown < filtered.length && (
+                        {loadingMore && (
                           <p className="mt-2 inline-flex items-center gap-2.5 text-text-secondary text-sm" role="status" aria-live="polite">
                             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className="size-[18px] animate-spin">
                               <path d="M21 12a9 9 0 1 1-6.2-8.56" />
