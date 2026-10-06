@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { HOURS_LINES, PHONE_DISPLAY, PHONE_TEL, showroomStatus } from "../lib/contactInfo";
+import { HOURS_LINES, PHONE_DISPLAY, showroomStatus } from "../lib/contactInfo";
 
 // Desktop "Call Us": a small contact card instead of a raw tel: link, since most
 // computers can't place a call. Offers the number and opening hours.
@@ -45,10 +45,8 @@ export default function ContactMenu({ trigger }: { trigger: React.ReactNode }) {
         <div role="dialog" aria-label="Contact us" className="contact-card absolute end-0 top-[calc(100%+14px)] z-[70] w-[340px] rounded-[20px] bg-white text-start shadow-[0_24px_60px_rgba(0,0,40,0.28)] border border-border-default overflow-hidden">
           <div className="p-5">
             <p className="text-xs font-medium text-text-secondary">Sales & enquiries</p>
-            <div className="mt-1 flex items-center justify-between gap-3">
-              <a href={`tel:${PHONE_TEL}`} className="text-lg font-bold text-text-primary tabular-nums hover:text-text-brand">
-                {PHONE_DISPLAY}
-              </a>
+            <div className="mt-1 flex items-center gap-3">
+              <p className="text-lg font-bold text-text-primary tabular-nums">{PHONE_DISPLAY}</p>
               <button
                 type="button"
                 onClick={copyNumber}
