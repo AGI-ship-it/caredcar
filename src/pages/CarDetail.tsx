@@ -5,7 +5,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CarCard from "../components/CarCard";
 import DirhamSymbol from "../components/DirhamSymbol";
-import SpecIcon from "../components/SpecIcon";
 import FavoriteButton from "../components/FavoriteButton";
 import EligibilityModal from "../components/EligibilityModal";
 import ReserveModal from "../components/ReserveModal";
@@ -215,63 +214,76 @@ export default function CarDetail() {
             </div>
 
             {/* Right: info card */}
-            <div className="w-full md:w-80 shrink-0">
+            <div className="w-full md:w-[360px] shrink-0">
               <div className="bg-bg-surface rounded-[12px] p-6 sticky top-[86px]">
                 <p className="text-text-secondary text-sm mb-1">{car.make}</p>
                 <h1 className="text-text-brand text-2xl font-extrabold mb-2">
                   {car.year} {car.model}
                 </h1>
 
-                {/* Year badge */}
-                <span className="inline-block bg-bg-brand-soft text-text-brand text-xs font-semibold px-3 py-1 rounded-full mb-4">
-                  {car.year}
-                </span>
-
-                {/* Price — total price primary, estimated monthly secondary */}
-                <div className="mb-4 flex flex-col gap-1.5">
-                  <div className="flex items-center gap-1.5">
-                    <DirhamSymbol color="var(--color-text-primary)" size={26} />
-                    <p className="text-text-primary text-4xl font-bold leading-none tabular-nums">
-                      {car.price.toLocaleString("en-AE")}
+                {/* Key stats: mileage | engine */}
+                <div className="flex items-stretch mb-5">
+                  <div className="pr-5">
+                    <p className="text-text-primary text-lg font-semibold leading-tight tabular-nums">
+                      {car.mileage.toLocaleString("en-AE")} km
                     </p>
+                    <p className="text-text-secondary text-xs mt-0.5">Mileage</p>
                   </div>
-                  <p className="text-text-secondary text-sm flex items-center gap-1">
-                    Est.
-                    <DirhamSymbol color="var(--color-text-secondary)" size={12} />
-                    <span className="font-semibold tabular-nums">{car.monthlyPayment.toLocaleString("en-AE")}</span>/mo
-                  </p>
+                  <div className="pl-5 border-l border-border-default">
+                    <p className="text-text-primary text-lg font-semibold leading-tight">{car.engineSize}</p>
+                    <p className="text-text-secondary text-xs mt-0.5">Engine</p>
+                  </div>
                 </div>
 
-                <hr className="border-gray-200 mb-4" />
-
-                {/* Quick specs badges */}
-                <div className="flex flex-wrap gap-2 mb-5">
-                  <span className="bg-bg-brand-soft text-text-primary text-xs px-2.5 py-1 rounded-full inline-flex items-center gap-1">
-                    <SpecIcon kind="transmission" />
-                    {car.transmission}
-                  </span>
-                  <span className="bg-bg-brand-soft text-text-primary text-xs px-2.5 py-1 rounded-full inline-flex items-center gap-1">
-                    <SpecIcon kind="fuel" />
-                    {car.fuelType}
-                  </span>
-                  <span className="bg-bg-brand-soft text-text-primary text-xs px-2.5 py-1 rounded-full inline-flex items-center gap-1">
-                    <SpecIcon kind="body" />
-                    {car.bodyType}
-                  </span>
+                {/* Price box — estimated monthly primary, cash price secondary */}
+                <div className="bg-white border border-border-default rounded-[16px] p-5 mb-4">
+                  <p className="text-text-secondary text-sm font-medium mb-1">Estimated Monthly Payment</p>
+                  <div className="flex items-baseline gap-1.5 mb-2">
+                    <span className="self-center">
+                      <DirhamSymbol color="var(--color-text-primary)" size={28} />
+                    </span>
+                    <span className="text-text-primary text-[44px] font-extrabold leading-none tabular-nums">
+                      {fmt(monthlyPayment)}
+                    </span>
+                    <span className="text-text-primary text-2xl font-bold">/mo</span>
+                  </div>
+                  <div className="flex items-center text-text-secondary text-xs mb-4">
+                    <span className="pr-2">Based on {Math.round((clampedDown / car.price) * 100)}% down</span>
+                    <span className="px-2 border-l border-border-default">{tenure} months</span>
+                    <span className="pl-2 border-l border-border-default">{annualRate.toFixed(1)}% rate</span>
+                  </div>
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-text-primary text-sm font-semibold inline-flex items-center gap-1.5">
+                      Cash Price:
+                      <DirhamSymbol color="var(--color-text-primary)" size={14} />
+                      <span className="text-xl font-bold tabular-nums">{car.price.toLocaleString("en-AE")}</span>
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setPriceDetailsOpen(true)}
+                      className="text-text-brand text-sm font-medium underline underline-offset-2 hover:text-blue-700 transition-colors shrink-0"
+                    >
+                      Price Details
+                    </button>
+                  </div>
                 </div>
 
                 {/* CTA buttons */}
                 <button
-                  onClick={() => setReserveOpen(true)}
+                  type="button"
+                  onClick={() =>
+                    document.getElementById("emi-calculator")?.scrollIntoView({ behavior: "smooth", block: "start" })
+                  }
                   className="block w-full bg-bg-brand text-white text-center py-3 rounded-full font-semibold text-sm hover:bg-blue-700 transition-colors mb-3"
                 >
-                  Reserve
+                  EMI Plans
                 </button>
                 <button
-                  onClick={() => setPriceDetailsOpen(true)}
+                  type="button"
+                  onClick={() => setReserveOpen(true)}
                   className="block w-full border border-border-focus text-text-brand text-center py-3 rounded-full font-semibold text-sm hover:bg-bg-brand-soft transition-colors mb-4"
                 >
-                  Price Details
+                  Reserve
                 </button>
 
                 {/* Favorite */}
@@ -331,7 +343,7 @@ export default function CarDetail() {
           </section>
 
           {/* EMI Calculator */}
-          <section className="bg-bg-inverse rounded-[20px] p-8 md:p-10 mb-16">
+          <section id="emi-calculator" className="bg-bg-inverse rounded-[20px] p-8 md:p-10 mb-16 scroll-mt-[100px]">
             <div className="mb-8">
  <h2 className="ty-h1 text-white font-display">
                 Estimate Your Monthly Payment
