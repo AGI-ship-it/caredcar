@@ -167,7 +167,9 @@ export default function Header() {
   const { language, setLanguage, t } = useLanguage();
   const labelFont = language === "ar" ? "font-arabic" : "";
 
-  const isActive = (href: string) => location.pathname.startsWith(href);
+  // Car detail pages (/car/:id) belong to the Buy section.
+  const isActive = (href: string) =>
+    location.pathname.startsWith(href) || (href === "/buy" && location.pathname.startsWith("/car/"));
   const [authGateOpen, setAuthGateOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const closeSearch = useCallback(() => setSearchOpen(false), []);
